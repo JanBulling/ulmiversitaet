@@ -19,17 +19,18 @@ pnpm install
 pnpm dev
 ```
 
-| Script             | Description                                |
-| ------------------ | ------------------------------------------ |
-| `pnpm dev`         | Dev server                                 |
-| `pnpm build`       | Production build (validates env vars)      |
-| `pnpm typecheck`   | Generate route types and run `tsc`         |
-| `pnpm test`        | Unit and database tests (Vitest + PGlite)  |
-| `pnpm lint`        | ESLint                                     |
-| `pnpm format`      | Prettier (with Tailwind class sorting)     |
-| `pnpm db:studio`   | Drizzle Studio                             |
-| `pnpm db:generate` | Generate SQL migration from schema changes |
-| `pnpm db:migrate`  | Apply migrations                           |
+| Script                  | Description                                                      |
+| ----------------------- | ---------------------------------------------------------------- |
+| `pnpm dev`              | Dev server                                                       |
+| `pnpm build`            | Production build (validates env vars)                            |
+| `pnpm typecheck`        | Generate route types and run `tsc`                               |
+| `pnpm test`             | Unit and database tests (Vitest + PGlite)                        |
+| `pnpm lint`             | ESLint                                                           |
+| `pnpm format`           | Prettier (with Tailwind class sorting)                           |
+| `pnpm db:studio`        | Drizzle Studio                                                   |
+| `pnpm update:transport` | Update the SWU stop list and check the line config (`--dry-run`) |
+| `pnpm db:generate`      | Generate SQL migration from schema changes                       |
+| `pnpm db:migrate`       | Apply migrations                                                 |
 
 ## Project structure
 
@@ -58,6 +59,7 @@ src/
 ├── features/                 # All logic (.ts), no UI: data access, actions, parsing
 │   ├── mensa/                #   Queries, scraper/, sync/, codes, display helpers
 │   ├── events/               #   Queries, formatting
+│   ├── public-transport/     #   SWU API client, nearest stops, formatting
 │   ├── guides/               #   Reading the MDX guides
 │   └── admin/                #   Server Actions and queries of the dashboard
 │       ├── auth/             #     Login, logout
@@ -69,7 +71,7 @@ src/
 │   ├── auth/                 #   Admin session (token, cookie, requireAdmin)
 │   ├── db/                   #   Drizzle client, schema/, migrations/, testing/
 │   ├── i18n/                 #   next-intl routing, request config, navigation, messages/
-│   ├── date.ts, network.ts, env.ts, site.ts, fonts.ts, utils.ts
+│   ├── date.ts, geolocation.ts, network.ts, env.ts, site.ts, fonts.ts, utils.ts
 ├── mdx-components.tsx        # Markdown element styles (file location required by @next/mdx)
 └── proxy.ts                  # Locale detection, admin redirect (file location required by Next.js)
 ```
@@ -135,6 +137,7 @@ src/
 
 ### Home page
 
-- Sections, top to bottom: quick links, mensa + public transport (placeholder), events (hidden when there are none), featured guides + links.
+- Sections, top to bottom: quick links, mensa + public transport, events (hidden when there are none), featured guides + links.
+- **Public transport** (`src/features/public-transport/`, `src/components/public-transport/`): real-time departures from the SWU API (`api.swu.de/mobility/v1`, no key needed). The server renders the first departures of Uni Süd and the current disruption notice; the browser then refreshes every 15 s directly from SWU (the API allows cross-origin requests) and counts down every second. "Near me" uses the browser location and the stop list in `src/content/public-transport/stops.json` (3 nearest stops within 5 km). The featured stops are in `src/content/public-transport/featured-stops.ts`. How to change stops, lines, and colors (and the `pnpm update:transport` script): see `docs/public-transport.md`.
 - Quick links, featured links, and featured guides are edited in `src/content/home.ts`.
 - The header shows "eduroam® aktiv" / "Uni-VPN aktiv" based on the client IP (`src/lib/network.ts`).

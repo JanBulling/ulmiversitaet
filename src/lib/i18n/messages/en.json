@@ -50,7 +50,27 @@
     },
     "PublicTransport": {
       "title": "Real-time transit",
-      "comingSoon": "Departures are coming soon."
+      "live": "Live",
+      "onTime": "On time",
+      "noDepartures": "No departures found.",
+      "departed": "Departed",
+      "now": "Now",
+      "seconds": "{count} s",
+      "minutes": "{count} min",
+      "nearMe": "Stops near me",
+      "backToCampus": "Back to the university stops",
+      "disruption": "Current disruption",
+      "errors": {
+        "unavailable": "Departures couldn't be loaded right now.",
+        "stale": "Refresh failed – the times may be out of date.",
+        "location": {
+          "denied": "Location access denied. Please allow it in your browser settings.",
+          "unavailable": "Your location is currently unavailable.",
+          "timeout": "The location request took too long. Please try again.",
+          "unsupported": "Your browser doesn't support location requests.",
+          "noStopsNearby": "No stops found near you."
+        }
+      }
     }
   },
   "LinkPage": {

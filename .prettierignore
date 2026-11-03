@@ -4,3 +4,5 @@ pnpm-lock.yaml
 src/lib/db/migrations
 src/content
 src/features/mensa/scraper/__fixtures__
+src/features/public-transport/__fixtures__
+src/content/public-transport/stops.json

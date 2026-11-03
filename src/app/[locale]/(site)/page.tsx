@@ -9,7 +9,10 @@ import {
   MensaSection,
   MensaSectionSkeleton,
 } from "@/components/mensa/mensa-section";
-import { PublicTransportSection } from "@/components/public-transport/public-transport-section";
+import {
+  PublicTransportSection,
+  PublicTransportSectionSkeleton,
+} from "@/components/public-transport/public-transport-section";
 
 export default function HomePage() {
   return (
@@ -20,7 +23,13 @@ export default function HomePage() {
         <Suspense fallback={<MensaSectionSkeleton className="md:col-span-4" />}>
           <MensaSection className="md:col-span-4" />
         </Suspense>
-        <PublicTransportSection className="md:col-span-3" />
+        <Suspense
+          fallback={
+            <PublicTransportSectionSkeleton className="md:col-span-3" />
+          }
+        >
+          <PublicTransportSection className="md:col-span-3" />
+        </Suspense>
       </div>
 
       {/* Renders nothing when there are no upcoming events */}

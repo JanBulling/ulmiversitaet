@@ -50,7 +50,27 @@
     },
     "PublicTransport": {
       "title": "Echtzeit-ÖPNV",
-      "comingSoon": "Abfahrten kommen bald."
+      "live": "Live",
+      "onTime": "Pünktlich",
+      "noDepartures": "Keine Abfahrten gefunden.",
+      "departed": "Abgefahren",
+      "now": "Jetzt",
+      "seconds": "{count} s",
+      "minutes": "{count} min",
+      "nearMe": "Haltestellen in meiner Nähe",
+      "backToCampus": "Zurück zu den Uni-Haltestellen",
+      "disruption": "Aktuelle Störung",
+      "errors": {
+        "unavailable": "Die Abfahrten konnten gerade nicht geladen werden.",
+        "stale": "Aktualisierung fehlgeschlagen – die Zeiten sind eventuell nicht aktuell.",
+        "location": {
+          "denied": "Standortzugriff verweigert. Bitte erlaube den Zugriff in den Browser-Einstellungen.",
+          "unavailable": "Dein Standort ist gerade nicht verfügbar.",
+          "timeout": "Die Standortabfrage hat zu lange gedauert. Bitte versuche es erneut.",
+          "unsupported": "Dein Browser unterstützt keine Standortabfrage.",
+          "noStopsNearby": "Keine Haltestellen in deiner Nähe gefunden."
+        }
+      }
     }
   },
   "LinkPage": {
