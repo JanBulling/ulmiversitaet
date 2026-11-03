@@ -1,7 +1,7 @@
 {
   "Nav": {
     "home": "Home",
-    "links": "All links",
+    "links": "Links",
     "guides": "Guides",
     "map": "Map",
     "search": "Search...",
@@ -33,14 +33,7 @@
       "links": {
         "title": "More links",
         "description": "Useful links for your studies",
-        "exmatriculation": "Deregistration",
-        "exmatriculationDescription": "Should I deregister? And how?",
-        "library": "Library catalog",
-        "libraryDescription": "Search and borrow books",
-        "lectureHalls": "Lecture hall finder",
-        "lectureHallsDescription": "Find your way around campus",
-        "stuve": "StuVe",
-        "stuveDescription": "The student representation of Ulm University"
+        "more": "More links"
       },
       "guides": {
         "title": "Guides",
@@ -71,11 +64,10 @@
           "noStopsNearby": "No stops found near you."
         }
       }
+    },
+    "QuickLinks": {
+      "more": "More links"
     }
-  },
-  "LinkPage": {
-    "title": "All links",
-    "description": "A collection of useful links for students at Ulm University. A link is missing? <a>Let us know!</a>."
   },
   "GuidesPage": {
     "title": "Guides",
@@ -275,5 +267,35 @@
       },
       "intro": "Events are shown on the home page until they are over."
     }
+  },
+  "Parking": {
+    "title": "Parking",
+    "description": "Free parking spaces at Ulm University in real time",
+    "ofTotal": "of {total}",
+    "spaces": "{count} spaces",
+    "allLots": "All parking lots",
+    "updatedAt": "As of {time}",
+    "unavailable": "Parking data couldn't be loaded right now.",
+    "stale": "Refresh failed – the numbers may be out of date.",
+    "source": "Real-time data from the <link>university's parking guidance system</link>.",
+    "areas": {
+      "WEST": "Uni West",
+      "KLINIKEN": "Hospitals",
+      "OST": "Uni East",
+      "HELMHOLTZ": "Helmholtzstraße",
+      "MICHELSBERG": "Michelsberg"
+    }
+  },
+  "Links": {
+    "title": "Links",
+    "description": "All important links for studying at Ulm University. A link is missing? <a>Let us know!</a>",
+    "metaDescription": "Collection of useful links for students at Ulm University.",
+    "searchPlaceholder": "Search links …",
+    "results": "{count, plural, =0 {No results} one {# result} other {# results}}",
+    "noResults": "No matching link found. Is one missing? <a>Let us know!</a>",
+    "uniNetworkOnly": "University network only",
+    "external": "opens in a new tab",
+    "showCategory": "All links in {title}",
+    "backToAll": "All links"
   }
 }

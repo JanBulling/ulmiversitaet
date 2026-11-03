@@ -6,6 +6,10 @@ import { FeaturedGuides } from "@/components/home/featured-guides";
 import { FeaturedLinks } from "@/components/home/featured-links";
 import { QuickLinks } from "@/components/home/quick-links";
 import {
+  ParkingSection,
+  ParkingSectionSkeleton,
+} from "@/components/parking/parking-section";
+import {
   MensaSection,
   MensaSectionSkeleton,
 } from "@/components/mensa/mensa-section";
@@ -29,6 +33,11 @@ export default function HomePage() {
           }
         >
           <PublicTransportSection className="md:col-span-3" />
+        </Suspense>
+        <Suspense
+          fallback={<ParkingSectionSkeleton className="col-span-full" />}
+        >
+          <ParkingSection className="col-span-full" />
         </Suspense>
       </div>
 

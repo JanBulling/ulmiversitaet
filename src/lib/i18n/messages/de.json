@@ -1,7 +1,7 @@
 {
   "Nav": {
     "home": "Home",
-    "links": "Alle Links",
+    "links": "Links",
     "guides": "Anleitungen",
     "map": "Karte",
     "search": "Suche...",
@@ -33,14 +33,7 @@
       "links": {
         "title": "Weitere Links",
         "description": "Nützliche Links rund ums Studium",
-        "exmatriculation": "Exmatrikulation",
-        "exmatriculationDescription": "Soll ich mich exmatrikulieren? Und wie?",
-        "library": "Bibliothekskatalog",
-        "libraryDescription": "Bücher suchen und ausleihen",
-        "lectureHalls": "Hörsaalfinder",
-        "lectureHallsDescription": "Finde dich auf dem Campus zurecht",
-        "stuve": "StuVe",
-        "stuveDescription": "Die Studierendenvertretung der Uni Ulm"
+        "more": "Mehr Links"
       },
       "guides": {
         "title": "Anleitungen",
@@ -71,11 +64,10 @@
           "noStopsNearby": "Keine Haltestellen in deiner Nähe gefunden."
         }
       }
+    },
+    "QuickLinks": {
+      "more": "Mehr Links"
     }
-  },
-  "LinkPage": {
-    "title": "Alle Links",
-    "description": "Die Ulmiversität hat eine Sammlung von nützlichen Links, die den Uni-Alltag erleichtern sollen. Ein Link fehlt? <a>Schreibe uns!</a>."
   },
   "GuidesPage": {
     "title": "Anleitungen",
@@ -275,5 +267,35 @@
       },
       "intro": "Events erscheinen auf der Startseite, bis sie vorbei sind."
     }
+  },
+  "Parking": {
+    "title": "Parkplätze",
+    "description": "Freie Parkplätze an der Universität Ulm in Echtzeit",
+    "ofTotal": "von {total}",
+    "spaces": "{count} Parkplätze",
+    "allLots": "Alle Parkplätze",
+    "updatedAt": "Stand: {time} Uhr",
+    "unavailable": "Die Parkplatzdaten konnten gerade nicht geladen werden.",
+    "stale": "Aktualisierung fehlgeschlagen – die Zahlen sind eventuell nicht aktuell.",
+    "source": "Echtzeitdaten vom <link>Parkleitsystem der Universität</link>.",
+    "areas": {
+      "WEST": "Uni West",
+      "KLINIKEN": "Kliniken",
+      "OST": "Uni Ost",
+      "HELMHOLTZ": "Helmholtzstraße",
+      "MICHELSBERG": "Michelsberg"
+    }
+  },
+  "Links": {
+    "title": "Links",
+    "description": "Alle wichtigen Links rund ums Studium an der Uni Ulm. Ein Link fehlt? <a>Schreib uns!</a>",
+    "metaDescription": "Sammlung nützlicher Links für Studierende an der Universität Ulm.",
+    "searchPlaceholder": "Links durchsuchen …",
+    "results": "{count, plural, =0 {Keine Treffer} one {# Treffer} other {# Treffer}}",
+    "noResults": "Kein passender Link gefunden. Fehlt einer? <a>Schreib uns!</a>",
+    "uniNetworkOnly": "Nur im Uni-Netz",
+    "external": "öffnet in neuem Tab",
+    "showCategory": "Alle Links in {title}",
+    "backToAll": "Alle Links"
   }
 }

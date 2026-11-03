@@ -15,7 +15,8 @@
     "db:check": "drizzle-kit check",
     "test": "vitest run",
     "test:watch": "vitest",
-    "update:transport": "tsx scripts/update-public-transport.ts"
+    "update:transport": "tsx scripts/update-public-transport.ts",
+    "check:links": "tsx scripts/check-links.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

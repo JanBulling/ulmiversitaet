@@ -1,66 +1,40 @@
 import { BookOpen, GraduationCap, MapPin, Users, type LucideIcon } from "lucide-react";
 
+import type { Localized } from "@/content/links";
+
 /**
- * Content of the home page: quick links, featured links, and featured guides.
- * Labels are proper names or `{ de, en }` pairs.
+ * Content of the home page. Links reference the link collection (`src/content/links/`) by id,
+ * so every URL exists only once; `pnpm test` fails if an id doesn't exist.
  */
 
-type Localized = string | { de: string; en: string };
-
 export type QuickLink = {
-  label: Localized;
-  href: string;
+  /** Id of a link in `src/content/links/` */
+  linkId: string;
+  /** Shorter label for the icon grid (default: the link's label) */
+  label?: Localized;
   /** Image in `public/`; falls back to `lucideIcon` */
   image?: string;
   lucideIcon?: LucideIcon;
 };
 
+/** App-icon style shortcuts (7 + "Mehr Links" fill one row on desktop) */
 export const QUICK_LINKS: QuickLink[] = [
-  { label: "Moodle", href: "https://moodle.uni-ulm.de", image: "/icons/quick-links/moodle.png" },
-  {
-    label: "Campus Online",
-    href: "https://campusonline.uni-ulm.de",
-    image: "/icons/quick-links/campusonline.png",
-  },
-  { label: "Campus4", href: "https://campus4.uni-ulm.de", image: "/icons/quick-links/campus4.png" },
-  { label: "SOGo", href: "https://sogo.uni-ulm.de", image: "/icons/quick-links/mail.png" },
-  { label: "Print@Uni", href: "https://print.uni-ulm.de", image: "/icons/quick-links/print.png" },
-  {
-    label: "CloudStore",
-    href: "https://cloudstore.uni-ulm.de",
-    image: "/icons/quick-links/nextcloud.png",
-  },
-  {
-    label: { de: "Bibliothek", en: "Library" },
-    href: "https://ulm.ibs-bw.de/",
-    lucideIcon: BookOpen,
-  },
-  {
-    label: { de: "Hörsaalfinder", en: "Lecture halls" },
-    href: "https://www.uni-ulm.de/einrichtungen/kiz/weiteres/campus-navigation/hoersaalfinder/",
-    lucideIcon: MapPin,
-  },
+  { linkId: "moodle", image: "/icons/quick-links/moodle.png" },
+  { linkId: "campusonline", label: "Campus Online", image: "/icons/quick-links/campusonline.png" },
+  { linkId: "campus4", image: "/icons/quick-links/campus4.png" },
+  { linkId: "sogo", image: "/icons/quick-links/mail.png" },
+  { linkId: "print-uni", image: "/icons/quick-links/print.png" },
+  { linkId: "cloudstore", image: "/icons/quick-links/nextcloud.png" },
+  { linkId: "bibliothekskatalog", label: { de: "Bibliothek", en: "Library" }, lucideIcon: BookOpen },
 ];
 
-/** Labels and descriptions are keys in `HomePage.Featured.links` */
-export const FEATURED_LINKS = [
-  {
-    key: "exmatriculation",
-    href: "/guides/exmatrikulieren",
-    icon: GraduationCap,
-  },
-  { key: "library", href: "https://ulm.ibs-bw.de/", icon: BookOpen },
-  {
-    key: "lectureHalls",
-    href: "https://www.uni-ulm.de/einrichtungen/kiz/weiteres/campus-navigation/hoersaalfinder/",
-    icon: MapPin,
-  },
-  { key: "stuve", href: "https://stuve.de/", icon: Users },
-] as const;
+/** "Weitere Links" on the home page; label and description come from the link collection */
+export const FEATURED_LINKS: { linkId: string; icon: LucideIcon }[] = [
+  { linkId: "exmatrikulation", icon: GraduationCap },
+  { linkId: "bibliothekskatalog", icon: BookOpen },
+  { linkId: "hoersaalfinder", icon: MapPin },
+  { linkId: "stuve-website", icon: Users },
+];
 
 /** Guide slugs shown on the home page, in this order */
 export const FEATURED_GUIDES = ["email-einrichten", "eduroam/ios", "Uni_VPN/mac", "mfa"];
-
-export function localized(label: Localized, locale: "de" | "en") {
-  return typeof label === "string" ? label : label[locale];
-}

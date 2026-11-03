@@ -19,18 +19,19 @@ pnpm install
 pnpm dev
 ```
 
-| Script                  | Description                                                      |
-| ----------------------- | ---------------------------------------------------------------- |
-| `pnpm dev`              | Dev server                                                       |
-| `pnpm build`            | Production build (validates env vars)                            |
-| `pnpm typecheck`        | Generate route types and run `tsc`                               |
-| `pnpm test`             | Unit and database tests (Vitest + PGlite)                        |
-| `pnpm lint`             | ESLint                                                           |
-| `pnpm format`           | Prettier (with Tailwind class sorting)                           |
-| `pnpm db:studio`        | Drizzle Studio                                                   |
-| `pnpm update:transport` | Update the SWU stop list and check the line config (`--dry-run`) |
-| `pnpm db:generate`      | Generate SQL migration from schema changes                       |
-| `pnpm db:migrate`       | Apply migrations                                                 |
+| Script                  | Description                                                       |
+| ----------------------- | ----------------------------------------------------------------- |
+| `pnpm dev`              | Dev server                                                        |
+| `pnpm build`            | Production build (validates env vars)                             |
+| `pnpm typecheck`        | Generate route types and run `tsc`                                |
+| `pnpm test`             | Unit and database tests (Vitest + PGlite)                         |
+| `pnpm lint`             | ESLint                                                            |
+| `pnpm format`           | Prettier (with Tailwind class sorting)                            |
+| `pnpm db:studio`        | Drizzle Studio                                                    |
+| `pnpm update:transport` | Update the SWU stop list and check the line config (`--dry-run`)  |
+| `pnpm check:links`      | Check every URL of the link collection for broken links/redirects |
+| `pnpm db:generate`      | Generate SQL migration from schema changes                        |
+| `pnpm db:migrate`       | Apply migrations                                                  |
 
 ## Project structure
 
@@ -52,6 +53,8 @@ src/
 │   ├── events/               #   Events on the home page
 │   ├── guides/               #   Guide tiles and article
 │   ├── public-transport/
+│   ├── parking/
+│   ├── links/                #   Link rows, link collection with search
 │   └── admin/                #   Admin navigation, login form
 │       ├── mensa/            #     Menu refresh
 │       ├── mensa-categories/ #     Category assignment and display categories
@@ -60,13 +63,15 @@ src/
 │   ├── mensa/                #   Queries, scraper/, sync/, codes, display helpers
 │   ├── events/               #   Queries, formatting
 │   ├── public-transport/     #   SWU API client, nearest stops, formatting
+│   ├── parking/              #   Parking counters, occupancy
+│   ├── links/                #   Resolving links per language, search, link check
 │   ├── guides/               #   Reading the MDX guides
 │   └── admin/                #   Server Actions and queries of the dashboard
 │       ├── auth/             #     Login, logout
 │       ├── mensa/
 │       ├── mensa-categories/
 │       └── events/
-├── content/                  # What the site says: guides (.mdx), legal texts (.md), home page links
+├── content/                  # What the site says: guides (.mdx), legal texts (.md), links/, home page selection
 ├── lib/                      # Technical foundation, no domain logic
 │   ├── auth/                 #   Admin session (token, cookie, requireAdmin)
 │   ├── db/                   #   Drizzle client, schema/, migrations/, testing/
@@ -137,7 +142,13 @@ src/
 
 ### Home page
 
-- Sections, top to bottom: quick links, mensa + public transport, events (hidden when there are none), featured guides + links.
+- Sections, top to bottom: quick links, mensa + public transport, parking, events (hidden when there are none), featured guides + links.
+- **Parking** (`src/features/parking/`, `src/components/parking/`, page `/parking-lots`): free spaces from the university's parking guidance system, read on the server (the API is HTTP-only) and cached for a minute; the browser refreshes via `/api/parking`. Lots and their order: `src/content/parking/parking-lots.ts`. Details: `docs/parking.md`.
 - **Public transport** (`src/features/public-transport/`, `src/components/public-transport/`): real-time departures from the SWU API (`api.swu.de/mobility/v1`, no key needed). The server renders the first departures of Uni Süd and the current disruption notice; the browser then refreshes every 15 s directly from SWU (the API allows cross-origin requests) and counts down every second. "Near me" uses the browser location and the stop list in `src/content/public-transport/stops.json` (3 nearest stops within 5 km). The featured stops are in `src/content/public-transport/featured-stops.ts`. How to change stops, lines, and colors (and the `pnpm update:transport` script): see `docs/public-transport.md`.
-- Quick links, featured links, and featured guides are edited in `src/content/home.ts`.
+- Quick links, featured links, and featured guides are edited in `src/content/home.ts`. Quick and featured links reference entries of the link collection by id.
+
+### Links
+
+- The link collection (`/links`, one page per category at `/links/<slug>`) is plain TypeScript data in `src/content/links/categories/*.ts`, typed by `src/content/links/types.ts`. Add a link there; the home page, search, and category pages pick it up.
+- `pnpm check:links` reports broken and moved URLs; `pnpm test` checks ids, URLs, internal links, and home page references. Details: `docs/links.md`.
 - The header shows "eduroam® aktiv" / "Uni-VPN aktiv" based on the client IP (`src/lib/network.ts`).

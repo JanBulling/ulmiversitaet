@@ -25,7 +25,7 @@ The reference for the look of the website is the **mensa section on the home pag
 | `Skeleton`          | `src/components/ui/skeleton.tsx` | Loading placeholders                                                                           |
 | `Alert`             | `src/components/ui/alert.tsx`    | Notices and errors inside content                                                              |
 
-Use-case-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/components/mensa/`) are built from these rules and should be reused within their area. All components live in `src/components/`; `src/features/` contains only logic.
+Use-case-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/components/mensa/`, `LinkRow` in `src/components/links/`) are built from these rules and should be reused within their area. All components live in `src/components/`; `src/features/` contains only logic.
 
 ## 3. Layout
 
@@ -94,6 +94,7 @@ Use-case-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/
 | Back navigation                   | `Button variant="ghost" size="sm"` with `ArrowLeft`, above the page content     |
 | Links in running text             | underlined (`underline underline-offset-4`)                                     |
 | External links                    | open in a new tab, `ExternalLink` icon (size 3) on buttons                      |
+| Link rows (`/links`)              | Title with `ExternalLink` (external, new tab) or `ChevronRight` (internal) icon |
 
 ## 8a. Forms
 

@@ -1,30 +1,38 @@
-import { LinkIcon } from "lucide-react";
-import { getLocale } from "next-intl/server";
+import { ArrowRight, LinkIcon } from "lucide-react";
+import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-import { localized, QUICK_LINKS } from "@/content/home";
+import { QUICK_LINKS } from "@/content/home";
+import { getLink, localize } from "@/features/links/links";
+import { Link } from "@/lib/i18n/navigation";
 
 /** App-icon style shortcuts to the most used university services */
 export async function QuickLinks() {
-  const locale = await getLocale();
+  const [t, locale] = await Promise.all([
+    getTranslations("HomePage.QuickLinks"),
+    getLocale(),
+  ]);
 
   return (
     <nav className="grid w-full grid-cols-4 gap-4 px-4 md:grid-cols-8 md:px-0">
-      {QUICK_LINKS.map((link) => {
-        const label = localized(link.label, locale);
-        const Icon = link.lucideIcon ?? LinkIcon;
+      {QUICK_LINKS.map((quickLink) => {
+        const link = getLink(quickLink.linkId, locale);
+        const label = quickLink.label
+          ? localize(quickLink.label, locale)
+          : link.label;
+        const Icon = quickLink.lucideIcon ?? LinkIcon;
         return (
           <a
-            key={link.href}
+            key={link.id}
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
             className="group"
           >
             <div className="relative mx-auto flex aspect-square size-16 items-center justify-center rounded-2xl border bg-card/25 backdrop-blur-lg group-hover:bg-muted/75 sm:size-24">
-              {link.image ? (
+              {quickLink.image ? (
                 <Image
-                  src={link.image}
+                  src={quickLink.image}
                   alt=""
                   width={48}
                   height={48}
@@ -45,6 +53,15 @@ export async function QuickLinks() {
           </a>
         );
       })}
+
+      <Link href="/links" className="group">
+        <div className="mx-auto flex aspect-square size-16 flex-col items-center justify-center gap-y-1 rounded-2xl border-2 border-dashed border-primary text-primary group-hover:border-primary/50 group-hover:text-primary/50 sm:size-24">
+          <ArrowRight className="size-6 sm:size-8" aria-hidden />
+        </div>
+        <p className="mt-1 line-clamp-1 px-1 text-center text-xs font-bold text-primary">
+          {t("more")}
+        </p>
+      </Link>
     </nav>
   );
 }
