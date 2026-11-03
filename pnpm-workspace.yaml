@@ -1,3 +1,8 @@
 allowBuilds:
   sharp: false
   unrs-resolver: false
+  # Used by drizzle-kit and tsx
+  esbuild: true
+  # Pulled in by next-intl's optional message extractor; prebuilt binaries ship as optional deps
+  "@swc/core": false
+  "@parcel/watcher": false

@@ -1,0 +1,259 @@
+{
+  "Nav": {
+    "home": "Home",
+    "links": "All links",
+    "guides": "Guides",
+    "map": "Map",
+    "search": "Search...",
+    "imprint": "Imprint",
+    "privacy": "Privacy",
+    "about": "About",
+    "mensa": "Mensa",
+    "menu": "Menu",
+    "close": "Close",
+    "toggleTheme": "Toggle color scheme",
+    "language": "Language",
+    "languages": {
+      "de": "Deutsch",
+      "en": "English"
+    },
+    "network": {
+      "vpn": "University VPN active",
+      "eduroam": "eduroam® active"
+    }
+  },
+  "HomePage": {
+    "title": "Ulmiversität",
+    "Events": {
+      "title": "Events",
+      "futureEvents": "Future events",
+      "openEnd": "from {time}"
+    },
+    "Featured": {
+      "links": {
+        "title": "More links",
+        "description": "Useful links for your studies",
+        "exmatriculation": "Deregistration",
+        "exmatriculationDescription": "Should I deregister? And how?",
+        "library": "Library catalog",
+        "libraryDescription": "Search and borrow books",
+        "lectureHalls": "Lecture hall finder",
+        "lectureHallsDescription": "Find your way around campus",
+        "stuve": "StuVe",
+        "stuveDescription": "The student representation of Ulm University"
+      },
+      "guides": {
+        "title": "Guides",
+        "description": "Guides for everyday university life",
+        "more": "More guides"
+      }
+    },
+    "PublicTransport": {
+      "title": "Real-time transit",
+      "comingSoon": "Departures are coming soon."
+    }
+  },
+  "LinkPage": {
+    "title": "All links",
+    "description": "A collection of useful links for students at Ulm University. A link is missing? <a>Let us know!</a>."
+  },
+  "GuidesPage": {
+    "title": "Guides",
+    "description": "A collection of useful guides for students at Ulm University. You have more ideas? <a>Let us know!</a>.",
+    "backToAll": "Back to all guides",
+    "eduroamDescription": "Guides to get eduroam® onto different devices."
+  },
+  "CampusMapPage": {
+    "title": "Campus map",
+    "subtitle": "Find your way around the campus!"
+  },
+  "ParkingLotPage": {
+    "title": "Parking Lots",
+    "description": "Real-time information about free parking spots at Ulm University"
+  },
+  "CampusMap": {
+    "selectLabel": "Choose what to display",
+    "searchPlaceholder": "Search {layer}",
+    "searchButton": "Search",
+    "baseLayers": {
+      "light": "Light",
+      "dark": "Dark",
+      "satellite": "Satellite"
+    },
+    "layers": {
+      "buildings": "Buildings",
+      "lectureHalls": "Lecture halls",
+      "poi": "Points of interest"
+    }
+  },
+  "NotFound": {
+    "title": "Schrödinger's cat has died",
+    "description": "The page exists — or it doesn't. Unfortunately, the universe decided against you this time.",
+    "backHome": "Back to homepage"
+  },
+  "AboutPage": {
+    "title": "About us",
+    "subtitle": "Two master's students in physics who wanted to make student life at Ulm University simpler and clearer.",
+    "roleDeveloper": "Website developer",
+    "roleQA": "Quality assurance",
+    "bioJan": "Jan is a master's student in physics at Ulm University and develops the Ulmiversität website. With his technical background and interest in web development, he built this platform to make everyday university life easier for students.",
+    "bioStefan": "Stefan is also a master's student in physics at Ulm University and takes care of the website's quality assurance. He ensures that all content is correct and up to date and meets students' needs.",
+    "missionTitle": "Our mission",
+    "missionText": "As students, we know the typical everyday challenges: finding lecture halls, checking the canteen menu, keeping track of important dates. With the Ulmiversität website, we wanted to create a central hub that makes this information clear and quickly accessible.",
+    "independenceTitle": "Independence",
+    "important": "Important:",
+    "independenceText": "We are completely independent of Ulm University and the student representation (StuVe). We develop this platform externally and on our own initiative.",
+    "contactTitle": "Contact & feedback",
+    "contactDescription": "Do you have questions, suggestions or feedback? We look forward to hearing from you!",
+    "footerSlogan": "By students, for students"
+  },
+  "Mensa": {
+    "title": "Mensa",
+    "menuTitle": "Menu",
+    "today": "Today",
+    "todayDate": "Today, {date}",
+    "closed": "There is no menu for this day.",
+    "closedToday": "Mensa is closed today",
+    "fullMenu": "Full menu",
+    "orderWest": "Order west",
+    "previousWeek": "Previous week",
+    "nextWeek": "Next week",
+    "askGuru": "Ask the Guru",
+    "guruThinking": "The Guru is thinking...",
+    "calories": "Calories",
+    "protein": "Protein",
+    "rating": "Rating",
+    "ratingCount": "{count, plural, =0 {No ratings yet} one {# rating} other {# ratings}}",
+    "taste": "Taste",
+    "look": "Look",
+    "price": "Price",
+    "comments": "Comments",
+    "noComments": "No comments yet!",
+    "prices": "Prices",
+    "student": "Students",
+    "employee": "Employees",
+    "guest": "Guests",
+    "nutrition": "Nutrition",
+    "perPortion": "per portion",
+    "energy": "Energy",
+    "fat": "Fat",
+    "saturatedFat": "of which saturates",
+    "carbohydrates": "Carbohydrates",
+    "sugar": "of which sugars",
+    "salt": "Salt",
+    "co2": "CO₂ footprint",
+    "noNutrition": "No nutrition information",
+    "allergens": "Allergens & additives",
+    "noAllergens": "No information",
+    "servedOn": "On the menu",
+    "backToMenu": "Back to the menu",
+    "mainDishes": "Main dishes",
+    "sidesAndDesserts": "Sides, salads & desserts"
+  },
+  "Admin": {
+    "title": "Admin",
+    "invalidInput": "Invalid input.",
+    "nav": {
+      "overview": "Overview",
+      "mensa": "Mensa",
+      "categories": "Categories",
+      "logout": "Log out",
+      "site": "To the website",
+      "events": "Events"
+    },
+    "login": {
+      "title": "Admin login",
+      "username": "Username",
+      "password": "Password",
+      "submit": "Log in",
+      "invalid": "Wrong username or password."
+    },
+    "overview": {
+      "description": "Administration of the Ulmiversität.",
+      "mensaDescription": "Reload and check the menu",
+      "categoriesDescription": "{count, plural, =0 {All categories are assigned} one {# category without assignment} other {# categories without assignment}}",
+      "eventsDescription": "Manage events for the home page"
+    },
+    "mensa": {
+      "refreshTitle": "Refresh menu",
+      "refreshDescription": "Reloads the menu from the Studierendenwerk right away, e.g. when the mensa changed it on short notice.",
+      "refreshToday": "Reload today",
+      "refreshThisWeek": "This week",
+      "refreshNextWeek": "Next week",
+      "refresh": "Reload",
+      "daysTitle": "Days",
+      "show": "View",
+      "todayTitle": "On the menu today",
+      "mealCount": "{count, plural, =0 {No menu} one {# meal} other {# meals}}",
+      "resultOpen": "{meals} meals, {newMeals} new",
+      "resultClosed": "closed",
+      "resultSoldOut": "{count} sold out",
+      "resultNewCategories": "new categories: {names}",
+      "resultError": "Error"
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Categories from the menu are added automatically. Assign them to a display category to set name, color, order, and whether they appear on the home page.",
+      "menuCategoriesTitle": "Categories on the menu",
+      "groupsTitle": "Display categories",
+      "unassigned": "Not assigned",
+      "servings": "served {count}×",
+      "lastSeen": "last {date}",
+      "showOnHome": "Home page",
+      "edit": "Edit",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "newGroup": "New display category",
+      "create": "Create",
+      "namePlaceholder": "e.g. Pizza",
+      "nameDe": "Name (German)",
+      "nameEn": "Name (English)",
+      "kind": "Kind",
+      "color": "Color",
+      "icon": "Icon",
+      "kinds": {
+        "main": "Main dish",
+        "side": "Side",
+        "dessert": "Dessert",
+        "other": "Other"
+      },
+      "kindHint": "Decides which meals count for the price statistics and appear under main dishes on the menu page.",
+      "showOnHomeHint": "Meals of this category appear in the mensa section of the home page.",
+      "save": "Save",
+      "saved": "Saved",
+      "delete": "Delete",
+      "deleteHint": "Menu categories assigned to it become “not assigned” again.",
+      "back": "Back to categories",
+      "assigned": "Assigned menu categories",
+      "noneAssigned": "None",
+      "duplicateName": "A display category with this name already exists."
+    },
+    "events": {
+      "description": "Description",
+      "upcoming": "Upcoming",
+      "past": "Past",
+      "noUpcoming": "No upcoming events.",
+      "new": "New event",
+      "create": "Create",
+      "edit": "Edit",
+      "back": "Back to events",
+      "titleField": "Title",
+      "location": "Location",
+      "color": "Color",
+      "startDate": "Date",
+      "endDate": "End date",
+      "endDateHint": "Leave empty for one-day events.",
+      "startTime": "Start",
+      "endTime": "End",
+      "timeHint": "Leave empty for all-day events.",
+      "endTimeHint": "Leave empty for “open end”.",
+      "delete": "Delete",
+      "deleteHint": "The event will be deleted permanently.",
+      "errors": {
+        "endBeforeStart": "The end is before the start.",
+        "endTimeWithoutStart": "An end time needs a start time."
+      },
+      "intro": "Events are shown on the home page until they are over."
+    }
+  }
+}

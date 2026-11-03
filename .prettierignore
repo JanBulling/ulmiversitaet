@@ -1,0 +1,6 @@
+.next
+node_modules
+pnpm-lock.yaml
+src/lib/db/migrations
+src/content
+src/features/mensa/scraper/__fixtures__

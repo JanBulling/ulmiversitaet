@@ -1,0 +1,259 @@
+{
+  "Nav": {
+    "home": "Home",
+    "links": "Alle Links",
+    "guides": "Anleitungen",
+    "map": "Karte",
+    "search": "Suche...",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "about": "Über uns",
+    "mensa": "Mensa",
+    "menu": "Menü",
+    "close": "Schließen",
+    "toggleTheme": "Farbschema wechseln",
+    "language": "Sprache",
+    "languages": {
+      "de": "Deutsch",
+      "en": "English"
+    },
+    "network": {
+      "vpn": "Uni-VPN aktiv",
+      "eduroam": "eduroam® aktiv"
+    }
+  },
+  "HomePage": {
+    "title": "Ulmiversität",
+    "Events": {
+      "title": "Events",
+      "futureEvents": "Zukünftige Events",
+      "openEnd": "ab {time}"
+    },
+    "Featured": {
+      "links": {
+        "title": "Weitere Links",
+        "description": "Nützliche Links rund ums Studium",
+        "exmatriculation": "Exmatrikulation",
+        "exmatriculationDescription": "Soll ich mich exmatrikulieren? Und wie?",
+        "library": "Bibliothekskatalog",
+        "libraryDescription": "Bücher suchen und ausleihen",
+        "lectureHalls": "Hörsaalfinder",
+        "lectureHallsDescription": "Finde dich auf dem Campus zurecht",
+        "stuve": "StuVe",
+        "stuveDescription": "Die Studierendenvertretung der Uni Ulm"
+      },
+      "guides": {
+        "title": "Anleitungen",
+        "description": "Anleitungen für den Uni-Alltag",
+        "more": "Mehr Anleitungen"
+      }
+    },
+    "PublicTransport": {
+      "title": "Echtzeit-ÖPNV",
+      "comingSoon": "Abfahrten kommen bald."
+    }
+  },
+  "LinkPage": {
+    "title": "Alle Links",
+    "description": "Die Ulmiversität hat eine Sammlung von nützlichen Links, die den Uni-Alltag erleichtern sollen. Ein Link fehlt? <a>Schreibe uns!</a>."
+  },
+  "GuidesPage": {
+    "title": "Anleitungen",
+    "description": "Die Ulmiversität hat eine Sammlung von Anleitungen, die den Uni-Alltag erleichtern sollen. Eine Anleitung fehlt oder Du hast weitere Ideen? <a>Schreibe uns!</a>.",
+    "backToAll": "Zurück zu allen Anleitungen",
+    "eduroamDescription": "Anleitungen zur Einrichtung von eduroam® an verschiedenen Geräten."
+  },
+  "CampusMapPage": {
+    "title": "Campus-Karte",
+    "subtitle": "Finde dich auf dem Campus zurecht!"
+  },
+  "ParkingLotPage": {
+    "title": "Parkplätze",
+    "description": "Echtzeit Auskunft der Parkplätze an der Universität Ulm"
+  },
+  "CampusMap": {
+    "selectLabel": "Auswählen, was angezeigt wird",
+    "searchPlaceholder": "Suche {layer}",
+    "searchButton": "Suchen",
+    "baseLayers": {
+      "light": "Hell",
+      "dark": "Dunkel",
+      "satellite": "Satellit"
+    },
+    "layers": {
+      "buildings": "Gebäude",
+      "lectureHalls": "Hörsäle",
+      "poi": "Wichtige Orte"
+    }
+  },
+  "NotFound": {
+    "title": "Schrödingers Katze ist gestorben",
+    "description": "Die Seite existiert – oder existiert nicht. Leider hat das Universum sich gegen dich entschieden.",
+    "backHome": "Zur Startseite"
+  },
+  "AboutPage": {
+    "title": "Über uns",
+    "subtitle": "Zwei Physik-Masterstudenten, die das Studierendenleben an der Uni Ulm einfacher und übersichtlicher gestalten wollten.",
+    "roleDeveloper": "Entwickler der Website",
+    "roleQA": "Qualitätssicherung",
+    "bioJan": "Jan studiert Physik im Master an der Uni Ulm und entwickelt die Ulmiversität-Website. Mit seinem technischen Hintergrund und Interesse an Webentwicklung hat er diese Plattform erstellt, um Studierenden den Unialltag zu erleichtern.",
+    "bioStefan": "Stefan studiert ebenfalls Physik im Master an der Uni Ulm und kümmert sich um die Qualitätssicherung der Website. Er sorgt dafür, dass alle Inhalte korrekt und aktuell sind und die Bedürfnisse der Studierenden erfüllt werden.",
+    "missionTitle": "Unser Ziel",
+    "missionText": "Als Studierende kennen wir die typischen Probleme des Unialltags: Hörsäle finden, Mensa-Speisepläne checken, wichtige Termine im Blick behalten. Mit der Ulmiversität-Website wollten wir eine zentrale Anlaufstelle schaffen, die diese Informationen übersichtlich und schnell zugänglich macht.",
+    "independenceTitle": "Unabhängigkeit",
+    "important": "Wichtig:",
+    "independenceText": "Wir sind vollständig unabhängig von der Universität Ulm und der Studierendenvertretung (StuVe). Diese Plattform entwickeln wir extern und aus eigenem Antrieb heraus.",
+    "contactTitle": "Kontakt & Feedback",
+    "contactDescription": "Habt ihr Fragen, Anregungen oder Feedback? Wir freuen uns über eure Nachrichten!",
+    "footerSlogan": "Von Studierenden für Studierende"
+  },
+  "Mensa": {
+    "title": "Mensa",
+    "menuTitle": "Speiseplan",
+    "today": "Heute",
+    "todayDate": "Heute, {date}",
+    "closed": "An diesem Tag gibt es keinen Speiseplan.",
+    "closedToday": "Mensa heute geschlossen",
+    "fullMenu": "Ganzer Speiseplan",
+    "orderWest": "Bestellung West",
+    "previousWeek": "Vorherige Woche",
+    "nextWeek": "Nächste Woche",
+    "askGuru": "Frage den Guru",
+    "guruThinking": "Der Guru denkt nach...",
+    "calories": "Kalorien",
+    "protein": "Protein",
+    "rating": "Bewertung",
+    "ratingCount": "{count, plural, =0 {Noch keine Bewertungen} one {# Bewertung} other {# Bewertungen}}",
+    "taste": "Geschmack",
+    "look": "Aussehen",
+    "price": "Preis",
+    "comments": "Kommentare",
+    "noComments": "Noch keine Kommentare abgegeben!",
+    "prices": "Preise",
+    "student": "Studierende",
+    "employee": "Bedienstete",
+    "guest": "Gäste",
+    "nutrition": "Nährwerte",
+    "perPortion": "pro Portion",
+    "energy": "Energie",
+    "fat": "Fett",
+    "saturatedFat": "davon gesättigt",
+    "carbohydrates": "Kohlenhydrate",
+    "sugar": "davon Zucker",
+    "salt": "Salz",
+    "co2": "CO₂-Fußabdruck",
+    "noNutrition": "Keine Nährwertangaben",
+    "allergens": "Allergene & Zusatzstoffe",
+    "noAllergens": "Keine Angaben",
+    "servedOn": "Auf dem Speiseplan",
+    "backToMenu": "Zum Speiseplan",
+    "mainDishes": "Hauptgerichte",
+    "sidesAndDesserts": "Beilagen, Salate & Desserts"
+  },
+  "Admin": {
+    "title": "Admin",
+    "invalidInput": "Ungültige Eingabe.",
+    "nav": {
+      "overview": "Übersicht",
+      "mensa": "Mensa",
+      "categories": "Kategorien",
+      "logout": "Abmelden",
+      "site": "Zur Website",
+      "events": "Events"
+    },
+    "login": {
+      "title": "Admin-Anmeldung",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "submit": "Anmelden",
+      "invalid": "Benutzername oder Passwort ist falsch."
+    },
+    "overview": {
+      "description": "Verwaltung der Ulmiversität.",
+      "mensaDescription": "Speiseplan neu laden und kontrollieren",
+      "categoriesDescription": "{count, plural, =0 {Alle Kategorien sind zugeordnet} one {# Kategorie ohne Zuordnung} other {# Kategorien ohne Zuordnung}}",
+      "eventsDescription": "Events für die Startseite verwalten"
+    },
+    "mensa": {
+      "refreshTitle": "Speiseplan aktualisieren",
+      "refreshDescription": "Lädt den Speiseplan sofort neu vom Studierendenwerk, z. B. wenn die Mensa das Menü spontan geändert hat.",
+      "refreshToday": "Heute neu laden",
+      "refreshThisWeek": "Diese Woche",
+      "refreshNextWeek": "Nächste Woche",
+      "refresh": "Neu laden",
+      "daysTitle": "Tage",
+      "show": "Ansehen",
+      "todayTitle": "Heute auf dem Speiseplan",
+      "mealCount": "{count, plural, =0 {Kein Speiseplan} one {# Gericht} other {# Gerichte}}",
+      "resultOpen": "{meals} Gerichte, davon {newMeals} neu",
+      "resultClosed": "geschlossen",
+      "resultSoldOut": "{count} ausverkauft",
+      "resultNewCategories": "neue Kategorien: {names}",
+      "resultError": "Fehler"
+    },
+    "categories": {
+      "title": "Kategorien",
+      "description": "Kategorien vom Speiseplan werden automatisch übernommen. Ordne sie einer Anzeige-Kategorie zu, um Name, Farbe, Reihenfolge und die Anzeige auf der Startseite festzulegen.",
+      "menuCategoriesTitle": "Kategorien auf dem Speiseplan",
+      "groupsTitle": "Anzeige-Kategorien",
+      "unassigned": "Nicht zugeordnet",
+      "servings": "{count}× serviert",
+      "lastSeen": "zuletzt {date}",
+      "showOnHome": "Startseite",
+      "edit": "Bearbeiten",
+      "moveUp": "Nach oben",
+      "moveDown": "Nach unten",
+      "newGroup": "Neue Anzeige-Kategorie",
+      "create": "Erstellen",
+      "namePlaceholder": "z. B. Pizza",
+      "nameDe": "Name (Deutsch)",
+      "nameEn": "Name (Englisch)",
+      "kind": "Art",
+      "color": "Farbe",
+      "icon": "Symbol",
+      "kinds": {
+        "main": "Hauptgericht",
+        "side": "Beilage",
+        "dessert": "Dessert",
+        "other": "Sonstiges"
+      },
+      "kindHint": "Bestimmt, welche Gerichte in die Preisstatistik eingehen und auf der Speiseplan-Seite bei den Hauptgerichten stehen.",
+      "showOnHomeHint": "Gerichte dieser Kategorie erscheinen im Mensa-Bereich der Startseite.",
+      "save": "Speichern",
+      "saved": "Gespeichert",
+      "delete": "Löschen",
+      "deleteHint": "Zugeordnete Speiseplan-Kategorien sind danach wieder „Nicht zugeordnet“.",
+      "back": "Zurück zu den Kategorien",
+      "assigned": "Zugeordnete Speiseplan-Kategorien",
+      "noneAssigned": "Keine",
+      "duplicateName": "Eine Anzeige-Kategorie mit diesem Namen existiert bereits."
+    },
+    "events": {
+      "description": "Beschreibung",
+      "upcoming": "Anstehend",
+      "past": "Vergangen",
+      "noUpcoming": "Keine anstehenden Events.",
+      "new": "Neues Event",
+      "create": "Erstellen",
+      "edit": "Bearbeiten",
+      "back": "Zurück zu den Events",
+      "titleField": "Titel",
+      "location": "Ort",
+      "color": "Farbe",
+      "startDate": "Datum",
+      "endDate": "Enddatum",
+      "endDateHint": "Leer lassen für eintägige Events.",
+      "startTime": "Beginn",
+      "endTime": "Ende",
+      "timeHint": "Leer lassen für ganztägige Events.",
+      "endTimeHint": "Leer lassen für „open end“.",
+      "delete": "Löschen",
+      "deleteHint": "Das Event wird endgültig gelöscht.",
+      "errors": {
+        "endBeforeStart": "Das Ende liegt vor dem Beginn.",
+        "endTimeWithoutStart": "Ein Ende braucht auch einen Beginn."
+      },
+      "intro": "Events erscheinen auf der Startseite, bis sie vorbei sind."
+    }
+  }
+}

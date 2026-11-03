@@ -1,0 +1,787 @@
+{
+  "id": "8abd4429-c7c2-44a9-85b3-ab455583b8a4",
+  "prevId": "e3040157-be94-4417-a1e2-c241a4601ff8",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "ulmiversitaet.category_groups": {
+      "name": "category_groups",
+      "schema": "ulmiversitaet",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "category_groups_id_seq",
+            "schema": "ulmiversitaet",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "name_de": {
+          "name": "name_de",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name_en": {
+          "name": "name_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kind": {
+          "name": "kind",
+          "type": "category_kind",
+          "typeSchema": "ulmiversitaet",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'main'"
+        },
+        "color": {
+          "name": "color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "icon": {
+          "name": "icon",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 100
+        },
+        "show_on_home": {
+          "name": "show_on_home",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "category_groups_name_de_unique": {
+          "name": "category_groups_name_de_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name_de"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "ulmiversitaet.meal_categories": {
+      "name": "meal_categories",
+      "schema": "ulmiversitaet",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "meal_categories_id_seq",
+            "schema": "ulmiversitaet",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "group_id": {
+          "name": "group_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "meal_categories_group_id_category_groups_id_fk": {
+          "name": "meal_categories_group_id_category_groups_id_fk",
+          "tableFrom": "meal_categories",
+          "tableTo": "category_groups",
+          "schemaTo": "ulmiversitaet",
+          "columnsFrom": [
+            "group_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "meal_categories_name_unique": {
+          "name": "meal_categories_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "ulmiversitaet.meal_history": {
+      "name": "meal_history",
+      "schema": "ulmiversitaet",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "meal_history_id_seq",
+            "schema": "ulmiversitaet",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "meal_id": {
+          "name": "meal_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category_id": {
+          "name": "category_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name_key": {
+          "name": "name_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "generated": {
+            "as": "lower(regexp_replace(\"name\", '[^[:alnum:]]+', '', 'g'))",
+            "type": "stored"
+          }
+        },
+        "price_student_cents": {
+          "name": "price_student_cents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_employee_cents": {
+          "name": "price_employee_cents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_guest_cents": {
+          "name": "price_guest_cents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_note": {
+          "name": "price_note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "position": {
+          "name": "position",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "meal_history_meal_date_idx": {
+          "name": "meal_history_meal_date_idx",
+          "columns": [
+            {
+              "expression": "meal_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "date",
+              "isExpression": false,
+              "asc": false,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "meal_history_name_key_idx": {
+          "name": "meal_history_name_key_idx",
+          "columns": [
+            {
+              "expression": "name_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "meal_history_meal_id_meals_id_fk": {
+          "name": "meal_history_meal_id_meals_id_fk",
+          "tableFrom": "meal_history",
+          "tableTo": "meals",
+          "schemaTo": "ulmiversitaet",
+          "columnsFrom": [
+            "meal_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "meal_history_category_id_meal_categories_id_fk": {
+          "name": "meal_history_category_id_meal_categories_id_fk",
+          "tableFrom": "meal_history",
+          "tableTo": "meal_categories",
+          "schemaTo": "ulmiversitaet",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "meal_history_date_meal_key": {
+          "name": "meal_history_date_meal_key",
+          "nullsNotDistinct": false,
+          "columns": [
+            "date",
+            "meal_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "ulmiversitaet.meal_ratings": {
+      "name": "meal_ratings",
+      "schema": "ulmiversitaet",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "meal_ratings_id_seq",
+            "schema": "ulmiversitaet",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "meal_id": {
+          "name": "meal_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "taste": {
+          "name": "taste",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "look": {
+          "name": "look",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price": {
+          "name": "price",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "total": {
+          "name": "total",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "generated": {
+            "as": "(3 * taste + 2 * look + price)::real / 6",
+            "type": "stored"
+          }
+        },
+        "comment": {
+          "name": "comment",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hidden_at": {
+          "name": "hidden_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "meal_ratings_meal_idx": {
+          "name": "meal_ratings_meal_idx",
+          "columns": [
+            {
+              "expression": "meal_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": false,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "meal_ratings_meal_id_meals_id_fk": {
+          "name": "meal_ratings_meal_id_meals_id_fk",
+          "tableFrom": "meal_ratings",
+          "tableTo": "meals",
+          "schemaTo": "ulmiversitaet",
+          "columnsFrom": [
+            "meal_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "meal_ratings_values_check": {
+          "name": "meal_ratings_values_check",
+          "value": "taste between 1 and 5 and look between 1 and 5 and price between 1 and 5"
+        },
+        "meal_ratings_comment_check": {
+          "name": "meal_ratings_comment_check",
+          "value": "char_length(comment) <= 1000"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "ulmiversitaet.meals": {
+      "name": "meals",
+      "schema": "ulmiversitaet",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name_key": {
+          "name": "name_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "generated": {
+            "as": "lower(regexp_replace(\"name\", '[^[:alnum:]]+', '', 'g'))",
+            "type": "stored"
+          }
+        },
+        "name_en": {
+          "name": "name_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "category_id": {
+          "name": "category_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "allergens": {
+          "name": "allergens",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'"
+        },
+        "types": {
+          "name": "types",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'"
+        },
+        "price_student_cents": {
+          "name": "price_student_cents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_employee_cents": {
+          "name": "price_employee_cents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_guest_cents": {
+          "name": "price_guest_cents",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price_note": {
+          "name": "price_note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "energy_kcal": {
+          "name": "energy_kcal",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "energy_kj": {
+          "name": "energy_kj",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "protein_g": {
+          "name": "protein_g",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fat_g": {
+          "name": "fat_g",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "saturated_fat_g": {
+          "name": "saturated_fat_g",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "carbohydrates_g": {
+          "name": "carbohydrates_g",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sugar_g": {
+          "name": "sugar_g",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "salt_g": {
+          "name": "salt_g",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "co2_g": {
+          "name": "co2_g",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_served_on": {
+          "name": "last_served_on",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "meals_name_key_idx": {
+          "name": "meals_name_key_idx",
+          "columns": [
+            {
+              "expression": "name_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "meals_name_trgm_idx": {
+          "name": "meals_name_trgm_idx",
+          "columns": [
+            {
+              "expression": "\"name\" gin_trgm_ops",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "gin",
+          "with": {}
+        },
+        "meals_category_idx": {
+          "name": "meals_category_idx",
+          "columns": [
+            {
+              "expression": "category_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "meals_category_id_meal_categories_id_fk": {
+          "name": "meals_category_id_meal_categories_id_fk",
+          "tableFrom": "meals",
+          "tableTo": "meal_categories",
+          "schemaTo": "ulmiversitaet",
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "ulmiversitaet.price_history": {
+      "name": "price_history",
+      "schema": "ulmiversitaet",
+      "columns": {
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "avg_main_student_cents": {
+          "name": "avg_main_student_cents",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avg_main_employee_cents": {
+          "name": "avg_main_employee_cents",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avg_main_guest_cents": {
+          "name": "avg_main_guest_cents",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avg_dessert_student_cents": {
+          "name": "avg_dessert_student_cents",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avg_side_student_cents": {
+          "name": "avg_side_student_cents",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "ulmiversitaet.category_kind": {
+      "name": "category_kind",
+      "schema": "ulmiversitaet",
+      "values": [
+        "main",
+        "side",
+        "dessert",
+        "other"
+      ]
+    }
+  },
+  "schemas": {
+    "ulmiversitaet": "ulmiversitaet"
+  },
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {
+    "ulmiversitaet.meal_rating_stats": {
+      "columns": {
+        "meal_id": {
+          "name": "meal_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "definition": "select \"meal_id\", count(*)::int as \"count\", avg(\"taste\")::real as \"taste\", avg(\"look\")::real as \"look\", avg(\"price\")::real as \"price\", avg(\"total\")::real as \"total\", ((count(*) * avg(\"total\") + 2 * 3.0) / (count(*) + 2))::real as \"score\" from \"ulmiversitaet\".\"meal_ratings\" where \"ulmiversitaet\".\"meal_ratings\".\"hidden_at\" is null group by \"ulmiversitaet\".\"meal_ratings\".\"meal_id\"",
+      "name": "meal_rating_stats",
+      "schema": "ulmiversitaet",
+      "isExisting": false,
+      "materialized": false
+    }
+  },
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
