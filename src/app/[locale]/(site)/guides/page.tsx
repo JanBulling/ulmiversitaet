@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 
 import { Page, PageHeader } from "@/components/layout/page";
-import { GuideTiles } from "@/features/guides/components/guide-tiles";
+import { GuideTiles } from "@/components/guides/guide-tiles";
 import { getGuideFolder } from "@/features/guides/guides";
 
 export async function generateMetadata(): Promise<Metadata> {

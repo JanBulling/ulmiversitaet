@@ -2,7 +2,7 @@ import { CookingPot } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import { PageHeader } from "@/components/layout/page";
-import { OrderWestButton } from "@/features/mensa/components/mensa-section";
+import { OrderWestButton } from "@/components/mensa/mensa-section";
 
 /** Static header of the menu pages (part of the prerendered shell) */
 export async function MenuHeader() {

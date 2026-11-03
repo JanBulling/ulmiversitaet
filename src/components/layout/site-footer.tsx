@@ -15,7 +15,7 @@ export async function SiteFooter() {
 
   return (
     <footer className="border-t bg-card">
-      <div className="mx-auto flex max-w-screen-xl flex-col gap-2 px-4 pt-4 pb-2">
+      <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 pt-4 pb-2">
         <div className="flex flex-col items-center gap-2 md:flex-row">
           <Logo size="sm" />
           <nav className="flex flex-1 items-center justify-center text-sm">

@@ -4,7 +4,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
 import { Panel, PanelBody, PanelHeader } from "@/components/ui/panel";
-import { LoginForm } from "@/features/admin/components/login-form";
+import { LoginForm } from "@/components/admin/login-form";
 import { isAdmin } from "@/lib/auth/session";
 import { redirect } from "@/lib/i18n/navigation";
 

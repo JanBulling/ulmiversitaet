@@ -25,7 +25,7 @@ The reference for the look of the website is the **mensa section on the home pag
 | `Skeleton`          | `src/components/ui/skeleton.tsx` | Loading placeholders                                                                           |
 | `Alert`             | `src/components/ui/alert.tsx`    | Notices and errors inside content                                                              |
 
-Feature-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/features/mensa/components/`) are built from these rules and should be reused within their feature.
+Use-case-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/components/mensa/`) are built from these rules and should be reused within their area. All components live in `src/components/`; `src/features/` contains only logic.
 
 ## 3. Layout
 
@@ -81,7 +81,7 @@ Feature-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/f
 - Only `lucide-react`. Icons are decorative (`aria-hidden`) unless they are the only content of a button (then the button gets an `aria-label`).
 - Panel/page header icon: `size-6 md:size-8 text-primary`, done by `PanelHeader`/`PageHeader`.
 - Inline icons in meta lines: `size-4`. Category icons next to labels: 16 px. Tile icons: `size-5 text-primary`.
-- Category icons are stored by name in the database; the allowed set is in `src/features/mensa/components/icons.tsx`.
+- Category icons are stored by name in the database; the allowed names are in `src/features/mensa/category-icons.ts`, their lucide components in `src/components/mensa/icons.tsx`.
 
 ## 8. Interaction
 

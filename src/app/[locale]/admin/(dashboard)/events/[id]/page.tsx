@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Panel, PanelBody, PanelHeader } from "@/components/ui/panel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SubmitButton } from "@/components/ui/submit-button";
-import { deleteEvent } from "@/features/events/admin/actions";
-import { EventForm } from "@/features/events/admin/components/event-form";
-import { getEvent } from "@/features/events/admin/queries";
+import { deleteEvent } from "@/features/admin/events/actions";
+import { EventForm } from "@/components/admin/events/event-form";
+import { getEvent } from "@/features/admin/events/queries";
 import { Link } from "@/lib/i18n/navigation";
 
 type Props = PageProps<"/[locale]/admin/events/[id]">;

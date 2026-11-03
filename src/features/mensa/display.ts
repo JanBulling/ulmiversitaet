@@ -20,7 +20,7 @@ export function categoryName(category: DisplayCategory, locale: Locale) {
 
 export function formatPrice(format: Formatter, cents: number | null) {
   return cents === null
-    ? "–"
+    ? "-"
     : format.number(cents / 100, { style: "currency", currency: "EUR" });
 }
 

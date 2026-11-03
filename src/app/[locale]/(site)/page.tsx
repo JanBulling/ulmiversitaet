@@ -1,15 +1,15 @@
 import { Suspense } from "react";
 
 import { Page } from "@/components/layout/page";
-import { EventsSection } from "@/features/events/components/events-section";
-import { FeaturedGuides } from "@/features/home/components/featured-guides";
-import { FeaturedLinks } from "@/features/home/components/featured-links";
-import { QuickLinks } from "@/features/home/components/quick-links";
+import { EventsSection } from "@/components/events/events-section";
+import { FeaturedGuides } from "@/components/home/featured-guides";
+import { FeaturedLinks } from "@/components/home/featured-links";
+import { QuickLinks } from "@/components/home/quick-links";
 import {
   MensaSection,
   MensaSectionSkeleton,
-} from "@/features/mensa/components/mensa-section";
-import { PublicTransportSection } from "@/features/public-transport/components/public-transport-section";
+} from "@/components/mensa/mensa-section";
+import { PublicTransportSection } from "@/components/public-transport/public-transport-section";
 
 export default function HomePage() {
   return (

@@ -5,6 +5,9 @@ import type { Event } from "@/lib/db/schema";
 
 type Formatter = ReturnType<typeof createFormatter>;
 
+/** Color of events without their own color */
+export const DEFAULT_EVENT_COLOR = "#f83a22";
+
 /** "Mi., 4. Nov." or "4. Nov. – 6. Nov." */
 export function formatEventDates(format: Formatter, event: Event): string {
   const day = (date: string, withWeekday: boolean) =>

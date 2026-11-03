@@ -1,5 +1,5 @@
 import { Page } from "@/components/layout/page";
-import { AdminNav } from "@/features/admin/components/admin-nav";
+import { AdminNav } from "@/components/admin/admin-nav";
 
 export default function DashboardLayout({
   children,

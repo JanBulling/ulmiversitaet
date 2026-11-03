@@ -3,10 +3,7 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import {
-  MenuView,
-  MenuViewSkeleton,
-} from "@/features/mensa/components/menu-view";
+import { MenuView, MenuViewSkeleton } from "@/components/mensa/menu-view";
 import { isIsoDate, toDate } from "@/lib/date";
 import { MenuHeader } from "../menu-header";
 

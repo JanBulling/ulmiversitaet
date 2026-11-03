@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
-import {
-  MenuView,
-  MenuViewSkeleton,
-} from "@/features/mensa/components/menu-view";
+import { MenuView, MenuViewSkeleton } from "@/components/mensa/menu-view";
 import { MenuHeader } from "./menu-header";
 
 export async function generateMetadata(): Promise<Metadata> {

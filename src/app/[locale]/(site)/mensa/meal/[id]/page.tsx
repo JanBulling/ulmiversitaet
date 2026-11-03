@@ -5,10 +5,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 import { Button } from "@/components/ui/button";
-import {
-  MealView,
-  MealViewSkeleton,
-} from "@/features/mensa/components/meal-view";
+import { MealView, MealViewSkeleton } from "@/components/mensa/meal-view";
 import { mealName } from "@/features/mensa/display";
 import { getMeal } from "@/features/mensa/queries";
 import { Link } from "@/lib/i18n/navigation";

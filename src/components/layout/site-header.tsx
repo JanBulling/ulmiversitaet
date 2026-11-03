@@ -17,7 +17,7 @@ export function SiteHeader() {
       id={HEADER_ID}
       className="sticky top-0 z-40 w-full border-b bg-card transition-all duration-300 ease-in-out"
     >
-      <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-2 px-4">
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4">
         <Logo />
 
         <Suspense

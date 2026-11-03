@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { PageHeader } from "@/components/layout/page";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tile } from "@/components/ui/tile";
-import { countUnassignedCategories } from "@/features/mensa/admin/queries";
+import { countUnassignedCategories } from "@/features/admin/mensa-categories/queries";
 
 export default async function AdminPage() {
   const t = await getTranslations("Admin");

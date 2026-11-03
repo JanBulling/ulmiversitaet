@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/layout/page";
 import {
   MenuAdmin,
   MenuAdminSkeleton,
-} from "@/features/mensa/admin/components/menu-admin";
+} from "@/components/admin/mensa/menu-admin";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Admin.nav");

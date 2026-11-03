@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/layout/page";
 import {
   EventsAdmin,
   EventsAdminSkeleton,
-} from "@/features/events/admin/components/events-admin";
+} from "@/components/admin/events/events-admin";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Admin.nav");

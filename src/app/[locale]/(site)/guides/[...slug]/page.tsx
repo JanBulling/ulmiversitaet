@@ -5,8 +5,8 @@ import { notFound } from "next/navigation";
 
 import { Page, PageHeader } from "@/components/layout/page";
 import { Button } from "@/components/ui/button";
-import { GuideArticle } from "@/features/guides/components/guide-article";
-import { GuideTiles } from "@/features/guides/components/guide-tiles";
+import { GuideArticle } from "@/components/guides/guide-article";
+import { GuideTiles } from "@/components/guides/guide-tiles";
 import {
   formatFolderName,
   getGuide,

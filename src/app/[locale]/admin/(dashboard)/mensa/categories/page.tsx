@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/layout/page";
 import {
   CategoriesAdmin,
   CategoriesAdminSkeleton,
-} from "@/features/mensa/admin/components/categories-admin";
+} from "@/components/admin/mensa-categories/categories-admin";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Admin.categories");

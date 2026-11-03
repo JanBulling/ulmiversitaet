@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Panel, PanelBody, PanelHeader } from "@/components/ui/panel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SubmitButton } from "@/components/ui/submit-button";
-import { deleteGroup } from "@/features/mensa/admin/actions";
-import { GroupForm } from "@/features/mensa/admin/components/group-form";
-import { getCategoryGroup } from "@/features/mensa/admin/queries";
+import { deleteGroup } from "@/features/admin/mensa-categories/actions";
+import { GroupForm } from "@/components/admin/mensa-categories/group-form";
+import { getCategoryGroup } from "@/features/admin/mensa-categories/queries";
 import { Link } from "@/lib/i18n/navigation";
 
 type Props = PageProps<"/[locale]/admin/mensa/categories/[id]">;

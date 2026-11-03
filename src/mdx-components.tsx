@@ -59,10 +59,7 @@ const components: MDXComponents = {
     );
   },
   p: ({ className, ...props }) => (
-    <p
-      className={cn("leading-relaxed [&:not(:first-child)]:mt-6", className)}
-      {...props}
-    />
+    <p className={cn("leading-relaxed not-first:mt-6", className)} {...props} />
   ),
   strong: ({ className, ...props }) => (
     <strong className={cn("font-medium", className)} {...props} />
@@ -107,7 +104,7 @@ const components: MDXComponents = {
   th: ({ className, ...props }) => (
     <th
       className={cn(
-        "px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
+        "px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right",
         className,
       )}
       {...props}
@@ -116,7 +113,7 @@ const components: MDXComponents = {
   td: ({ className, ...props }) => (
     <td
       className={cn(
-        "px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
+        "px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right",
         className,
       )}
       {...props}

@@ -35,31 +35,46 @@ pnpm dev
 
 ```
 src/
-├── app/                    # Routing only: thin pages that compose features
-│   ├── [locale]/           # Root layout (<html>), `locale` is a root param
-│   │   ├── (site)/         # Pages with the public header/footer
+├── app/                      # Routing only: thin pages that compose components
+│   ├── [locale]/             # Root layout (<html>), `locale` is a root param
+│   │   ├── (site)/           # Public pages with header/footer
+│   │   ├── admin/            # Admin dashboard (login + (dashboard)/…)
 │   │   └── not-found.tsx
+│   ├── api/cron/             # Cron jobs (Route Handlers)
 │   └── global-not-found.tsx
-├── features/<name>/        # What the site does (guides, mensa, public transport, …)
-│   ├── components/         #   UI of the feature
-│   └── *.ts, <topic>/      #   Data access, parsing, domain logic (e.g. mensa/scraper/)
-├── content/                # What the site says: guides (.mdx), legal texts (.md), static data
-├── lib/                    # Technical foundation, no domain logic
-│   ├── db/                 #   Drizzle client, schema/, migrations/
-│   ├── i18n/               #   next-intl routing, request config, navigation, messages/
-│   ├── env.ts              #   Typed env vars
-│   ├── site.ts             #   Site name, URLs, theme colors
-│   ├── fonts.ts
-│   └── utils.ts
-├── components/             # Shared UI used by several features
-│   ├── ui/                 #   Primitives (shadcn/ui)
-│   ├── layout/             #   Header, footer, providers
-│   └── mdx/                #   Components available inside guides
-├── mdx-components.tsx      # Markdown element styles (file location required by @next/mdx)
-└── proxy.ts                # Locale detection/redirects (file location required by Next.js)
+├── components/               # All UI (.tsx), grouped by use case
+│   ├── ui/                   #   Primitives: button, panel, tile, input, sheet, …
+│   ├── layout/               #   Page, header, footer, navigation, theme
+│   ├── mdx/                  #   Components available inside guides
+│   ├── home/                 #   Quick links, featured guides/links
+│   ├── mensa/                #   Menu, meal page, home section
+│   ├── events/               #   Events on the home page
+│   ├── guides/               #   Guide tiles and article
+│   ├── public-transport/
+│   └── admin/                #   Admin navigation, login form
+│       ├── mensa/            #     Menu refresh
+│       ├── mensa-categories/ #     Category assignment and display categories
+│       └── events/           #     Event list and form
+├── features/                 # All logic (.ts), no UI: data access, actions, parsing
+│   ├── mensa/                #   Queries, scraper/, sync/, codes, display helpers
+│   ├── events/               #   Queries, formatting
+│   ├── guides/               #   Reading the MDX guides
+│   └── admin/                #   Server Actions and queries of the dashboard
+│       ├── auth/             #     Login, logout
+│       ├── mensa/
+│       ├── mensa-categories/
+│       └── events/
+├── content/                  # What the site says: guides (.mdx), legal texts (.md), home page links
+├── lib/                      # Technical foundation, no domain logic
+│   ├── auth/                 #   Admin session (token, cookie, requireAdmin)
+│   ├── db/                   #   Drizzle client, schema/, migrations/, testing/
+│   ├── i18n/                 #   next-intl routing, request config, navigation, messages/
+│   ├── date.ts, network.ts, env.ts, site.ts, fonts.ts, utils.ts
+├── mdx-components.tsx        # Markdown element styles (file location required by @next/mdx)
+└── proxy.ts                  # Locale detection, admin redirect (file location required by Next.js)
 ```
 
-Rule of thumb: `features` may import from `lib`, `components`, and `content`; `lib` never imports from `features`.
+**Dependency direction:** `app` → `components` → `features` → `lib`. Components may use features and lib; features only use `lib` and `content` (never `components`); `lib` uses neither. The folders below `components/` and `features/` mirror each other (e.g. `components/admin/events/` ↔ `features/admin/events/`).
 
 ## Conventions
 
@@ -116,7 +131,7 @@ Rule of thumb: `features` may import from `lib`, `components`, and `content`; `l
 - Mensa (`/admin/mensa`): reload today, this week, next week, or a single day from the Studierendenwerk (for spontaneous menu changes the cron jobs don't catch).
 - Categories (`/admin/mensa/categories`): assign menu categories to display categories, rename them (de/en), set color, icon, kind, order, and whether they appear on the home page. Changes are visible on the public pages immediately (`updateTag`), and past price averages are recomputed when a category's group or kind changes.
 - Events (`/admin/events`): create, edit, and delete the events shown on the home page (`ulmiversitaet.events`); an event disappears from the home page once its end date has passed.
-- Feature-specific admin code lives in the feature (`src/features/mensa/admin/`, `src/features/events/admin/`); login/logout and the admin navigation in `src/features/admin/`.
+- Admin logic (Server Actions, queries) lives in `src/features/admin/{auth,mensa,mensa-categories,events}/`, the matching UI in `src/components/admin/…`.
 
 ### Home page
 
