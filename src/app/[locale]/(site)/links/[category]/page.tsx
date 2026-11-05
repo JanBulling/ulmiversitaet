@@ -51,7 +51,7 @@ export default async function LinkCategoryPage({ params }: Props) {
         description={category.description}
       />
       <Panel>
-        <ul className="divide-y divide-accent">
+        <ul className="divide-y divide-border">
           {category.links.map((link) => (
             <LinkRow key={link.id} link={link} />
           ))}

@@ -1,4 +1,4 @@
-import { BookOpen, GraduationCap, MapPin, Users, type LucideIcon } from "lucide-react";
+import { BookOpen, LinkIcon, MapIcon, Users, type LucideIcon } from "lucide-react";
 
 import type { Localized } from "@/content/links";
 
@@ -28,11 +28,14 @@ export const QUICK_LINKS: QuickLink[] = [
   { linkId: "bibliothekskatalog", label: { de: "Bibliothek", en: "Library" }, lucideIcon: BookOpen },
 ];
 
-/** "Weitere Links" on the home page; label and description come from the link collection */
+/**
+ * "Weitere Links" on the home page; label and description come from the link collection.
+ * Icons as on the previous site (`MapIcon` was its campus map, the closest to the lecture hall finder).
+ */
 export const FEATURED_LINKS: { linkId: string; icon: LucideIcon }[] = [
-  { linkId: "exmatrikulation", icon: GraduationCap },
+  { linkId: "exmatrikulation", icon: LinkIcon },
   { linkId: "bibliothekskatalog", icon: BookOpen },
-  { linkId: "hoersaalfinder", icon: MapPin },
+  { linkId: "hoersaalfinder", icon: MapIcon },
   { linkId: "stuve-website", icon: Users },
 ];
 

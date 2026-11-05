@@ -9,8 +9,8 @@ export class ParkingApiError extends Error {
   name = "ParkingApiError";
 }
 
-/** Number of cars currently parked; `null` if the counter is unknown */
-export async function getParkedCars(counterId: number): Promise<number | null> {
+/** Number of cars currently parked (can be negative, see `parseParkedCars`) */
+export async function getParkedCars(counterId: number): Promise<number> {
   let response: Response;
   try {
     response = await fetch(`${BASE_URL}?counterid=${counterId}`, {
@@ -25,12 +25,17 @@ export async function getParkedCars(counterId: number): Promise<number | null> {
   return parseParkedCars(await response.text());
 }
 
-/** The API answers with a bare number; `-1` means the counter is unknown */
-export function parseParkedCars(text: string): number | null {
-  const value = Number(text.trim());
-  if (!Number.isInteger(value))
+/**
+ * The API answers with a bare number. Counters drift: when more cars leave than were counted
+ * entering, they go negative (e.g. `-4` for a nearly empty lot), so negative values are real
+ * readings, not errors. Unknown counters answer `-1` as well and can't be told apart.
+ */
+export function parseParkedCars(text: string): number {
+  const trimmed = text.trim();
+  const value = Number(trimmed);
+  if (trimmed === "" || !Number.isInteger(value))
     throw new ParkingApiError(
       `Unexpected parking API response: "${text.slice(0, 50)}"`,
     );
-  return value < 0 ? null : value;
+  return value;
 }

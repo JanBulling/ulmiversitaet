@@ -4,6 +4,7 @@ import {
   addDays,
   isIsoDate,
   isWeekend,
+  startOfMonth,
   startOfWeek,
   today,
   weekdaysOf,
@@ -36,6 +37,12 @@ describe("date", () => {
       "2026-11-12",
       "2026-11-13",
     ]);
+  });
+
+  it("finds the first day of a month, also across years", () => {
+    expect(startOfMonth("2026-11-05")).toBe("2026-11-01");
+    expect(startOfMonth("2026-11-30", 2)).toBe("2027-01-01");
+    expect(startOfMonth("2026-01-31", -1)).toBe("2025-12-01");
   });
 
   it("detects weekends", () => {

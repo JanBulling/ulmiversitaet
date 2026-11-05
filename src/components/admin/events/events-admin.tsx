@@ -80,7 +80,7 @@ async function EventList({ events }: { events: Event[] }) {
   ]);
 
   return (
-    <ul className="divide-y divide-accent">
+    <ul className="divide-y divide-border">
       {events.map((event) => (
         <li key={event.id} className="flex items-center gap-3 px-4 py-2">
           <span

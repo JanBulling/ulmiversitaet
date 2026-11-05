@@ -11,7 +11,15 @@ import { normalize, searchLinks } from "./search";
 
 const GUIDES_DIR = path.resolve(import.meta.dirname, "../../content/guides");
 /** Internal pages a link may point to (besides guides) */
-const INTERNAL_PAGES = ["/", "/mensa", "/guides", "/parking-lots", "/links"];
+const INTERNAL_PAGES = [
+  "/",
+  "/mensa",
+  "/guides",
+  "/parking-lots",
+  "/links",
+  "/about",
+  "/exmatriculation",
+];
 
 const allLinks = LINK_CATEGORIES.flatMap((category) => category.links);
 

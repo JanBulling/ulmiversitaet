@@ -4,8 +4,8 @@ The home page shows the free spaces of the main university parking lots; `/parki
 
 ## How it works
 
-1. The DUU API (`http://tsu-app.rrooaarr.biz/front/soap.php?counterid=…`) returns the number of parked cars as plain text, `-1` for an unknown counter. It is **HTTP-only and has no CORS headers**, so browsers can't call it from the HTTPS site; only our server does.
-2. `getParkingSnapshot()` (`src/features/parking/queries.ts`) reads all counters in parallel and computes free spaces = total − parked cars. The result is cached for one minute, so all visitors share one reading.
+1. The DUU API (`http://tsu-app.rrooaarr.biz/front/soap.php?counterid=…`) returns the number of parked cars as plain text. The counters drift and can go negative (e.g. `-4` on a nearly empty lot) or above the capacity, so free spaces are kept between 0 and the total. Unknown counters answer `-1`, which looks like a drifted counter, so check new counter ids by hand (see below). It is **HTTP-only and has no CORS headers**, so browsers can't call it from the HTTPS site; only our server does.
+2. `getParkingSnapshot()` (`src/features/parking/queries.ts`) reads all counters in parallel and computes free spaces = total − parked cars, limited to 0 … total. The result is cached for one minute, so all visitors share one reading.
 3. The page is rendered with that data. In the browser, `/api/parking` (Route Handler) is polled every 60 s to update the numbers (paused while the tab is hidden).
 
 Logic lives in `src/features/parking/`, data in `src/content/parking/parking-lots.ts`, UI in `src/components/parking/`.
@@ -26,7 +26,7 @@ Logic lives in `src/features/parking/`, data in `src/content/parking/parking-lot
 
 ## Adding or changing a lot
 
-1. Find the counter id: the DUU overview (`http://tsu-app.rrooaarr.biz/front/mitarbeiter.html`) and the network requests of that page show the `counterid` of each lot. Check it with `curl "http://tsu-app.rrooaarr.biz/front/soap.php?counterid=<id>"`; it should print a number (not `-1`).
+1. Find the counter id: the DUU overview (`http://tsu-app.rrooaarr.biz/front/mitarbeiter.html`) and the network requests of that page show the `counterid` of each lot. Check it with `curl "http://tsu-app.rrooaarr.biz/front/soap.php?counterid=<id>"`; it should print a number that changes over the day (unknown ids print `-1` or `0`).
 2. Add an entry to `PARKING_LOTS` with `code`, `counterId`, `total` (number of spaces), `area`, and `address`. `name`/`shortName` are optional; lots without a name are shown by their code.
 3. To show it on the home page, add its code to `HOME_LOTS` (and to `HOME_LOTS_MOBILE` for small screens).
 4. `pnpm test` checks the config: unique codes, home lots exist and have a counter, every area is listed in `PARKING_AREAS`.
@@ -37,5 +37,5 @@ Note: M1 (HNO Klinik) and M2 (Klinik Michelsberg) share one counter in the DUU s
 
 ## Error handling
 
-- A counter that can't be read shows "–" for its lot; if no counter can be read at all, the panel shows an error message.
+- A counter that can't be read (network error, unexpected response) shows "–" for its lot; if no counter can be read at all, the panel shows an error message.
 - If the browser refresh fails, the last numbers stay visible with a note that they may be out of date.

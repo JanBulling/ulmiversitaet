@@ -6,8 +6,17 @@ import type { MenuMeal } from "@/features/mensa/queries";
 import { MealTypeIcon } from "./icons";
 import { RatingStars } from "./rating-stars";
 
-/** One meal as a full-width row inside a panel: name, diet icons, price, nutrition, rating */
-export async function MealRow({ meal }: { meal: MenuMeal }) {
+/**
+ * One meal as a full-width row inside a panel: name, diet icons, rating (if any, and if not
+ * shown next to the category label instead), price, nutrition
+ */
+export async function MealRow({
+  meal,
+  showRating = true,
+}: {
+  meal: MenuMeal;
+  showRating?: boolean;
+}) {
   const [t, format, locale] = await Promise.all([
     getTranslations("Mensa"),
     getFormatter(),
@@ -26,29 +35,30 @@ export async function MealRow({ meal }: { meal: MenuMeal }) {
             <MealTypeIcon key={code} code={code} locale={locale} />
           ))}
         </div>
+        {showRating && meal.rating && (
+          <RatingStars
+            className="ml-auto shrink-0"
+            size={16}
+            value={meal.rating.total}
+            count={meal.rating.count}
+          />
+        )}
         <p className="shrink-0 font-mono text-sm text-muted-foreground">
-          {meal.prices.note && <span className="mr-1">{meal.prices.note}</span>}
+          {meal.prices.note && <span className="mr-1">{meal.prices.note} </span>}
           {formatPrice(format, meal.prices.studentCents)}
         </p>
       </div>
-      <div className="mt-0.5 flex items-center justify-between gap-4 text-xs text-muted-foreground">
-        <div className="flex gap-2">
-          {meal.energyKcal !== null && (
-            <p>
-              <b>{t("calories")}:</b> {meal.energyKcal} kcal
-            </p>
-          )}
-          {meal.proteinG !== null && (
-            <p>
-              <b>{t("protein")}:</b> {format.number(meal.proteinG)} g
-            </p>
-          )}
-        </div>
-        <RatingStars
-          size={14}
-          value={meal.rating?.total}
-          count={meal.rating?.count}
-        />
+      <div className="mt-0.5 flex gap-2 text-xs text-muted-foreground">
+        {meal.energyKcal !== null && (
+          <p>
+            <b>{t("calories")}:</b> {meal.energyKcal} kcal
+          </p>
+        )}
+        {meal.proteinG !== null && (
+          <p>
+            <b>{t("protein")}:</b> {format.number(meal.proteinG)} g
+          </p>
+        )}
       </div>
     </Link>
   );

@@ -39,7 +39,7 @@ export async function CategoriesAdmin() {
         <PanelHeader icon={Tags} title={t("menuCategoriesTitle")}>
           {categories.length}
         </PanelHeader>
-        <ul className="divide-y divide-accent">
+        <ul className="divide-y divide-border">
           {categories.map((category) => (
             <li
               key={category.id}
@@ -93,7 +93,7 @@ export async function CategoriesAdmin() {
         <PanelHeader icon={Layers} title={t("groupsTitle")}>
           {groups.length}
         </PanelHeader>
-        <ul className="divide-y divide-accent">
+        <ul className="divide-y divide-border">
           {groups.map((group, index) => (
             <li key={group.id} className="flex items-center gap-2 px-4 py-2">
               <div className="flex flex-col">

@@ -5,13 +5,15 @@ import { categoryName, DEFAULT_CATEGORY_COLOR } from "@/features/mensa/display";
 import type { DisplayCategory } from "@/features/mensa/queries";
 import { CategoryIcon } from "./icons";
 
-/** Uppercase mono label in the category color, e.g. "VEGAN 🌱" */
+/** Uppercase mono label in the category color, e.g. "VEGAN 🌱"; `children` go to the right */
 export async function CategoryLabel({
   category,
   className,
+  children,
 }: {
   category: DisplayCategory;
   className?: string;
+  children?: React.ReactNode;
 }) {
   const locale = await getLocale();
 
@@ -24,6 +26,7 @@ export async function CategoryLabel({
         {categoryName(category, locale)}
       </h3>
       <CategoryIcon icon={category.icon} />
+      {children && <div className="ml-auto shrink-0">{children}</div>}
     </div>
   );
 }

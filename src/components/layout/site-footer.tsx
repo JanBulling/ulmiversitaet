@@ -25,6 +25,9 @@ export async function SiteFooter() {
             <Button variant="link" asChild>
               <Link href="/privacy">{t("privacy")}</Link>
             </Button>
+            <Button variant="link" asChild>
+              <Link href="/about">{t("about")}</Link>
+            </Button>
           </nav>
           <div className="flex">
             <Button variant="ghost" size="icon" asChild>

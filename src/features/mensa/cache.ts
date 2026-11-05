@@ -4,8 +4,8 @@ import { refresh, updateTag } from "next/cache";
 export const MENSA_CACHE_TAG = "mensa";
 
 /**
- * After an admin change: expire the cached public mensa pages immediately and re-render
- * the (uncached) admin page. Only callable from Server Actions.
+ * After an admin change or a new rating: expire the cached public mensa pages immediately and
+ * re-render the current page. Only callable from Server Actions.
  */
 export function invalidateMensa() {
   updateTag(MENSA_CACHE_TAG);

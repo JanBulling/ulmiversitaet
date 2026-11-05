@@ -181,7 +181,7 @@ export function DeparturesBoard({
       ) : (
         <ol
           className={cn(
-            "mt-2 divide-y divide-accent transition-opacity",
+            "mt-2 divide-y divide-border transition-opacity",
             switching && "opacity-50",
           )}
         >

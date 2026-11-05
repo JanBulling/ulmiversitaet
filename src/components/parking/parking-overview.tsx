@@ -43,7 +43,7 @@ export function ParkingOverview({ initial }: { initial: ParkingSnapshot }) {
             return (
               <Panel key={area}>
                 <PanelHeader title={t(`areas.${area}`)} />
-                <ul className="divide-y divide-accent">
+                <ul className="divide-y divide-border">
                   {lots.map((lot) => (
                     <li
                       key={lot.code}

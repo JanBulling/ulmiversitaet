@@ -58,7 +58,8 @@ export async function MensaSection({ className }: { className?: string }) {
         <PanelEmpty>{t("closedToday")}</PanelEmpty>
       ) : (
         <>
-          <div className="divide-y divide-accent">
+          {/* Separated by whitespace only, like on the previous site */}
+          <div>
             {single.map((category) => (
               <SingleMeal key={category.key} category={category} />
             ))}

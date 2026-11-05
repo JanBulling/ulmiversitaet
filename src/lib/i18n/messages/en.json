@@ -27,7 +27,9 @@
     "Events": {
       "title": "Events",
       "futureEvents": "Future events",
-      "openEnd": "from {time}"
+      "openEnd": "from {time}",
+      "previousMonth": "Previous month",
+      "nextMonth": "Next month"
     },
     "Featured": {
       "links": {
@@ -73,7 +75,8 @@
     "title": "Guides",
     "description": "A collection of useful guides for students at Ulm University. You have more ideas? <a>Let us know!</a>.",
     "backToAll": "Back to all guides",
-    "eduroamDescription": "Guides to get eduroam® onto different devices."
+    "eduroamDescription": "Guides to get eduroam® onto different devices.",
+    "guideCount": "{count, plural, one {# guide} other {# guides}}"
   },
   "CampusMapPage": {
     "title": "Campus map",
@@ -82,6 +85,83 @@
   "ParkingLotPage": {
     "title": "Parking Lots",
     "description": "Real-time information about free parking spots at Ulm University"
+  },
+  "AboutPage": {
+    "title": "About us",
+    "description": "Two master's students in physics who wanted to make student life at Ulm University simpler and clearer.",
+    "team": {
+      "jan": {
+        "role": "Website developer",
+        "bio": "Jan is a master's student in physics at Ulm University and develops the Ulmiversität website. With his technical background and interest in web development, he built this platform to make everyday university life easier for students."
+      },
+      "stefan": {
+        "role": "Quality assurance",
+        "bio": "Stefan is also a master's student in physics at Ulm University and takes care of the website's quality assurance. He ensures that all content is correct and up to date and meets students' needs."
+      }
+    },
+    "mission": {
+      "title": "Our mission",
+      "text": "As students, we know the typical everyday challenges: finding lecture halls, checking the canteen menu, keeping track of important dates. With Ulmiversität, we wanted to create a central hub that makes this information clear and quickly accessible.",
+      "features": {
+        "mensa": {
+          "title": "Mensa",
+          "description": "Menu, ratings, and nutrition"
+        },
+        "parking": {
+          "title": "Parking",
+          "description": "Free spaces in real time"
+        },
+        "links": {
+          "title": "Links",
+          "description": "All important links for studying"
+        },
+        "guides": {
+          "title": "Guides",
+          "description": "Help for everyday university life"
+        }
+      }
+    },
+    "independence": {
+      "title": "Independence",
+      "text": "<strong>Important:</strong> We are completely independent of Ulm University and the student representation (StuVe). We develop this platform externally and on our own initiative."
+    },
+    "contact": {
+      "title": "Contact & feedback",
+      "text": "Do you have questions, suggestions, or feedback? We look forward to hearing from you!"
+    },
+    "tagline": "By students, for students"
+  },
+  "Exmatriculation": {
+    "title": "Unenrollment",
+    "description": "Not sure whether you want to continue your studies? Our quiz helps you decide.",
+    "backToHome": "Back to home",
+    "startQuestion": "Start the unenrollment quiz?",
+    "start": "Let's go",
+    "progress": "Question {current} of {total}",
+    "questions": [
+      "Are you satisfied with your studies overall?",
+      "Do you feel that your degree program suits you?",
+      "Are you coping well with the workload?",
+      "Do you think the mensa prices are fair?",
+      "Do you see clear prospects after graduating?",
+      "Do you have enough support (e.g. counseling, friends)?",
+      "Does the content of your studies motivate you?",
+      "Would you choose your degree program again?"
+    ],
+    "yes": "Yes",
+    "no": "No",
+    "recommendation": "Ulmiversität recommends:",
+    "result": "Unenroll. Now.",
+    "form": "Unenrollment application (German)",
+    "restart": "Restart quiz",
+    "share": "Share",
+    "shareTitle": "Should I unenroll?",
+    "shareText": "Ulmiversität's quiz on whether unenrolling is the right choice for you.",
+    "shareStatus": {
+      "shared": "Shared",
+      "copied": "Link copied!",
+      "failed": "Sharing not possible"
+    }
   },
   "CampusMap": {
     "selectLabel": "Choose what to display",
@@ -103,22 +183,6 @@
     "description": "The page exists — or it doesn't. Unfortunately, the universe decided against you this time.",
     "backHome": "Back to homepage"
   },
-  "AboutPage": {
-    "title": "About us",
-    "subtitle": "Two master's students in physics who wanted to make student life at Ulm University simpler and clearer.",
-    "roleDeveloper": "Website developer",
-    "roleQA": "Quality assurance",
-    "bioJan": "Jan is a master's student in physics at Ulm University and develops the Ulmiversität website. With his technical background and interest in web development, he built this platform to make everyday university life easier for students.",
-    "bioStefan": "Stefan is also a master's student in physics at Ulm University and takes care of the website's quality assurance. He ensures that all content is correct and up to date and meets students' needs.",
-    "missionTitle": "Our mission",
-    "missionText": "As students, we know the typical everyday challenges: finding lecture halls, checking the canteen menu, keeping track of important dates. With the Ulmiversität website, we wanted to create a central hub that makes this information clear and quickly accessible.",
-    "independenceTitle": "Independence",
-    "important": "Important:",
-    "independenceText": "We are completely independent of Ulm University and the student representation (StuVe). We develop this platform externally and on our own initiative.",
-    "contactTitle": "Contact & feedback",
-    "contactDescription": "Do you have questions, suggestions or feedback? We look forward to hearing from you!",
-    "footerSlogan": "By students, for students"
-  },
   "Mensa": {
     "title": "Mensa",
     "menuTitle": "Menu",
@@ -136,11 +200,26 @@
     "protein": "Protein",
     "rating": "Rating",
     "ratingCount": "{count, plural, =0 {No ratings yet} one {# rating} other {# ratings}}",
+    "noRatings": "No ratings yet.",
+    "outOfFive": "out of 5",
     "taste": "Taste",
     "look": "Look",
     "price": "Price",
     "comments": "Comments",
     "noComments": "No comments yet!",
+    "rateMeal": "Rate this meal",
+    "rateMealHint": "How was it? You can rate each meal once a day.",
+    "ratingLabels": ["Bad", "Meh", "Okay", "Good", "Great"],
+    "stars": "{count, plural, one {# star} other {# stars}}",
+    "commentLabel": "Comment (optional)",
+    "commentPlaceholder": "How did you like it?",
+    "submitRating": "Submit rating",
+    "ratingSaved": "Thanks for your rating!",
+    "alreadyRated": "You already rated this meal today. You can rate it again tomorrow.",
+    "ratingErrors": {
+      "invalid": "Please rate taste, look, and price with 1 to 5 stars.",
+      "alreadyRated": "You already rated this meal today."
+    },
     "prices": "Prices",
     "student": "Students",
     "employee": "Employees",
@@ -159,6 +238,7 @@
     "noAllergens": "No information",
     "servedOn": "On the menu",
     "backToMenu": "Back to the menu",
+    "backToHome": "Back to home",
     "mainDishes": "Main dishes",
     "sidesAndDesserts": "Sides, salads & desserts"
   },

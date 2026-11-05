@@ -43,7 +43,8 @@ export type Guide = {
 
 export type GuideFolder = {
   path: string;
-  folders: string[];
+  /** Sub folders with the number of guides they contain (including nested folders) */
+  folders: { path: string; guideCount: number }[];
   guides: Guide[];
 };
 
@@ -121,19 +122,28 @@ export async function getGuideFolder(
   const guides = await getGuides(locale);
   const prefix = folderPath ? `${folderPath}/` : "";
 
-  const folders = new Set<string>();
+  const folders = new Map<string, number>();
   const direct: Guide[] = [];
 
   for (const guide of guides) {
     if (!guide.slug.startsWith(prefix)) continue;
     const rest = guide.slug.slice(prefix.length).split("/");
     if (rest.length === 1) direct.push(guide);
-    else folders.add(prefix + rest[0]);
+    else {
+      const sub = prefix + rest[0];
+      folders.set(sub, (folders.get(sub) ?? 0) + 1);
+    }
   }
 
   if (folderPath && folders.size === 0 && direct.length === 0) return null;
 
-  return { path: folderPath, folders: [...folders].sort(), guides: direct };
+  return {
+    path: folderPath,
+    folders: [...folders]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([path, guideCount]) => ({ path, guideCount })),
+    guides: direct,
+  };
 }
 
 /** Every guide and folder path, for `generateStaticParams` and the sitemap */

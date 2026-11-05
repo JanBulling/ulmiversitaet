@@ -1,4 +1,4 @@
-import { BookText, FileText } from "lucide-react";
+import { BookText } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 
 import { MoreTile, Tile } from "@/components/ui/tile";
@@ -24,9 +24,9 @@ export async function FeaturedGuides() {
           <li key={guide.slug}>
             <Tile
               href={`/guides/${guide.slug}`}
-              icon={FileText}
               title={guide.frontmatter.title}
               description={guide.frontmatter.summary}
+              align="top"
               className="h-full"
             />
           </li>

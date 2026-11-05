@@ -81,7 +81,7 @@ export const studium: LinkCategory = {
     {
       id: "exmatrikulation",
       label: { de: "Exmatrikulation", en: "Unenrollment" },
-      href: "/guides/exmatrikulieren",
+      href: "/exmatriculation",
       description: { de: "Soll ich mich exmatrikulieren? Und wie?", en: "Should I unenroll? And how?" },
     },
   ],

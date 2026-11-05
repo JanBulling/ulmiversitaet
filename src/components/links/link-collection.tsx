@@ -83,7 +83,7 @@ export function LinkCollection({
               <p className="-mt-1 mb-1 px-4 text-sm text-muted-foreground">
                 {category.description}
               </p>
-              <ul className="divide-y divide-accent">
+              <ul className="divide-y divide-border">
                 {category.links.map((link) => (
                   <LinkRow key={link.id} link={link} />
                 ))}

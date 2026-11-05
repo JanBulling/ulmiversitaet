@@ -27,7 +27,9 @@
     "Events": {
       "title": "Events",
       "futureEvents": "Zukünftige Events",
-      "openEnd": "ab {time}"
+      "openEnd": "ab {time}",
+      "previousMonth": "Vorheriger Monat",
+      "nextMonth": "Nächster Monat"
     },
     "Featured": {
       "links": {
@@ -73,7 +75,8 @@
     "title": "Anleitungen",
     "description": "Die Ulmiversität hat eine Sammlung von Anleitungen, die den Uni-Alltag erleichtern sollen. Eine Anleitung fehlt oder Du hast weitere Ideen? <a>Schreibe uns!</a>.",
     "backToAll": "Zurück zu allen Anleitungen",
-    "eduroamDescription": "Anleitungen zur Einrichtung von eduroam® an verschiedenen Geräten."
+    "eduroamDescription": "Anleitungen zur Einrichtung von eduroam® an verschiedenen Geräten.",
+    "guideCount": "{count, plural, one {# Anleitung} other {# Anleitungen}}"
   },
   "CampusMapPage": {
     "title": "Campus-Karte",
@@ -82,6 +85,83 @@
   "ParkingLotPage": {
     "title": "Parkplätze",
     "description": "Echtzeit Auskunft der Parkplätze an der Universität Ulm"
+  },
+  "AboutPage": {
+    "title": "Über uns",
+    "description": "Zwei Physik-Masterstudenten, die das Studierendenleben an der Uni Ulm einfacher und übersichtlicher gestalten wollten.",
+    "team": {
+      "jan": {
+        "role": "Entwickler der Website",
+        "bio": "Jan studiert Physik im Master an der Uni Ulm und entwickelt die Ulmiversität-Website. Mit seinem technischen Hintergrund und Interesse an Webentwicklung hat er diese Plattform erstellt, um Studierenden den Unialltag zu erleichtern."
+      },
+      "stefan": {
+        "role": "Qualitätssicherung",
+        "bio": "Stefan studiert ebenfalls Physik im Master an der Uni Ulm und kümmert sich um die Qualitätssicherung der Website. Er sorgt dafür, dass alle Inhalte korrekt und aktuell sind und die Bedürfnisse der Studierenden erfüllt werden."
+      }
+    },
+    "mission": {
+      "title": "Unser Ziel",
+      "text": "Als Studierende kennen wir die typischen Probleme des Unialltags: Hörsäle finden, Mensa-Speisepläne checken, wichtige Termine im Blick behalten. Mit der Ulmiversität wollten wir eine zentrale Anlaufstelle schaffen, die diese Informationen übersichtlich und schnell zugänglich macht.",
+      "features": {
+        "mensa": {
+          "title": "Mensa",
+          "description": "Speiseplan, Bewertungen und Nährwerte"
+        },
+        "parking": {
+          "title": "Parkplätze",
+          "description": "Freie Plätze in Echtzeit"
+        },
+        "links": {
+          "title": "Links",
+          "description": "Alle wichtigen Links rund ums Studium"
+        },
+        "guides": {
+          "title": "Anleitungen",
+          "description": "Hilfe für den Uni-Alltag"
+        }
+      }
+    },
+    "independence": {
+      "title": "Unabhängigkeit",
+      "text": "<strong>Wichtig:</strong> Wir sind vollständig unabhängig von der Universität Ulm und der Studierendenvertretung (StuVe). Diese Plattform entwickeln wir extern und aus eigenem Antrieb."
+    },
+    "contact": {
+      "title": "Kontakt & Feedback",
+      "text": "Habt ihr Fragen, Anregungen oder Feedback? Wir freuen uns über eure Nachrichten!"
+    },
+    "tagline": "Von Studierenden für Studierende"
+  },
+  "Exmatriculation": {
+    "title": "Exmatrikulation",
+    "description": "Du bist dir nicht sicher, ob du das Studium weiterhin möchtest? Unser Quiz hilft dir bei der Entscheidung.",
+    "backToHome": "Zur Startseite",
+    "startQuestion": "Exmatrikulations-Quiz starten?",
+    "start": "Los geht's",
+    "progress": "Frage {current} von {total}",
+    "questions": [
+      "Bist du mit deinem Studium insgesamt zufrieden?",
+      "Hast du das Gefühl, dass dein Studiengang zu dir passt?",
+      "Kommst du mit der Studienbelastung gut zurecht?",
+      "Findest du die Mensapreise angemessen?",
+      "Siehst du eine klare Perspektive nach dem Abschluss?",
+      "Hast du genügend Unterstützung (z. B. Beratung, Freundeskreis)?",
+      "Motiviert dich der Studieninhalt?",
+      "Würdest du deinen Studiengang erneut wählen?"
+    ],
+    "yes": "Ja",
+    "no": "Nein",
+    "recommendation": "Die Ulmiversität empfiehlt:",
+    "result": "Exmatrikuliere dich. Jetzt.",
+    "form": "Zum Antrag auf Exmatrikulation",
+    "restart": "Quiz erneut starten",
+    "share": "Teilen",
+    "shareTitle": "Soll ich mich exmatrikulieren?",
+    "shareText": "Quiz der Ulmiversität, ob eine Exmatrikulation für dich das Richtige wäre.",
+    "shareStatus": {
+      "shared": "Geteilt",
+      "copied": "Link kopiert!",
+      "failed": "Teilen nicht möglich"
+    }
   },
   "CampusMap": {
     "selectLabel": "Auswählen, was angezeigt wird",
@@ -103,22 +183,6 @@
     "description": "Die Seite existiert – oder existiert nicht. Leider hat das Universum sich gegen dich entschieden.",
     "backHome": "Zur Startseite"
   },
-  "AboutPage": {
-    "title": "Über uns",
-    "subtitle": "Zwei Physik-Masterstudenten, die das Studierendenleben an der Uni Ulm einfacher und übersichtlicher gestalten wollten.",
-    "roleDeveloper": "Entwickler der Website",
-    "roleQA": "Qualitätssicherung",
-    "bioJan": "Jan studiert Physik im Master an der Uni Ulm und entwickelt die Ulmiversität-Website. Mit seinem technischen Hintergrund und Interesse an Webentwicklung hat er diese Plattform erstellt, um Studierenden den Unialltag zu erleichtern.",
-    "bioStefan": "Stefan studiert ebenfalls Physik im Master an der Uni Ulm und kümmert sich um die Qualitätssicherung der Website. Er sorgt dafür, dass alle Inhalte korrekt und aktuell sind und die Bedürfnisse der Studierenden erfüllt werden.",
-    "missionTitle": "Unser Ziel",
-    "missionText": "Als Studierende kennen wir die typischen Probleme des Unialltags: Hörsäle finden, Mensa-Speisepläne checken, wichtige Termine im Blick behalten. Mit der Ulmiversität-Website wollten wir eine zentrale Anlaufstelle schaffen, die diese Informationen übersichtlich und schnell zugänglich macht.",
-    "independenceTitle": "Unabhängigkeit",
-    "important": "Wichtig:",
-    "independenceText": "Wir sind vollständig unabhängig von der Universität Ulm und der Studierendenvertretung (StuVe). Diese Plattform entwickeln wir extern und aus eigenem Antrieb heraus.",
-    "contactTitle": "Kontakt & Feedback",
-    "contactDescription": "Habt ihr Fragen, Anregungen oder Feedback? Wir freuen uns über eure Nachrichten!",
-    "footerSlogan": "Von Studierenden für Studierende"
-  },
   "Mensa": {
     "title": "Mensa",
     "menuTitle": "Speiseplan",
@@ -136,11 +200,26 @@
     "protein": "Protein",
     "rating": "Bewertung",
     "ratingCount": "{count, plural, =0 {Noch keine Bewertungen} one {# Bewertung} other {# Bewertungen}}",
+    "noRatings": "Noch keine Bewertungen.",
+    "outOfFive": "von 5",
     "taste": "Geschmack",
     "look": "Aussehen",
     "price": "Preis",
     "comments": "Kommentare",
     "noComments": "Noch keine Kommentare abgegeben!",
+    "rateMeal": "Gericht bewerten",
+    "rateMealHint": "Wie war's? Du kannst jedes Gericht einmal am Tag bewerten.",
+    "ratingLabels": ["Schlecht", "Naja", "Okay", "Gut", "Super"],
+    "stars": "{count, plural, one {# Stern} other {# Sterne}}",
+    "commentLabel": "Kommentar (optional)",
+    "commentPlaceholder": "Wie hat es dir geschmeckt?",
+    "submitRating": "Bewertung abschicken",
+    "ratingSaved": "Danke für deine Bewertung!",
+    "alreadyRated": "Du hast dieses Gericht heute schon bewertet. Morgen kannst du es wieder bewerten.",
+    "ratingErrors": {
+      "invalid": "Bitte bewerte Geschmack, Aussehen und Preis mit 1 bis 5 Sternen.",
+      "alreadyRated": "Du hast dieses Gericht heute schon bewertet."
+    },
     "prices": "Preise",
     "student": "Studierende",
     "employee": "Bedienstete",
@@ -159,6 +238,7 @@
     "noAllergens": "Keine Angaben",
     "servedOn": "Auf dem Speiseplan",
     "backToMenu": "Zum Speiseplan",
+    "backToHome": "Zur Startseite",
     "mainDishes": "Hauptgerichte",
     "sidesAndDesserts": "Beilagen, Salate & Desserts"
   },

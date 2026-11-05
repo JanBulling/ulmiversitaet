@@ -10,7 +10,7 @@ export const stuve: LinkCategory = {
       id: "stuve-website",
       label: { de: "StuVe-Website", en: "StuVe Website" },
       href: "https://stuve.de/",
-      description: { de: "Die zentrale Website der StuVe (Studierendenvertretung). Hier geht's auch zu den Fachbereichsvertretungen.", en: "The central website of StuVe (student representation). This also links to the student councils." },
+      description: { de: "Die zentrale Website der StuVe (Studierendenvertretung).", en: "The central website of StuVe (student representation)." },
       related: [
         { label: { de: "Fachbereichsvertretungen", en: "Student councils" }, href: "https://stuve.de/fachbereichsvertretungen" },
         { label: { de: "StuVe Accountanfrage", en: "StuVe IT account request" }, href: "https://account.stuve.de/" },

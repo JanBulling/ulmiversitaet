@@ -46,6 +46,14 @@ export function startOfWeek(date: IsoDate): IsoDate {
   return addDays(date, 1 - isoWeekday(date));
 }
 
+/** First day of the month of `date`, moved by `months` (negative goes back) */
+export function startOfMonth(date: IsoDate, months = 0): IsoDate {
+  const d = toUtcDate(date);
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + months, 1))
+    .toISOString()
+    .slice(0, 10);
+}
+
 /** Monday to Friday of the week starting at `monday` */
 export function weekdaysOf(monday: IsoDate): IsoDate[] {
   return [0, 1, 2, 3, 4].map((i) => addDays(monday, i));

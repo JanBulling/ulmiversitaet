@@ -1,4 +1,11 @@
-import { Apple, CalendarDays, MessageSquare, Star, Wheat } from "lucide-react";
+import {
+  Apple,
+  CalendarDays,
+  MessageSquare,
+  MessageSquarePlus,
+  Star,
+  Wheat,
+} from "lucide-react";
 import { getFormatter, getLocale, getTranslations } from "next-intl/server";
 
 import {
@@ -15,6 +22,7 @@ import { formatPrice, mealName } from "@/features/mensa/display";
 import type { MealDetails } from "@/features/mensa/queries";
 import { CategoryLabel } from "./category-label";
 import { MealTypeIcon } from "./icons";
+import { RatingForm } from "./rating-form";
 import { RatingStars } from "./rating-stars";
 
 type Meal = NonNullable<MealDetails>;
@@ -26,6 +34,7 @@ export async function MealView({ meal }: { meal: Meal }) {
       <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-7">
         <div className="space-y-4 md:col-span-4">
           <Rating meal={meal} />
+          <RateMeal meal={meal} />
           <Comments meal={meal} />
         </div>
         <div className="space-y-4 md:col-span-3">
@@ -123,32 +132,77 @@ async function MealHeader({ meal }: { meal: Meal }) {
   );
 }
 
+/**
+ * Read-only summary: the average as a big number and one bar per dimension. No star rows,
+ * so it can't be mistaken for the rating form below.
+ */
 async function Rating({ meal }: { meal: Meal }) {
-  const t = await getTranslations("Mensa");
-  const count = meal.rating?.count ?? 0;
+  const [t, format] = await Promise.all([
+    getTranslations("Mensa"),
+    getFormatter(),
+  ]);
+  const { rating } = meal;
+  const oneDecimal = (value: number) =>
+    format.number(value, {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    });
 
   return (
     <Panel>
       <PanelHeader icon={Star} title={t("rating")}>
-        {t("ratingCount", { count })}
+        {t("ratingCount", { count: rating?.count ?? 0 })}
       </PanelHeader>
-      <PanelBody className="space-y-3">
-        <RatingStars
-          value={meal.rating?.total}
-          size={28}
-          className="text-primary"
-        />
-        <dl className="grid grid-cols-[auto_1fr] items-center gap-x-6 gap-y-1">
-          {(["taste", "look", "price"] as const).map((dimension) => (
-            <div key={dimension} className="contents">
-              <dt className="text-sm font-semibold">{t(dimension)}</dt>
-              <dd>
-                <RatingStars size={16} value={meal.rating?.[dimension]} />
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </PanelBody>
+      {!rating ? (
+        <PanelEmpty>{t("noRatings")}</PanelEmpty>
+      ) : (
+        <PanelBody className="flex flex-col gap-6 sm:flex-row sm:items-center">
+          <div className="flex shrink-0 flex-col items-center sm:w-32">
+            <p className="text-5xl font-extrabold tabular-nums">
+              {oneDecimal(rating.total)}
+            </p>
+            <RatingStars
+              value={rating.total}
+              size={16}
+              showValue={false}
+              className="mt-2 text-primary"
+            />
+            <p className="mt-1 text-xs text-muted-foreground">
+              {t("outOfFive")}
+            </p>
+          </div>
+          <dl className="grid flex-1 grid-cols-[auto_1fr_auto] items-center gap-x-4 gap-y-3">
+            {(["taste", "look", "price"] as const).map((dimension) => (
+              <div key={dimension} className="contents">
+                <dt className="text-sm font-semibold">{t(dimension)}</dt>
+                <dd
+                  className="h-2 overflow-hidden rounded-full bg-muted"
+                  aria-hidden
+                >
+                  <div
+                    className="h-full rounded-full bg-primary"
+                    style={{ width: `${(rating[dimension] / 5) * 100}%` }}
+                  />
+                </dd>
+                <dd className="text-right font-mono text-sm">
+                  {oneDecimal(rating[dimension])}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </PanelBody>
+      )}
+    </Panel>
+  );
+}
+
+async function RateMeal({ meal }: { meal: Meal }) {
+  const t = await getTranslations("Mensa");
+
+  return (
+    <Panel>
+      <PanelHeader icon={MessageSquarePlus} title={t("rateMeal")} />
+      <RatingForm mealId={meal.id} />
     </Panel>
   );
 }
@@ -167,7 +221,7 @@ async function Comments({ meal }: { meal: Meal }) {
       {meal.comments.length === 0 ? (
         <PanelEmpty>{t("noComments")}</PanelEmpty>
       ) : (
-        <ul className="divide-y divide-accent">
+        <ul className="divide-y divide-border">
           {meal.comments.map((comment) => (
             <li key={comment.id} className="px-4 py-3">
               <div className="flex items-center justify-between gap-4">
@@ -231,7 +285,7 @@ async function Nutrition({ meal }: { meal: Meal }) {
               className={
                 row.nested
                   ? "flex justify-between px-4 pb-1 pl-8 text-xs text-muted-foreground"
-                  : "flex justify-between border-t border-accent px-4 py-1.5 first:border-t-0"
+                  : "flex justify-between border-t border-border px-4 py-1.5 first:border-t-0"
               }
             >
               <dt>{row.label}</dt>

@@ -24,7 +24,9 @@ export async function FeaturedLinks() {
                 href={link.href}
                 external={!link.internal}
                 icon={icon}
+                iconClassName="size-6 text-foreground"
                 title={link.label}
+                align="top"
                 description={link.description ?? undefined}
               />
             </li>

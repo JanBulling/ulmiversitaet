@@ -50,7 +50,7 @@ Use-case-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/
 | Quick-link app icons (home page)        | `rounded-2xl` (deliberately app-icon-like) |
 
 - **No shadows.** The only exception is the built-in `shadow-xs` of buttons.
-- **Borders:** the theme `border` color everywhere. Dividers between rows: `divide-y divide-accent` (or `border-t border-accent`).
+- **Borders:** the theme `border` color everywhere, also for dividers between rows: `divide-y divide-border` (or `border-t border-border`). Don't use `accent` for lines, it is too dark. Where whitespace separates items well enough (meals on the home page), leave the lines out.
 
 ## 5. Typography
 
@@ -112,7 +112,7 @@ Use-case-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/
 - **Footer**: logo, legal links (`link` buttons), social icons; on mobile also network badge and language switch.
 - Parts that read the URL (`usePathname`) or request headers are wrapped in `<Suspense>` with a static fallback that looks the same, so pages keep their prerendered shell.
 - **Home page order**: quick links → mensa (`md:col-span-4`) + public transport (`md:col-span-3`) → events (only if there are any) → featured guides + links (`md:grid-cols-2`). Content (links, featured guides) lives in `src/content/home.ts`.
-- **Event cards**: `rounded-lg border bg-muted` with a 4px left border and the icons in the event color; dates and times in `font-mono`.
+- **Events**: one panel with a compact month calendar on the left (desktop only; event days marked with a dot in the event color, today in `primary`, navigation over the next three months) and the upcoming events on the right, each in its own `rounded-lg border bg-muted` box: color dot and title, then date (`font-mono`) · time · location, then the description.
 
 ## 9. States
 

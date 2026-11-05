@@ -15,8 +15,8 @@ describe("DUU API", () => {
     expect(parseParkedCars(" 0\n")).toBe(0);
   });
 
-  it("returns null for unknown counters", () => {
-    expect(parseParkedCars("-1")).toBeNull();
+  it("keeps negative readings of drifted counters", () => {
+    expect(parseParkedCars("-4")).toBe(-4);
   });
 
   it("rejects unexpected responses", () => {
@@ -24,13 +24,15 @@ describe("DUU API", () => {
       ParkingApiError,
     );
     expect(() => parseParkedCars("12.5")).toThrow(ParkingApiError);
+    expect(() => parseParkedCars("")).toThrow(ParkingApiError);
   });
 });
 
 describe("occupancy", () => {
-  it("never reports negative free spaces", () => {
+  it("keeps free spaces between 0 and the total", () => {
     expect(freeSpaces(100, 30)).toBe(70);
     expect(freeSpaces(100, 120)).toBe(0);
+    expect(freeSpaces(301, -4)).toBe(301);
   });
 
   it.each([

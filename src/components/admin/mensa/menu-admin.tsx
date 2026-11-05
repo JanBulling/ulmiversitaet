@@ -62,7 +62,7 @@ export async function MenuAdmin() {
       <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-7">
         <Panel className="md:col-span-3">
           <PanelHeader icon={CalendarDays} title={t("daysTitle")} />
-          <ul className="divide-y divide-accent">
+          <ul className="divide-y divide-border">
             {[...thisWeek, ...nextWeek].map((date) => (
               <li
                 key={date}
@@ -106,7 +106,7 @@ export async function MenuAdmin() {
           {menu.length === 0 ? (
             <PanelEmpty>{t("mealCount", { count: 0 })}</PanelEmpty>
           ) : (
-            <ul className="divide-y divide-accent">
+            <ul className="divide-y divide-border">
               {menu.map((row) => (
                 <li key={row.mealId}>
                   <Link

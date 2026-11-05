@@ -1,8 +1,11 @@
 export type OccupancyLevel = "free" | "filling" | "full";
 
-/** Free spaces can't be negative, even if more cars are counted than there are spaces */
+/**
+ * Free spaces between 0 and `total`: the counters drift, so they can report more cars than
+ * there are spaces, or fewer than zero cars
+ */
 export function freeSpaces(total: number, parkedCars: number): number {
-  return Math.max(0, total - parkedCars);
+  return Math.min(total, Math.max(0, total - parkedCars));
 }
 
 /** Full at ≤ 5 % or ≤ 2 free spaces, filling at ≤ 10 % */

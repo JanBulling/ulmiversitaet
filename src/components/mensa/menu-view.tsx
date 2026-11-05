@@ -9,6 +9,7 @@ import { getMenu, type MenuCategory } from "@/features/mensa/queries";
 import { CategoryLabel } from "./category-label";
 import { DaySelector } from "./day-selector";
 import { MealRow } from "./meal-row";
+import { RatingStars } from "./rating-stars";
 
 /**
  * Full menu of one day: weekday selector, then main dishes and everything else
@@ -64,24 +65,61 @@ export async function MenuView({ date }: { date?: IsoDate }) {
   );
 }
 
+/** Same layout as the loaded page, with small placeholders instead of large blocks */
 export function MenuViewSkeleton() {
   return (
     <>
-      <div className="space-y-2 px-4 md:px-0">
-        <Skeleton className="mx-auto h-9 w-full max-w-xl" />
-        <Skeleton className="mx-auto h-5 w-48" />
+      <div className="space-y-2">
+        <div className="flex h-9 items-center justify-center gap-1">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <Skeleton key={i} className="h-8 w-12 sm:w-20" />
+          ))}
+        </div>
+        {/* Date line: keeps its space without a placeholder */}
+        <div className="h-5" />
       </div>
       <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-2">
-        {[0, 1].map((i) => (
-          <Panel key={i} className="space-y-3 px-4">
-            <Skeleton className="h-8 w-48" />
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-16 w-full" />
-            <Skeleton className="h-16 w-full" />
+        {[0, 1].map((panel) => (
+          <Panel key={panel}>
+            <div className="mb-2 flex items-center gap-4 px-4">
+              <Skeleton className="size-6 md:size-8" />
+              <Skeleton className="h-6 w-40" />
+            </div>
+            {[0, 1].map((category) => (
+              <div key={category} className="space-y-2 px-4 py-3">
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-4 w-3/4" />
+                <Skeleton className="h-3 w-1/3" />
+              </div>
+            ))}
           </Panel>
         ))}
       </div>
     </>
+  );
+}
+
+/**
+ * Like on the home page: a category with one meal shows its rating next to the label
+ * (in the category color), categories with several meals show it in each row.
+ */
+function MenuCategoryBlock({ category }: { category: MenuCategory }) {
+  const single = category.meals.length === 1 ? category.meals[0] : null;
+
+  return (
+    <div className="py-2">
+      <CategoryLabel category={category} className="px-4">
+        {single?.rating && (
+          <RatingStars
+            value={single.rating.total}
+            count={single.rating.count}
+          />
+        )}
+      </CategoryLabel>
+      {category.meals.map((meal) => (
+        <MealRow key={meal.id} meal={meal} showRating={!single} />
+      ))}
+    </div>
   );
 }
 
@@ -97,14 +135,9 @@ function CategoryPanel({
   return (
     <Panel>
       <PanelHeader icon={icon} title={title} />
-      <div className="divide-y divide-accent">
+      <div className="divide-y divide-border">
         {categories.map((category) => (
-          <div key={category.key} className="py-2">
-            <CategoryLabel category={category} className="px-4" />
-            {category.meals.map((meal) => (
-              <MealRow key={meal.id} meal={meal} />
-            ))}
-          </div>
+          <MenuCategoryBlock key={category.key} category={category} />
         ))}
       </div>
     </Panel>

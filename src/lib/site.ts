@@ -6,7 +6,7 @@ export const siteConfig = {
   ogImage: `${BASE_URL}/og`,
   description: "Link management Platform für die Universität Ulm",
   links: {
-    github: "https://github.com/janbulling/ulmiversitaet-web",
+    github: "https://github.com/janbulling/ulmiversitaet",
     instagram: "https://www.instagram.com/ulmiversitaet/",
   },
 };
