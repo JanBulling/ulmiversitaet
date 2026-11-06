@@ -14,6 +14,7 @@ const GUIDES_DIR = path.resolve(import.meta.dirname, "../../content/guides");
 const INTERNAL_PAGES = [
   "/",
   "/mensa",
+  "/campus-map",
   "/guides",
   "/parking-lots",
   "/links",

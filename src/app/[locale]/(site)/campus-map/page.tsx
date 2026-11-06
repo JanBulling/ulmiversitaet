@@ -34,13 +34,13 @@ export default async function CampusMapPage() {
 /** Same layout as `CampusMap`: search, map, list */
 function CampusMapSkeleton() {
   return (
-    <div className="grid grid-cols-1 gap-4 lg:h-[calc(100dvh-14rem)] lg:min-h-[560px] lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:grid-rows-[auto_minmax(0,1fr)] lg:gap-y-0">
+    <div className="grid grid-cols-1 gap-4 lg:h-[calc(100svh-14rem)] lg:min-h-[560px] lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:grid-rows-[auto_minmax(0,1fr)] lg:gap-y-0">
       <Panel className="py-3 lg:col-start-1 lg:row-start-1 lg:border-b-0">
         <div className="px-4">
           <Skeleton className="h-9 w-full" />
         </div>
       </Panel>
-      <Panel className="h-[55dvh] min-h-80 py-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:h-auto">
+      <Panel className="h-[55svh] min-h-80 py-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:h-auto">
         <Skeleton className="size-full rounded-none" />
       </Panel>
       <Panel className="space-y-3 px-4 py-3 lg:col-start-1 lg:row-start-2 lg:border-t-0 lg:pt-0">

@@ -2,9 +2,12 @@ import { ArrowLeft, FolderOpen } from "lucide-react";
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 import { Page, PageHeader } from "@/components/layout/page";
 import { Button } from "@/components/ui/button";
+import { Panel } from "@/components/ui/panel";
+import { Skeleton } from "@/components/ui/skeleton";
 import { GuideArticle } from "@/components/guides/guide-article";
 import { GuideTiles } from "@/components/guides/guide-tiles";
 import {
@@ -44,7 +47,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function GuidePage({ params }: Props) {
+/**
+ * Every guide and folder is prerendered at build time (`generateStaticParams`). Which one to show
+ * depends on the URL, so it is read inside `<Suspense>`: the route's shared shell stays instant,
+ * and links to guides prefetch the prerendered content (`prefetch` on the tiles), so the fallback
+ * is only seen when someone clicks before the prefetch is done.
+ */
+export default function GuidePage({ params }: Props) {
+  return (
+    <Suspense fallback={<GuideSkeleton />}>
+      <GuideOrFolder params={params} />
+    </Suspense>
+  );
+}
+
+async function GuideOrFolder({ params }: Pick<Props, "params">) {
   const [path, locale] = await Promise.all([resolveSlug(params), getLocale()]);
   const t = await getTranslations("GuidesPage");
 
@@ -70,6 +87,19 @@ export default async function GuidePage({ params }: Props) {
         description={t("title")}
       />
       <GuideTiles folder={folder} />
+    </Page>
+  );
+}
+
+function GuideSkeleton() {
+  return (
+    <Page width="narrow">
+      <Skeleton className="mx-4 h-8 w-48 md:mx-0" />
+      <Panel className="space-y-4 px-4 md:px-8">
+        <Skeleton className="h-9 w-3/4" />
+        <Skeleton className="h-5 w-full" />
+        <Skeleton className="h-64 w-full" />
+      </Panel>
     </Page>
   );
 }

@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 export function Tile({
   href,
   external = false,
+  prefetch,
   icon: Icon,
   iconClassName,
   title,
@@ -22,6 +23,8 @@ export function Tile({
   href: string;
   /** Opens in a new tab */
   external?: boolean;
+  /** Load the whole page when the tile is visible, so it opens instantly (guides) */
+  prefetch?: boolean;
   icon?: LucideIcon;
   /** Overrides the default small primary-colored icon */
   iconClassName?: string;
@@ -90,7 +93,11 @@ export function Tile({
       {content}
     </a>
   ) : (
-    <Link href={href} className={cn("group block", className)}>
+    <Link
+      href={href}
+      prefetch={prefetch}
+      className={cn("group block", className)}
+    >
       {content}
     </Link>
   );

@@ -23,7 +23,11 @@ import {
   MAIN_CAMPUS_BOUNDS,
   type BuildingFeature,
 } from "@/content/campus-map";
-import type { CampusPlace } from "@/features/campus-map/places";
+import {
+  getBuilding,
+  isBuilding,
+  type CampusPlace,
+} from "@/features/campus-map/places";
 
 // The worker is a separate file in maplibre-gl 6; the bundler copies it and gives us its URL
 setWorkerUrl(
@@ -59,11 +63,44 @@ const COLORS = {
 
 type Theme = keyof typeof COLORS;
 
+/**
+ * OpenFreeMap's dark style is almost black; these colors lighten it to a few steps above the
+ * site's dark background (`#17171c`), so streets and areas stay readable. Keyed by layer id.
+ */
+type PaintProperty = Parameters<MapLibreMap["setPaintProperty"]>[1];
+
+const DARK_BASE_MAP: Record<string, Partial<Record<PaintProperty, string>>> = {
+  background: { "background-color": "#24242a" },
+  water: { "fill-color": "#1d2733" },
+  waterway: { "line-color": "#1d2733" },
+  landuse_residential: { "fill-color": "#26262c" },
+  landcover_wood: { "fill-color": "#283029" },
+  landuse_park: { "fill-color": "#283029" },
+  building: { "fill-color": "#2e2e35", "fill-outline-color": "#3a3a42" },
+  road_area_pier: { "fill-color": "#24242a" },
+  road_pier: { "line-color": "#24242a" },
+  highway_path: { "line-color": "#3a3a42" },
+  highway_minor: { "line-color": "#3d3d45" },
+  highway_major_casing: { "line-color": "#4a4a53" },
+  highway_major_inner: { "line-color": "#36363d" },
+  highway_major_subtle: { "line-color": "#3d3d45" },
+  highway_motorway_casing: { "line-color": "#4a4a53" },
+  highway_motorway_inner: { "line-color": "#36363d" },
+  highway_motorway_subtle: { "line-color": "#3d3d45" },
+  railway_transit: { "line-color": "#45454d" },
+  railway_transit_dashline: { "line-color": "#24242a" },
+  railway_minor: { "line-color": "#45454d" },
+  railway_minor_dashline: { "line-color": "#24242a" },
+  railway: { "line-color": "#45454d" },
+  railway_dashline: { "line-color": "#24242a" },
+};
+
 type PlaceColor = "default" | "printer" | "stop" | "parking";
 
 /**
  * Dots, their names and the pin: red by default, so they stand out from the blue buildings;
- * printers green, stops yellow, parking blue. Names are a bit darker (lighter in dark mode) to be readable.
+ * places with a printer green (also PC pools with one), stops yellow, parking blue. Names are a bit
+ * darker (lighter in dark mode) to be readable.
  */
 const PLACE_COLORS: Record<
   Theme,
@@ -83,9 +120,9 @@ const PLACE_COLORS: Record<
   },
 };
 
-/** `printers`: in the printer category, PC pools with a printer are shown as printers too */
-function placeColor(place: CampusPlace, printers = false): PlaceColor {
-  if (place.kind === "printer" || (printers && place.printer)) return "printer";
+/** The color of a place depends only on the place, so a dot and its pin always match */
+function placeColor(place: CampusPlace): PlaceColor {
+  if (place.kind === "printer" || place.printer) return "printer";
   if (place.kind === "stop" || place.kind === "parking") return place.kind;
   return "default";
 }
@@ -131,8 +168,6 @@ export type MapViewProps = {
   places: CampusPlace[];
   /** Zoom to `places` when they change (categories), instead of keeping the view (typing) */
   fitPlaces: boolean;
-  /** Printer category: PC pools with a printer get the printer color */
-  printers: boolean;
   /** Changes when the map should show the whole campus again */
   resetView: number;
   selected: CampusPlace | null;
@@ -146,7 +181,6 @@ export type MapViewProps = {
 export function MapView({
   places,
   fitPlaces,
-  printers,
   resetView,
   selected,
   onSelect,
@@ -160,16 +194,9 @@ export function MapView({
   const theme: Theme = resolvedTheme === "dark" ? "dark" : "light";
 
   // Latest props for the map callbacks (they are registered once)
-  const state = useRef({
-    places,
-    printers,
-    selected,
-    theme,
-    onSelect,
-    onError,
-  });
+  const state = useRef({ places, selected, theme, onSelect, onError });
   useEffect(() => {
-    state.current = { places, printers, selected, theme, onSelect, onError };
+    state.current = { places, selected, theme, onSelect, onError };
   });
 
   // ── Create the map once ──
@@ -209,8 +236,9 @@ export function MapView({
     map.on("style.load", () => {
       styleLoaded = true;
       hideBaseMapLabels(map);
+      if (state.current.theme === "dark") lightenDarkBaseMap(map);
       addCampusLayers(map, state.current.theme);
-      showPlaces(map, state.current.places, state.current.printers);
+      showPlaces(map, state.current.places);
       highlightBuilding(map, state.current.selected?.buildingId);
     });
     map.on("error", (event) => {
@@ -244,19 +272,20 @@ export function MapView({
     };
   }, []);
 
-  // ── Theme: swap the base map, the campus layers are added again on "style.load" ──
+  // ── Theme: swap the base map; `diff: false` replaces the whole style, so "style.load" fires
+  // and adds the campus layers again (a diff would silently drop them) ──
   const initialTheme = useRef(theme);
   useEffect(() => {
     if (theme === initialTheme.current) return;
     initialTheme.current = theme;
-    mapRef.current?.setStyle(STYLES[theme]);
+    mapRef.current?.setStyle(STYLES[theme], { diff: false });
   }, [theme]);
 
   // ── Dots for the current results ──
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-    showPlaces(map, places, printers);
+    showPlaces(map, places);
     if (!fitPlaces) return;
     // Places far away (Michelsberg, stops in the city) don't zoom the map out
     const [west, south, east, north] = MAIN_CAMPUS_BOUNDS;
@@ -273,7 +302,7 @@ export function MapView({
         maxZoom: 17.5,
       });
     }
-  }, [places, fitPlaces, printers]);
+  }, [places, fitPlaces]);
 
   // ── Back to the start view ──
   useEffect(() => {
@@ -290,14 +319,14 @@ export function MapView({
     markerRef.current = null;
     if (!selected) return;
 
-    const building = BUILDINGS.features.find(
-      (feature) => feature.properties.id === selected.buildingId,
-    );
-    const isWholeBuilding = building && selected.buildingId === selected.id;
-    if (!isWholeBuilding) {
+    // A building is shown by its highlighted outline, everything else gets a pin
+    const outline = isBuilding(selected)
+      ? getBuilding(selected.id)?.geometry
+      : undefined;
+    if (!outline) {
       markerRef.current = new Marker({
         element: pinElement(
-          PLACE_COLORS[theme][placeColor(selected, printers)].dot,
+          PLACE_COLORS[theme][placeColor(selected)].dot,
           COLORS[theme].halo,
         ),
         anchor: "bottom",
@@ -306,8 +335,8 @@ export function MapView({
         .addTo(map);
     }
 
-    if (isWholeBuilding && building.geometry) {
-      map.fitBounds(boundsOf(outlinePoints(building)), {
+    if (outline) {
+      map.fitBounds(boundsOf(outlinePoints(outline)), {
         padding: 80,
         maxZoom: 18,
       });
@@ -317,7 +346,7 @@ export function MapView({
         zoom: Math.max(map.getZoom(), 17.5),
       });
     }
-  }, [selected, theme, printers]);
+  }, [selected, theme]);
 
   return (
     <div
@@ -337,6 +366,15 @@ function hideBaseMapLabels(map: MapLibreMap) {
   for (const layer of map.getStyle().layers) {
     if (layer.type === "symbol" && !/^(highway|road)/.test(layer.id)) {
       map.setLayoutProperty(layer.id, "visibility", "none");
+    }
+  }
+}
+
+function lightenDarkBaseMap(map: MapLibreMap) {
+  for (const [layer, paint] of Object.entries(DARK_BASE_MAP)) {
+    if (!map.getLayer(layer)) continue;
+    for (const [property, color] of Object.entries(paint)) {
+      map.setPaintProperty(layer, property as PaintProperty, color);
     }
   }
 }
@@ -431,11 +469,7 @@ function addCampusLayers(map: MapLibreMap, theme: Theme) {
   });
 }
 
-function showPlaces(
-  map: MapLibreMap,
-  places: CampusPlace[],
-  printers: boolean,
-) {
+function showPlaces(map: MapLibreMap, places: CampusPlace[]) {
   const source = map.getSource<GeoJSONSource>("campus-places");
   source?.setData({
     type: "FeatureCollection",
@@ -444,28 +478,17 @@ function showPlaces(
       properties: {
         id: place.id,
         name: place.name,
-        color: placeColor(place, printers),
+        color: placeColor(place),
       },
       geometry: { type: "Point", coordinates: [place.lng, place.lat] },
     })),
   });
 }
 
-/** Highlighted building per map (feature states are reset when the style changes) */
-const highlighted = new WeakMap<MapLibreMap, string>();
-
 function highlightBuilding(map: MapLibreMap, buildingId: string | undefined) {
   if (!map.getSource("campus-buildings")) return;
-  const previous = highlighted.get(map);
-  if (previous) {
-    map.setFeatureState(
-      { source: "campus-buildings", id: previous },
-      { selected: false },
-    );
-  }
-  highlighted.delete(map);
+  map.removeFeatureState({ source: "campus-buildings" });
   if (buildingId) {
-    highlighted.set(map, buildingId);
     map.setFeatureState(
       { source: "campus-buildings", id: buildingId },
       { selected: true },
@@ -473,9 +496,9 @@ function highlightBuilding(map: MapLibreMap, buildingId: string | undefined) {
   }
 }
 
-function outlinePoints(building: BuildingFeature): [number, number][] {
-  const geometry = building.geometry;
-  if (!geometry) return [];
+function outlinePoints(
+  geometry: NonNullable<BuildingFeature["geometry"]>,
+): [number, number][] {
   const polygons =
     geometry.type === "Polygon" ? [geometry.coordinates] : geometry.coordinates;
   return polygons.flatMap((polygon) => polygon[0] as [number, number][]);

@@ -72,6 +72,13 @@ export const studium: LinkCategory = {
       ],
     },
     {
+      id: "campusplan",
+      label: { de: "Campusplan", en: "Campus Map" },
+      href: "/campus-map",
+      description: { de: "Hörsäle, Räume und Gebäude finden.", en: "Find lecture halls, rooms and buildings." },
+      keywords: ["karte", "map", "hörsaal", "raum", "room", "gebäude", "building"],
+    },
+    {
       id: "hoersaalfinder",
       label: { de: "Hörsaalfinder", en: "Lecture Hall Finder" },
       href: "https://www.uni-ulm.de/einrichtungen/kiz/weiteres/campus-navigation/hoersaalfinder/",

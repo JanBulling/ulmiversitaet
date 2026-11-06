@@ -1,4 +1,4 @@
-import { BookOpen, LinkIcon, MapIcon, Users, type LucideIcon } from "lucide-react";
+import { BookOpen, LinkIcon, Users, type LucideIcon } from "lucide-react";
 
 import type { Localized } from "@/content/links";
 
@@ -17,7 +17,7 @@ export type QuickLink = {
   lucideIcon?: LucideIcon;
 };
 
-/** App-icon style shortcuts (7 + "Mehr Links" fill one row on desktop) */
+/** App-icon style shortcuts (7 + "Mehr Links": one row on desktop, 4 × 2 on phones) */
 export const QUICK_LINKS: QuickLink[] = [
   { linkId: "moodle", image: "/icons/quick-links/moodle.png" },
   { linkId: "campusonline", label: "Campus Online", image: "/icons/quick-links/campusonline.png" },
@@ -25,17 +25,16 @@ export const QUICK_LINKS: QuickLink[] = [
   { linkId: "sogo", image: "/icons/quick-links/mail.png" },
   { linkId: "print-uni", image: "/icons/quick-links/print.png" },
   { linkId: "cloudstore", image: "/icons/quick-links/nextcloud.png" },
-  { linkId: "bibliothekskatalog", label: { de: "Bibliothek", en: "Library" }, lucideIcon: BookOpen },
+  { linkId: "campusplan", label: { de: "Karte", en: "Map" }, image: "/icons/quick-links/map.png" },
 ];
 
 /**
  * "Weitere Links" on the home page; label and description come from the link collection.
- * Icons as on the previous site (`MapIcon` was its campus map, the closest to the lecture hall finder).
+ * Icons as on the previous site.
  */
 export const FEATURED_LINKS: { linkId: string; icon: LucideIcon }[] = [
   { linkId: "exmatrikulation", icon: LinkIcon },
   { linkId: "bibliothekskatalog", icon: BookOpen },
-  { linkId: "hoersaalfinder", icon: MapIcon },
   { linkId: "stuve-website", icon: Users },
 ];
 

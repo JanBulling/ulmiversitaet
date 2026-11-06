@@ -24,6 +24,7 @@ export async function FeaturedGuides() {
           <li key={guide.slug}>
             <Tile
               href={`/guides/${guide.slug}`}
+              prefetch
               title={guide.frontmatter.title}
               description={guide.frontmatter.summary}
               align="top"

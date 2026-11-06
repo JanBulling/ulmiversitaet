@@ -38,6 +38,55 @@ describe("campus map data", () => {
       if (geometry) expect(properties.center, properties.id).toBeDefined();
     }
   });
+
+  it("winds outlines counterclockwise and holes clockwise", () => {
+    // MapLibre tells outlines from holes by their direction; a wrong one makes a building
+    // (or part of it) a hole that can't be clicked
+    const signedArea = (ring: number[][]) =>
+      ring
+        .slice(1)
+        .reduce((sum, [x, y], i) => sum + ring[i][0] * y - x * ring[i][1], 0);
+    for (const { properties, geometry } of BUILDINGS.features) {
+      if (!geometry) continue;
+      const polygons =
+        geometry.type === "Polygon"
+          ? [geometry.coordinates]
+          : geometry.coordinates;
+      for (const [outline, ...holes] of polygons) {
+        expect(signedArea(outline), properties.id).toBeGreaterThan(0);
+        for (const hole of holes) {
+          expect(signedArea(hole), properties.id).toBeLessThan(0);
+        }
+      }
+    }
+  });
+
+  it("has no overlapping parts within a building", () => {
+    // MapLibre's click test counts overlapping parts as "outside" (even-odd), so a building
+    // made of overlapping parts can't be clicked there; merge such parts into one outline
+    const inside = ([x, y]: number[], ring: number[][]) => {
+      let result = false;
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const [xi, yi] = ring[i];
+        const [xj, yj] = ring[j];
+        if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) {
+          result = !result;
+        }
+      }
+      return result;
+    };
+    for (const { properties, geometry } of BUILDINGS.features) {
+      if (geometry?.type !== "MultiPolygon") continue;
+      const outlines = geometry.coordinates.map(([outline]) => outline);
+      outlines.forEach((outline, i) => {
+        outlines.forEach((other, j) => {
+          if (i === j) return;
+          const overlaps = outline.some((point) => inside(point, other));
+          expect(overlaps, `${properties.id}: parts ${i} and ${j}`).toBe(false);
+        });
+      });
+    }
+  });
 });
 
 describe("campus search", () => {

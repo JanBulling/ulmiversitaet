@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import { Page } from "@/components/layout/page";
 import { EventsSection } from "@/components/events/events-section";
+import { CampusMapTeaser } from "@/components/home/campus-map-teaser";
 import { FeaturedGuides } from "@/components/home/featured-guides";
 import { FeaturedLinks } from "@/components/home/featured-links";
 import { QuickLinks } from "@/components/home/quick-links";
@@ -40,6 +41,8 @@ export default function HomePage() {
           <ParkingSection className="col-span-full" />
         </Suspense>
       </div>
+
+      <CampusMapTeaser />
 
       {/* Renders nothing when there are no upcoming events */}
       <Suspense>

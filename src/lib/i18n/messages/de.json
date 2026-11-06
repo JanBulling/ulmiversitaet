@@ -69,6 +69,16 @@
     },
     "QuickLinks": {
       "more": "Mehr Links"
+    },
+    "CampusMap": {
+      "title": "Campusplan",
+      "description": "Nie wieder den Hörsaal suchen: alle Räume und Gebäude der Uni auf einer Karte.",
+      "features": {
+        "search": "Ein besserer Hörsaal- und Raumfinder",
+        "highlight": "Gebäude und Räume werden auf der Karte markiert",
+        "route": "Nächste Haltestelle und Route zu Fuß"
+      },
+      "open": "Karte öffnen"
     }
   },
   "GuidesPage": {

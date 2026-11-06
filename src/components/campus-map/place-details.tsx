@@ -14,6 +14,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   getBuilding,
+  isBuilding,
   nearestStop,
   type CampusPlace,
 } from "@/features/campus-map/places";
@@ -40,8 +41,7 @@ export function PlaceDetails({
     place.buildingId && place.buildingId !== place.id
       ? getBuilding(place.buildingId)?.properties
       : undefined;
-  const isBuilding = place.buildingId === place.id || place.kind === "building";
-  const rooms = isBuilding ? roomsInBuilding(places, place.id) : [];
+  const rooms = isBuilding(place) ? roomsInBuilding(places, place.id) : [];
   const stop = place.kind === "stop" ? null : nearestStop(place, places);
 
   const facts: [string, React.ReactNode][] = [];

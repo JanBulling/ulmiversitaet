@@ -69,6 +69,16 @@
     },
     "QuickLinks": {
       "more": "More links"
+    },
+    "CampusMap": {
+      "title": "Campus map",
+      "description": "Never search for a lecture hall again: every room and building of the university on one map.",
+      "features": {
+        "search": "Search rooms better than the room-finder",
+        "highlight": "Buildings and rooms are highlighted on the map",
+        "route": "Nearest stop and walking directions"
+      },
+      "open": "Open map"
     }
   },
   "GuidesPage": {

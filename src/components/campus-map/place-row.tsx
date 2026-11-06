@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { KIND_ICONS } from "./kind-icon";
 
 /** "Hörsaal · O25 · Niveau 2 · 210 Plätze" */
-export function usePlaceSummary() {
+function usePlaceSummary() {
   const t = useTranslations("CampusMap");
   return (place: CampusPlace, { withKind = true } = {}) => {
     const building =

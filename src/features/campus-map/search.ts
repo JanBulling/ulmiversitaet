@@ -18,10 +18,6 @@ export const CATEGORIES = [
 
 export type Category = (typeof CATEGORIES)[number];
 
-export function isCategory(value: string | null): value is Category {
-  return CATEGORIES.includes(value as Category);
-}
-
 /** Places of a category; printers include the PC pools with a printer */
 export function placesInCategory(
   places: CampusPlace[],

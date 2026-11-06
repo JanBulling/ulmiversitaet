@@ -267,6 +267,11 @@ export function getCampusPlaces(locale: Locale): CampusPlace[] {
   ];
 }
 
+/** A building (also the Mensa and the library), as opposed to a room or place inside one */
+export function isBuilding(place: CampusPlace): boolean {
+  return place.kind === "building" || place.buildingId === place.id;
+}
+
 /** The nearest tram/bus stop to a place, with the walking distance in meters (as the crow flies) */
 export function nearestStop(
   place: Pick<CampusPlace, "lat" | "lng">,

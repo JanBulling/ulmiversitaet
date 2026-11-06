@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Panel, PanelEmpty } from "@/components/ui/panel";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getCampusPlaces } from "@/features/campus-map/places";
+import { getCampusPlaces, isBuilding } from "@/features/campus-map/places";
 import {
   CATEGORIES,
   placesInCategory,
@@ -20,7 +20,6 @@ import {
   type Category,
 } from "@/features/campus-map/search";
 import type { Locale } from "@/lib/i18n/routing";
-import { cn } from "@/lib/utils";
 import { KIND_ICONS } from "./kind-icon";
 import { PlaceDetails } from "./place-details";
 import { PlaceRow } from "./place-row";
@@ -74,24 +73,27 @@ export function CampusMap() {
   const listed = searchQuery ? results : categoryPlaces;
   const mapPlaces = useMemo(
     () =>
-      selected &&
-      (selected.buildingId === selected.id || selected.kind === "building")
+      selected && isBuilding(selected)
         ? roomsInBuilding(places, selected.id)
         : listed,
     [selected, places, listed],
   );
 
-  function select(id: string | null) {
-    const url = new URL(window.location.href);
-    if (id) url.searchParams.set(PLACE_PARAM, id);
-    else url.searchParams.delete(PLACE_PARAM);
-    // Next.js picks this up in `useSearchParams`; back closes the details again
-    window.history.pushState(null, "", url);
-    // On mobile the list is below the map: show where the place is
-    if (id && window.matchMedia("(max-width: 1023px)").matches) {
+  /** `fromList`: picked in the list, which is below the map on mobile, so scroll up to the map */
+  function select(id: string | null, { fromList = false } = {}) {
+    if (id !== selectedId) {
+      const url = new URL(window.location.href);
+      if (id) url.searchParams.set(PLACE_PARAM, id);
+      else url.searchParams.delete(PLACE_PARAM);
+      // Next.js picks this up in `useSearchParams`; back closes the details again
+      window.history.pushState(null, "", url);
+    }
+    if (id && fromList && window.matchMedia("(max-width: 1023px)").matches) {
       mapRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
+
+  const selectFromList = (id: string) => select(id, { fromList: true });
 
   /** Back to the start: no selection, search or category, the whole campus on the map */
   function goHome() {
@@ -111,7 +113,7 @@ export function CampusMap() {
       );
     } else if (event.key === "Enter" && results[activeIndex]) {
       event.preventDefault();
-      select(results[activeIndex].id);
+      selectFromList(results[activeIndex].id);
     } else if (event.key === "Escape") {
       setQuery("");
     }
@@ -120,7 +122,7 @@ export function CampusMap() {
   const showResults = Boolean(searchQuery) && !selected;
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:h-[calc(100dvh-14rem)] lg:min-h-[560px] lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:grid-rows-[auto_minmax(0,1fr)] lg:gap-y-0">
+    <div className="grid grid-cols-1 gap-4 lg:h-[calc(100svh-14rem)] lg:min-h-140 lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:grid-rows-[auto_minmax(0,1fr)] lg:gap-y-0">
       {/* ── Search ── */}
       <Panel className="py-3 lg:col-start-1 lg:row-start-1 lg:border-b-0">
         <div className="relative px-4">
@@ -165,10 +167,10 @@ export function CampusMap() {
         </div>
       </Panel>
 
-      {/* ── Map ── */}
+      {/* ── Map ── (`svh`: the height stays the same when the mobile browser bar hides while scrolling) */}
       <Panel
         ref={mapRef}
-        className="relative h-[55dvh] min-h-80 scroll-mt-20 overflow-hidden py-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:h-auto"
+        className="relative h-[55svh] min-h-80 scroll-mt-20 overflow-hidden py-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:h-auto"
       >
         {mapFailed ? (
           <Alert variant="warning" className="m-4 w-auto">
@@ -178,7 +180,6 @@ export function CampusMap() {
           <MapView
             places={mapPlaces}
             fitPlaces={!searchQuery && !selected && Boolean(category)}
-            printers={!searchQuery && category === "printer"}
             resetView={resetView}
             selected={selected}
             onSelect={select}
@@ -195,7 +196,7 @@ export function CampusMap() {
             key={selected.id}
             place={selected}
             places={places}
-            onSelect={select}
+            onSelect={selectFromList}
             onBack={goHome}
           />
         ) : searchQuery ? (
@@ -221,7 +222,7 @@ export function CampusMap() {
                     place={place}
                     option={{ id: `campus-result-${place.id}` }}
                     active={index === activeIndex}
-                    onSelect={select}
+                    onSelect={selectFromList}
                   />
                 ))}
               </ul>
@@ -248,7 +249,7 @@ export function CampusMap() {
                   key={place.id}
                   place={place}
                   withKind={place.kind !== category}
-                  onSelect={select}
+                  onSelect={selectFromList}
                 />
               ))}
             </ul>
@@ -289,9 +290,7 @@ function Categories({
                   {placesInCategory(places, category).length}
                 </span>
                 <ChevronRight
-                  className={cn(
-                    "size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5",
-                  )}
+                  className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5"
                   aria-hidden
                 />
               </button>

@@ -111,7 +111,7 @@ Use-case-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/
 - **Mobile menu**: full-screen sheet from the top, large centered links, language buttons and theme toggle at the bottom. Closes on navigation.
 - **Footer**: logo, legal links (`link` buttons), social icons; on mobile also network badge and language switch.
 - Parts that read the URL (`usePathname`) or request headers are wrapped in `<Suspense>` with a static fallback that looks the same, so pages keep their prerendered shell.
-- **Home page order**: quick links → mensa (`md:col-span-4`) + public transport (`md:col-span-3`) → events (only if there are any) → featured guides + links (`md:grid-cols-2`). Content (links, featured guides) lives in `src/content/home.ts`.
+- **Home page order**: quick links (4 × 2 on phones, one row of 8 from `md`) → mensa (`md:col-span-4`) + public transport (`md:col-span-3`) + parking → campus map teaser (text `md:col-span-3`, static map `md:col-span-4`) → events (only if there are any) → featured guides + links (`md:grid-cols-2`). Content (links, featured guides) lives in `src/content/home.ts`.
 - **Events**: one panel with a compact month calendar on the left (desktop only; event days marked with a dot in the event color, today in `primary`, navigation over the next three months) and the upcoming events on the right, each in its own `rounded-lg border bg-muted` box: color dot and title, then date (`font-mono`) · time · location, then the description.
 
 ## 9. States

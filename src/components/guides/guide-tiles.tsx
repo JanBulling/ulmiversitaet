@@ -21,6 +21,7 @@ export async function GuideTiles({ folder }: { folder: GuideFolder }) {
             <li key={path}>
               <Tile
                 href={`/guides/${path}`}
+                prefetch
                 icon={FolderOpen}
                 size="lg"
                 title={formatFolderName(path)}
@@ -38,6 +39,7 @@ export async function GuideTiles({ folder }: { folder: GuideFolder }) {
             <li key={guide.slug}>
               <Tile
                 href={`/guides/${guide.slug}`}
+                prefetch
                 icon={FileText}
                 title={title}
                 description={summary}
