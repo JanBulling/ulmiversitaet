@@ -6,3 +6,6 @@ allowBuilds:
   # Pulled in by next-intl's optional message extractor; prebuilt binaries ship as optional deps
   "@swc/core": false
   "@parcel/watcher": false
+  # Gemini SDK (mensa guru): its install scripts aren't needed, it works without them
+  "@google/genai": false
+  protobufjs: false

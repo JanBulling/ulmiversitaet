@@ -27,7 +27,7 @@ Siehe die Angaben im [Impressum](/impressum).
 
 ### 2. Externe Inhalte/APIs
 
-- Mensa-API `mensa.ulmiversitaet.de`: Abruf tagesaktueller Speisepläne und Guru-Inhalte. Dabei wird Ihre IP-Adresse technisch bedingt an den API-Server übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. b und f DSGVO.
+- Google Gemini API (Anbieter: Google): Der „Mensa-Guru“ lässt seine Essensempfehlung vom KI-Modell Gemini erzeugen. Die Anfrage stellt unser Server; übermittelt werden nur der Speiseplan des Tages und die zusammengefassten Bewertungen (Durchschnitt und Anzahl), keine Kommentare und keine personenbezogenen Daten. Ihre IP-Adresse wird dabei nicht an Google übermittelt.
 - SWU Mobility API `api.swu.de`: Abruf von ÖPNV-Abfahrten/Passagen für angezeigte Haltestellen. Dabei wird Ihre IP-Adresse technisch bedingt an den API-Server übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. b und f DSGVO.
 - MapTiler (Anbieter: MapTiler S.A.): Bereitstellung von Kartenkacheln für die Campus-Karte. Dabei wird Ihre IP-Adresse technisch bedingt an den Anbieter übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.
 - OpenStreetMap: Nutzung von OpenStreetMap-Daten für die Campus-Karte. Dabei wird Ihre IP-Adresse technisch bedingt an die OpenStreetMap-Server übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.

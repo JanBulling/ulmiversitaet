@@ -19,8 +19,10 @@ import {
   mealName,
 } from "@/features/mensa/display";
 import { MENSA_CACHE_TAG, TODAY_CACHE_LIFE } from "@/features/mensa/cache";
+import { isGuruEnabled } from "@/features/mensa/guru";
 import { getMenu, type MenuCategory } from "@/features/mensa/queries";
 import { CategoryLabel } from "./category-label";
+import { MensaGuru } from "./mensa-guru";
 import { RatingStars } from "./rating-stars";
 
 const ORDER_WEST_URL = "https://stwulm.my-mensa.de/mensatogo.php?mensa=2";
@@ -85,6 +87,8 @@ export async function MensaSection({ className }: { className?: string }) {
           </Link>
         </Button>
       </PanelFooter>
+      {/* Only with a Gemini API key, and only on days with a menu */}
+      {isGuruEnabled() && categories.length > 0 && <MensaGuru />}
     </Panel>
   );
 }

@@ -1,12 +1,17 @@
 "use server";
 
 import { eq } from "drizzle-orm";
+import { hasLocale } from "next-intl";
 import { cookies } from "next/headers";
 import { z } from "zod";
 
+import { today } from "@/lib/date";
 import { db } from "@/lib/db";
 import { mealRatings, meals } from "@/lib/db/schema";
+import { routing } from "@/lib/i18n/routing";
 import { invalidateMensa } from "./cache";
+import { getGuruAdvice, isGuruEnabled } from "./guru";
+import type { GuruAdvice } from "./guru-prompt";
 import {
   RATED_MEALS_COOKIE,
   RATING_INTERVAL_MS,
@@ -66,4 +71,21 @@ export async function rateMeal(
 
   invalidateMensa();
   return { saved: true };
+}
+
+export type GuruResult =
+  { advice: GuruAdvice } | { error: "unavailable" | "failed" };
+
+/** The guru's recommendation for today in the given language (see `guru.ts`) */
+export async function askGuru(locale: string): Promise<GuruResult> {
+  if (!isGuruEnabled() || !hasLocale(routing.locales, locale)) {
+    return { error: "unavailable" };
+  }
+  try {
+    const advice = await getGuruAdvice(today(), locale);
+    return advice ? { advice } : { error: "unavailable" };
+  } catch (error) {
+    console.error("[mensa-guru] Asking Gemini failed", error);
+    return { error: "failed" };
+  }
 }

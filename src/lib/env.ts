@@ -20,8 +20,10 @@ export const env = createEnv({
     ADMIN_PASSWORD: z.string().min(1),
     SESSION_SECRET: z.string().min(32),
 
-    // Mensa guru + English meal names
+    // Mensa guru (free tier of the Gemini API); without a key the guru is hidden
     GEMINI_API_KEY: z.string().min(1).optional(),
+    // Optional override of the guru's model, e.g. after Google retires the default one
+    GEMINI_MODEL: z.string().min(1).optional(),
   },
   client: {},
   experimental__runtimeEnv: {},
