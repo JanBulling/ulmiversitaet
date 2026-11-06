@@ -267,24 +267,23 @@ header.scrolled {
   }
 }
 
-.leaflet-pane {
-  z-index: 10 !important;
+/* Campus map (MapLibre): controls in the dark theme */
+.dark .maplibregl-ctrl-group,
+.dark .maplibregl-ctrl-attrib {
+  background-color: var(--card);
+  color: var(--foreground);
 }
-
-.leaflet-tile-pane {
-  z-index: 10 !important;
+.dark .maplibregl-ctrl-group button + button {
+  border-top-color: var(--border);
 }
-
-.leaflet-overlay-pane {
-  z-index: 10 !important;
+/* Keep the blue "location active" icon */
+.dark
+  .maplibregl-ctrl-group
+  button:not([class*="maplibregl-ctrl-geolocate-"])
+  .maplibregl-ctrl-icon,
+.dark .maplibregl-ctrl-attrib-button {
+  filter: invert(1);
 }
-.leaflet-map-pane svg {
-  z-index: 20 !important;
-}
-
-.leaflet-top,
-.leaflet-bottom,
-.leaflet-right,
-.leaflet-left {
-  z-index: 20 !important;
+.dark .maplibregl-ctrl-attrib a {
+  color: inherit;
 }

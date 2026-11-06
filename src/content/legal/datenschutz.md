@@ -29,8 +29,8 @@ Siehe die Angaben im [Impressum](/impressum).
 
 - Google Gemini API (Anbieter: Google): Der „Mensa-Guru“ lässt seine Essensempfehlung vom KI-Modell Gemini erzeugen. Die Anfrage stellt unser Server; übermittelt werden nur der Speiseplan des Tages und die zusammengefassten Bewertungen (Durchschnitt und Anzahl), keine Kommentare und keine personenbezogenen Daten. Ihre IP-Adresse wird dabei nicht an Google übermittelt.
 - SWU Mobility API `api.swu.de`: Abruf von ÖPNV-Abfahrten/Passagen für angezeigte Haltestellen. Dabei wird Ihre IP-Adresse technisch bedingt an den API-Server übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. b und f DSGVO.
-- MapTiler (Anbieter: MapTiler S.A.): Bereitstellung von Kartenkacheln für die Campus-Karte. Dabei wird Ihre IP-Adresse technisch bedingt an den Anbieter übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.
-- OpenStreetMap: Nutzung von OpenStreetMap-Daten für die Campus-Karte. Dabei wird Ihre IP-Adresse technisch bedingt an die OpenStreetMap-Server übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.
+- OpenFreeMap (`tiles.openfreemap.org`): Kartenkacheln, Schriften und Symbole für den Campusplan, auf Basis von OpenStreetMap-Daten. Beim Aufruf des Campusplans lädt Ihr Browser diese Dateien direkt vom Anbieter; dabei wird Ihre IP-Adresse technisch bedingt übermittelt. Es werden keine Cookies gesetzt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Darstellung einer Karte). Die Räume, Gebäude und die Suche des Campusplans liegen auf unserem Server; Suchanfragen verlassen Ihren Browser nicht.
+- Standort („Mein Standort“ auf dem Campusplan): Nur wenn Sie die Schaltfläche nutzen und es in Ihrem Browser erlauben, wird Ihr Standort auf der Karte angezeigt. Er wird nur in Ihrem Browser verarbeitet und nicht an uns übermittelt.
 
 ### 3. Datenbank
 
@@ -51,7 +51,7 @@ Beim Aufruf unserer Seiten werden technische Zugriffsdaten verarbeitet (IP-Adres
 
 ## Empfänger von Daten / Drittlandtransfer
 
-- Im Rahmen der oben genannten Dienste kann es zu einer Übermittlung von Daten an in der EU bzw. ggf. in Drittländern ansässige Anbieter kommen (z. B. Vercel als Hosting/Analytics, Neon als Datenbank, MapTiler für Kartendienste). Soweit erforderlich, stützen wir Übermittlungen auf geeignete Garantien gem. Art. 44 ff. DSGVO (z. B. EU-Standardvertragsklauseln) und minimieren die Daten.
+- Im Rahmen der oben genannten Dienste kann es zu einer Übermittlung von Daten an in der EU bzw. ggf. in Drittländern ansässige Anbieter kommen (z. B. Vercel als Hosting/Analytics, Neon als Datenbank, OpenFreeMap für Kartendienste). Soweit erforderlich, stützen wir Übermittlungen auf geeignete Garantien gem. Art. 44 ff. DSGVO (z. B. EU-Standardvertragsklauseln) und minimieren die Daten.
 
 ## Externe Links
 

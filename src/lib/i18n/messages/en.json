@@ -78,10 +78,6 @@
     "eduroamDescription": "Guides to get eduroam® onto different devices.",
     "guideCount": "{count, plural, one {# guide} other {# guides}}"
   },
-  "CampusMapPage": {
-    "title": "Campus map",
-    "subtitle": "Find your way around the campus!"
-  },
   "ParkingLotPage": {
     "title": "Parking Lots",
     "description": "Real-time information about free parking spots at Ulm University"
@@ -164,19 +160,69 @@
     }
   },
   "CampusMap": {
-    "selectLabel": "Choose what to display",
-    "searchPlaceholder": "Search {layer}",
-    "searchButton": "Search",
-    "baseLayers": {
-      "light": "Light",
-      "dark": "Dark",
-      "satellite": "Satellite"
+    "title": "Campus map",
+    "description": "Find lecture halls, seminar rooms, buildings and more at Ulm University.",
+    "searchLabel": "Search the campus",
+    "searchPlaceholder": "Room or building, e.g. H4/5, O27/2201, Mensa",
+    "clearSearch": "Clear search",
+    "results": "{count, plural, one {# result} other {# results}}",
+    "noResults": "Nothing found. Try the building number (e.g. O27) or just the room number (e.g. 2201).",
+    "back": "Back",
+    "kinds": {
+      "lecture-hall": "Lecture hall",
+      "seminar-room": "Seminar room",
+      "pc-pool": "PC pool",
+      "printer": "Printer",
+      "building": "Building",
+      "food": "Food & coffee",
+      "library": "Library",
+      "service": "Service",
+      "top-up": "Top-up machine",
+      "stop": "Stop",
+      "parking": "Parking"
     },
-    "layers": {
-      "buildings": "Buildings",
-      "lectureHalls": "Lecture halls",
-      "poi": "Points of interest"
-    }
+    "categories": {
+      "lecture-hall": "Lecture halls",
+      "seminar-room": "Seminar rooms",
+      "pc-pool": "PC pools",
+      "printer": "Printers",
+      "building": "Buildings",
+      "food": "Food & coffee",
+      "library": "Libraries",
+      "service": "Services",
+      "top-up": "Top-up machines for the student card",
+      "stop": "Stops",
+      "parking": "Parking"
+    },
+    "areas": {
+      "ost": "Uni East",
+      "west": "Uni West",
+      "helmholtz": "Helmholtzstraße",
+      "michelsberg": "Michelsberg"
+    },
+    "facts": {
+      "building": "Building",
+      "area": "Area",
+      "floor": "Level",
+      "room": "Room",
+      "seats": "Seats",
+      "printer": "Printer"
+    },
+    "floor": "Level {floor}",
+    "seats": "{count} seats",
+    "printerColor": "Color",
+    "printerBlackWhite": "Black and white",
+    "nearestStop": "Nearest stop",
+    "route": "Directions",
+    "share": "Share",
+    "copied": "Link copied",
+    "officialPage": "Hörsaalfinder",
+    "openMenu": "Menu",
+    "freeSpaces": "Free spaces",
+    "roomsInBuilding": "Rooms in {building}",
+    "mapLabel": "Map of the campus",
+    "mapError": "The map could not be loaded. Search still works.",
+    "source": "Rooms from the university's <hsf>Hörsaalfinder</hsf>. Something missing or wrong? <mail>Let us know</mail>."
   },
   "NotFound": {
     "title": "Schrödinger's cat has died",
@@ -212,13 +258,7 @@
     "noComments": "No comments yet!",
     "rateMeal": "Rate this meal",
     "rateMealHint": "How was it? You can rate each meal once a day.",
-    "ratingLabels": [
-      "Bad",
-      "Meh",
-      "Okay",
-      "Good",
-      "Great"
-    ],
+    "ratingLabels": ["Bad", "Meh", "Okay", "Good", "Great"],
     "stars": "{count, plural, one {# star} other {# stars}}",
     "commentLabel": "Comment (optional)",
     "commentPlaceholder": "How did you like it?",

@@ -78,10 +78,6 @@
     "eduroamDescription": "Anleitungen zur Einrichtung von eduroam® an verschiedenen Geräten.",
     "guideCount": "{count, plural, one {# Anleitung} other {# Anleitungen}}"
   },
-  "CampusMapPage": {
-    "title": "Campus-Karte",
-    "subtitle": "Finde dich auf dem Campus zurecht!"
-  },
   "ParkingLotPage": {
     "title": "Parkplätze",
     "description": "Echtzeit Auskunft der Parkplätze an der Universität Ulm"
@@ -164,19 +160,69 @@
     }
   },
   "CampusMap": {
-    "selectLabel": "Auswählen, was angezeigt wird",
-    "searchPlaceholder": "Suche {layer}",
-    "searchButton": "Suchen",
-    "baseLayers": {
-      "light": "Hell",
-      "dark": "Dunkel",
-      "satellite": "Satellit"
+    "title": "Campusplan",
+    "description": "Hörsäle, Seminarräume, Gebäude und mehr an der Uni Ulm finden.",
+    "searchLabel": "Campus durchsuchen",
+    "searchPlaceholder": "Raum oder Gebäude, z. B. H4/5, O27/2201, Mensa",
+    "clearSearch": "Suche leeren",
+    "results": "{count, plural, one {# Treffer} other {# Treffer}}",
+    "noResults": "Nichts gefunden. Probier es mit der Gebäudenummer (z. B. O27) oder nur der Raumnummer (z. B. 2201).",
+    "back": "Zurück",
+    "kinds": {
+      "lecture-hall": "Hörsaal",
+      "seminar-room": "Seminarraum",
+      "pc-pool": "PC-Pool",
+      "printer": "Drucker",
+      "building": "Gebäude",
+      "food": "Essen & Kaffee",
+      "library": "Bibliothek",
+      "service": "Service",
+      "top-up": "Aufwerter",
+      "stop": "Haltestelle",
+      "parking": "Parkplatz"
     },
-    "layers": {
-      "buildings": "Gebäude",
-      "lectureHalls": "Hörsäle",
-      "poi": "Wichtige Orte"
-    }
+    "categories": {
+      "lecture-hall": "Hörsäle",
+      "seminar-room": "Seminarräume",
+      "pc-pool": "PC-Pools",
+      "printer": "Drucker",
+      "building": "Gebäude",
+      "food": "Essen & Kaffee",
+      "library": "Bibliotheken",
+      "service": "Services",
+      "top-up": "Aufwerter für die Mensakarte",
+      "stop": "Haltestellen",
+      "parking": "Parkplätze"
+    },
+    "areas": {
+      "ost": "Uni Ost",
+      "west": "Uni West",
+      "helmholtz": "Helmholtzstraße",
+      "michelsberg": "Michelsberg"
+    },
+    "facts": {
+      "building": "Gebäude",
+      "area": "Bereich",
+      "floor": "Niveau",
+      "room": "Raum",
+      "seats": "Plätze",
+      "printer": "Drucker"
+    },
+    "floor": "Niveau {floor}",
+    "seats": "{count} Plätze",
+    "printerColor": "Farbe",
+    "printerBlackWhite": "Schwarz-Weiß",
+    "nearestStop": "Nächste Haltestelle",
+    "route": "Route",
+    "share": "Teilen",
+    "copied": "Link kopiert",
+    "officialPage": "Hörsaalfinder",
+    "openMenu": "Speiseplan",
+    "freeSpaces": "Freie Plätze",
+    "roomsInBuilding": "Räume in {building}",
+    "mapLabel": "Karte des Campus",
+    "mapError": "Die Karte konnte nicht geladen werden. Die Suche funktioniert trotzdem.",
+    "source": "Räume aus dem <hsf>Hörsaalfinder</hsf> der Universität. Fehlt etwas oder stimmt etwas nicht? <mail>Schreib uns</mail>."
   },
   "NotFound": {
     "title": "Schrödingers Katze ist gestorben",
@@ -212,13 +258,7 @@
     "noComments": "Noch keine Kommentare abgegeben!",
     "rateMeal": "Gericht bewerten",
     "rateMealHint": "Wie war's? Du kannst jedes Gericht einmal am Tag bewerten.",
-    "ratingLabels": [
-      "Schlecht",
-      "Naja",
-      "Okay",
-      "Gut",
-      "Super"
-    ],
+    "ratingLabels": ["Schlecht", "Naja", "Okay", "Gut", "Super"],
     "stars": "{count, plural, one {# Stern} other {# Sterne}}",
     "commentLabel": "Kommentar (optional)",
     "commentPlaceholder": "Wie hat es dir geschmeckt?",

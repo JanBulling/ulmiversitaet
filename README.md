@@ -147,6 +147,10 @@ src/
 - **Public transport** (`src/features/public-transport/`, `src/components/public-transport/`): real-time departures from the SWU API (`api.swu.de/mobility/v1`, no key needed). The server renders the first departures of Uni Süd and the current disruption notice; the browser then refreshes every 15 s directly from SWU (the API allows cross-origin requests) and counts down every second. "Near me" uses the browser location and the stop list in `src/content/public-transport/stops.json` (3 nearest stops within 5 km). The featured stops are in `src/content/public-transport/featured-stops.ts`. How to change stops, lines, and colors (and the `pnpm update:transport` script): see `docs/public-transport.md`.
 - Quick links, featured links, and featured guides are edited in `src/content/home.ts`. Quick and featured links reference entries of the link collection by id.
 
+### Campus map
+
+- `/campus-map` is a searchable campus map ("Hörsaalfinder"): rooms from the university's Hörsaalfinder (`src/content/campus-map/rooms.json`), building outlines (`buildings.json`, mostly OpenStreetMap), places like cafeterias (`places.ts`), plus tram stops and parking lots from their own data. Search and categories run in the browser (`src/features/campus-map/`); the map is MapLibre with free OpenFreeMap tiles (`src/components/campus-map/`). The selected place is in the URL (`?p=o25-h1`). Details and how to add rooms: `docs/campus-map.md`.
+
 ### Links
 
 - The link collection (`/links`, one page per category at `/links/<slug>`) is plain TypeScript data in `src/content/links/categories/*.ts`, typed by `src/content/links/types.ts`. Add a link there; the home page, search, and category pages pick it up.
