@@ -332,6 +332,18 @@
       "titleField": "Title",
       "location": "Location",
       "color": "Color",
+      "customColor": "Custom color",
+      "colors": {
+        "red": "Red",
+        "orange": "Orange",
+        "yellow": "Yellow",
+        "green": "Green",
+        "teal": "Teal",
+        "blue": "Blue",
+        "purple": "Purple",
+        "pink": "Pink",
+        "gray": "Gray"
+      },
       "startDate": "Date",
       "endDate": "End date",
       "endDateHint": "Leave empty for one-day events.",

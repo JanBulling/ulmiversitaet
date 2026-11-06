@@ -12,6 +12,7 @@ import {
   saveEvent,
   type EventFormState,
 } from "@/features/admin/events/actions";
+import { EventColorField } from "./event-color-field";
 
 /** Create (without `event`) or edit an event */
 export function EventForm({ event }: { event?: Event }) {
@@ -93,15 +94,10 @@ export function EventForm({ event }: { event?: Event }) {
             maxLength={200}
           />
         </Field>
-        <Field label={t("events.color")} htmlFor="color">
-          <Input
-            id="color"
-            name="color"
-            type="color"
-            defaultValue={event?.color ?? DEFAULT_EVENT_COLOR}
-            className="h-9 cursor-pointer p-1"
-          />
-        </Field>
+        <EventColorField
+          name="color"
+          defaultValue={event?.color ?? DEFAULT_EVENT_COLOR}
+        />
       </div>
 
       <Field label={t("events.description")} htmlFor="description">

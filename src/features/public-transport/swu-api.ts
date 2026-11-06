@@ -25,7 +25,11 @@ export async function requestSwu(path: string): Promise<unknown> {
   if (!response.ok) {
     throw new SwuApiError(`SWU API responded with ${response.status}`);
   }
-  return response.json();
+  try {
+    return await response.json();
+  } catch {
+    throw new SwuApiError("SWU API responded with invalid JSON");
+  }
 }
 
 export async function getDepartures(
@@ -50,19 +54,33 @@ export async function getPassengerAlert(): Promise<PassengerAlert> {
 export function parseDepartures(json: any): Departure[] {
   const passage = json?.StopPassage;
   if (!passage) throw new SwuApiError("Unexpected departures response");
-  // Without upcoming departures the API omits `DepartureData`
-  const data: any[] = Array.isArray(passage.DepartureData)
-    ? passage.DepartureData
-    : [];
+  return toArray(passage.DepartureData)
+    .map((item) => ({
+      route: String(item?.RouteName ?? ""),
+      direction: String(item?.DepartureDirectionText ?? ""),
+      scheduledTime: new Date(item?.DepartureTimeScheduled),
+      actualTime: new Date(item?.DepartureTimeActual),
+      countdown: Number(item?.DepartureCountdown),
+      deviation: Number(item?.DepartureDeviation ?? 0),
+    }))
+    .filter(isValidDeparture);
+}
 
-  return data.map((item) => ({
-    route: String(item.RouteName),
-    direction: String(item.DepartureDirectionText),
-    scheduledTime: new Date(item.DepartureTimeScheduled),
-    actualTime: new Date(item.DepartureTimeActual),
-    countdown: Number(item.DepartureCountdown),
-    deviation: Number(item.DepartureDeviation),
-  }));
+/** Without departures the API omits the field, with exactly one it may send a plain object */
+function toArray(value: any): any[] {
+  if (value == null) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+/** Drops incomplete entries, so a single broken departure can't break the whole board */
+function isValidDeparture(departure: Departure): boolean {
+  return (
+    departure.route !== "" &&
+    !Number.isNaN(departure.scheduledTime.getTime()) &&
+    !Number.isNaN(departure.actualTime.getTime()) &&
+    Number.isFinite(departure.countdown) &&
+    Number.isFinite(departure.deviation)
+  );
 }
 
 export function parsePassengerAlert(json: any): PassengerAlert {

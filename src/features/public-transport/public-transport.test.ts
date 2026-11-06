@@ -34,6 +34,22 @@ describe("SWU API parsing", () => {
     expect(parseDepartures({ StopPassage: { State: "ok" } })).toEqual([]);
   });
 
+  it("accepts a single departure sent as a plain object", () => {
+    const [first] = fixture("departures.json").StopPassage.DepartureData;
+    expect(
+      parseDepartures({ StopPassage: { DepartureData: first } }),
+    ).toHaveLength(1);
+  });
+
+  it("drops incomplete departures instead of failing", () => {
+    const [first, second] =
+      fixture("departures.json").StopPassage.DepartureData;
+    const broken = { ...second, DepartureTimeActual: "not a date" };
+    expect(
+      parseDepartures({ StopPassage: { DepartureData: [first, broken, {}] } }),
+    ).toHaveLength(1);
+  });
+
   it("rejects unexpected responses", () => {
     expect(() => parseDepartures({ error: "x" })).toThrow(SwuApiError);
     expect(() => parsePassengerAlert(null)).toThrow(SwuApiError);

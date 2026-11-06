@@ -3,7 +3,12 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-import { MenuView, MenuViewSkeleton } from "@/components/mensa/menu-view";
+import {
+  MenuDays,
+  MenuDaysPlaceholder,
+  MenuView,
+  MenuViewSkeleton,
+} from "@/components/mensa/menu-view";
 import { isIsoDate, toDate } from "@/lib/date";
 import { MenuHeader } from "../menu-header";
 
@@ -26,11 +31,20 @@ export default function MensaDatePage({ params }: Props) {
   return (
     <>
       <MenuHeader />
+      {/* Only waits for the route params, not for the menu */}
+      <Suspense fallback={<MenuDaysPlaceholder />}>
+        <DateDays params={params} />
+      </Suspense>
       <Suspense fallback={<MenuViewSkeleton />}>
         <DateMenu params={params} />
       </Suspense>
     </>
   );
+}
+
+async function DateDays({ params }: { params: Props["params"] }) {
+  const { date } = await params;
+  return isIsoDate(date) ? <MenuDays date={date} /> : null;
 }
 
 async function DateMenu({ params }: { params: Props["params"] }) {

@@ -332,6 +332,18 @@
       "titleField": "Titel",
       "location": "Ort",
       "color": "Farbe",
+      "customColor": "Eigene Farbe",
+      "colors": {
+        "red": "Rot",
+        "orange": "Orange",
+        "yellow": "Gelb",
+        "green": "Grün",
+        "teal": "Petrol",
+        "blue": "Blau",
+        "purple": "Lila",
+        "pink": "Rosa",
+        "gray": "Grau"
+      },
       "startDate": "Datum",
       "endDate": "Enddatum",
       "endDateHint": "Leer lassen für eintägige Events.",

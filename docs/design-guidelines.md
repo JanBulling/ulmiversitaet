@@ -117,7 +117,7 @@ Use-case-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/
 ## 9. States
 
 - **Empty:** `PanelEmpty` (centered, italic, muted), inside the panel that would contain the data.
-- **Loading:** skeletons with the same structure as the final page (panels with skeleton rows), so nothing jumps when the content streams in. Data that depends on the URL or "today" is wrapped in `<Suspense>` with such a skeleton; static parts (`PageHeader`) stay outside so they are part of the prerendered shell.
+- **Loading:** skeletons with the same structure as the final page (panels with skeleton rows), so nothing jumps when the content streams in. Data that depends on the URL or "today" is wrapped in `<Suspense>` with such a skeleton; static parts (`PageHeader`) stay outside so they are part of the prerendered shell. Parts that only need "today" and no data (the mensa day selector) get no skeleton: they are cached on their own (`TODAY_CACHE_LIFE` in `src/features/mensa/cache.ts`) and rendered right away.
 - **Not found:** `notFound()`; the shared `not-found.tsx` page handles the look.
 - **Errors/notices:** `Alert` with the matching variant.
 

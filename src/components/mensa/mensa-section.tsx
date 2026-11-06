@@ -1,6 +1,6 @@
 import { ChevronRight, CookingPot, ExternalLink } from "lucide-react";
 import { getFormatter, getLocale, getTranslations } from "next-intl/server";
-import { connection } from "next/server";
+import { cacheLife, cacheTag } from "next/cache";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +18,7 @@ import {
   formatPrice,
   mealName,
 } from "@/features/mensa/display";
+import { MENSA_CACHE_TAG, TODAY_CACHE_LIFE } from "@/features/mensa/cache";
 import { getMenu, type MenuCategory } from "@/features/mensa/queries";
 import { CategoryLabel } from "./category-label";
 import { RatingStars } from "./rating-stars";
@@ -27,9 +28,15 @@ const ORDER_WEST_URL = "https://stwulm.my-mensa.de/mensatogo.php?mensa=2";
 /**
  * Today's meals on the home page, only categories with "show on home".
  * Categories with one meal are shown as a row, categories with several as a list.
+ *
+ * Cached as a whole (part of the prerendered page): menu syncs, admin changes and ratings
+ * invalidate it through the mensa tag, and it revalidates every 30 minutes for the change
+ * of day.
  */
 export async function MensaSection({ className }: { className?: string }) {
-  await connection(); // "today" is evaluated per request
+  "use cache";
+  cacheTag(MENSA_CACHE_TAG);
+  cacheLife(TODAY_CACHE_LIFE);
   const date = today();
 
   const [t, format, menu] = await Promise.all([

@@ -6,22 +6,22 @@
  * `pnpm update:transport` lists lines from the SWU API that are missing here.
  */
 
-/** Badge color per line (official SWU colors) */
+/** Badge color per line (official SWU colors, same values as on the previous site) */
 export const LINE_COLORS: Record<string, string> = {
-  "1": "#E52129",
-  "2": "#3EAD56",
-  "4": "#14816E",
-  "5": "#17A9BF",
-  "6": "#F39437",
-  "7": "#B2116C",
-  "8": "#77418F",
-  "9": "#E09DBC",
+  "1": "#ED1B24",
+  "2": "#37B355",
+  "4": "#01806D",
+  "5": "#1AA8BE",
+  "6": "#F79534",
+  "7": "#B1006A",
+  "8": "#76408C",
+  "9": "#DF9CBB",
   "10": "#A5A158",
-  "11": "#085EA4",
-  "12": "#B22E2B",
-  "13": "#7CC191",
-  "14": "#26ABE3",
-  "15": "#B281B8",
+  "11": "#005DA3",
+  "12": "#B22C2B",
+  "13": "#7AC4A5",
+  "14": "#00ADEF",
+  "15": "#B382BA",
   "16": "#DE4B95",
   "17": "#CC9900",
   E: "#FFFFFF",
