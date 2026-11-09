@@ -72,3 +72,35 @@ export function toDate(date: IsoDate): Date {
 export function nextWeekday(date: IsoDate): IsoDate {
   return isWeekend(date) ? addDays(startOfWeek(date), 7) : date;
 }
+
+const timeFormatter = new Intl.DateTimeFormat("en-GB", {
+  timeZone: TIME_ZONE,
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+});
+
+/** The current time of day in Berlin as `HH:MM` (compares correctly as a string) */
+export function timeOfDay(now: Date = new Date()): string {
+  return timeFormatter.format(now);
+}
+
+/** `2026-11-04` → `04.11.2026` (or `04/11/2026` with `separator: "/"`), day first */
+export function formatDayFirst(date: IsoDate, separator = "."): string {
+  const [year, month, day] = date.split("-");
+  return [day, month, year].join(separator);
+}
+
+/**
+ * Reads a typed date, day first: `4.11.2026`, `04/11/2026`, `4-11-26` (→ 2026). `null` if it
+ * isn't a valid date.
+ */
+export function parseDayFirst(text: string): IsoDate | null {
+  const match = text
+    .trim()
+    .match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{2}|\d{4})$/);
+  if (!match) return null;
+  const [, day, month, year] = match;
+  const date = `${year.length === 2 ? `20${year}` : year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+  return isIsoDate(date) ? date : null;
+}

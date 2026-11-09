@@ -3,7 +3,7 @@
   "crons": [
     {
       "path": "/api/cron/mensa/next-week",
-      "schedule": "0 4 * * 5"
+      "schedule": "0 6 * * 1"
     },
     {
       "path": "/api/cron/mensa/today",

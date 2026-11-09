@@ -334,7 +334,7 @@ Code: `src/features/mensa/scraper/` (fetch → parse → merge DE/EN) and `src/f
 
 | Job                         | Schedule (UTC, `vercel.json`)                                                | What it does                                                           |
 | --------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `/api/cron/mensa/next-week` | `0 4 * * 5` — Fridays, 05:00–05:59 Berlin (winter)                           | Loads Monday–Friday of next week, so the menu can be shown in advance  |
+| `/api/cron/mensa/next-week` | `0 6 * * 1` — Mondays, 07:00–07:59 (winter) / 08:00–08:59 (summer) Berlin    | Loads Monday–Friday of next week, so the menu can be shown in advance  |
 | `/api/cron/mensa/today`     | `0 7 * * 1-5` — weekdays, 08:00–08:59 (winter) / 09:00–09:59 (summer) Berlin | Refreshes today's menu (the mensa sometimes changes it in the morning) |
 
 - Hobby runs each job once a day, somewhere within the given hour. Both are protected by `CRON_SECRET`.

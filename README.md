@@ -121,10 +121,16 @@ src/
 
 - Menus are scraped from the Studierendenwerk endpoint (`src/features/mensa/scraper/`) and written to the database by `syncMenu` (`src/features/mensa/sync/`). The data model is described in `docs/plans/mensa-database.md`.
 - Two Vercel cron jobs (`vercel.json`, times in UTC, Hobby plan runs them within the given hour):
-  - `/api/cron/mensa/next-week` — Fridays: loads Monday–Friday of next week.
+  - `/api/cron/mensa/next-week` — Mondays, around 7:00 Berlin: loads Monday–Friday of next week.
   - `/api/cron/mensa/today` — weekday mornings: refreshes today's menu (the mensa sometimes changes it on short notice).
 - Manual run (e.g. to fill a fresh database): `curl -H "Authorization: Bearer $CRON_SECRET" "http://localhost:3000/api/cron/mensa/next-week?week=2026-11-02"` or `.../today?date=2026-11-04`.
 - New categories on the menu are added automatically without a group; assign them in the admin dashboard.
+- `/mensa/archive`, `/mensa/prices`, `/mensa/ranking` (linked at the bottom of the menu pages):
+  - Archive: a date picker that opens `/mensa/YYYY-MM-DD`; past weeks can be browsed with the day selector.
+  - Price tracker: average prices per menu day, computed from `meal_history` (`getPriceDays`), with a 20-day moving average (`src/features/mensa/price-stats.ts`) and averages per month.
+  - Ranking: top and bottom 10 main dishes with at least 3 ratings, ordered by the weighted `score` of `meal_rating_stats`.
+  - Their data is cached with `cacheLife("days")` and not tagged, so new ratings or menu syncs show up there within a day (`src/features/mensa/statistics.ts`).
+- Ratings are only open on a day the meal is served, from 11:30 (Berlin) when the mensa opens (`src/features/mensa/rating-window.ts`, checked in the form and in the Server Action), and once per meal and day per browser (cookie, `rated-meals.ts`).
 
 ### Tests
 

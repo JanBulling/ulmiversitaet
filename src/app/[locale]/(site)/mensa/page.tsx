@@ -7,6 +7,7 @@ import {
   MenuView,
   MenuViewSkeleton,
 } from "@/components/mensa/menu-view";
+import { MensaMore } from "@/components/mensa/mensa-more";
 import { MenuHeader } from "./menu-header";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -24,6 +25,7 @@ export default function MensaPage() {
       <Suspense fallback={<MenuViewSkeleton />}>
         <MenuView />
       </Suspense>
+      <MensaMore />
     </>
   );
 }

@@ -2,8 +2,10 @@ import { describe, expect, it } from "vitest";
 
 import {
   addDays,
+  formatDayFirst,
   isIsoDate,
   isWeekend,
+  parseDayFirst,
   startOfMonth,
   startOfWeek,
   today,
@@ -56,5 +58,16 @@ describe("date", () => {
     expect(isIsoDate("2026-02-30")).toBe(false);
     expect(isIsoDate("2026-13-45")).toBe(false);
     expect(isIsoDate("02.11.2026")).toBe(false);
+  });
+
+  it("formats and reads dates day first", () => {
+    expect(formatDayFirst("2026-11-04")).toBe("04.11.2026");
+    expect(formatDayFirst("2026-11-04", "/")).toBe("04/11/2026");
+    expect(parseDayFirst("04.11.2026")).toBe("2026-11-04");
+    expect(parseDayFirst(" 4/11/2026 ")).toBe("2026-11-04");
+    expect(parseDayFirst("4-11-26")).toBe("2026-11-04");
+    expect(parseDayFirst("30.02.2026")).toBeNull();
+    expect(parseDayFirst("2026-11-04")).toBeNull();
+    expect(parseDayFirst("")).toBeNull();
   });
 });

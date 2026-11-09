@@ -9,6 +9,7 @@ import {
   MenuView,
   MenuViewSkeleton,
 } from "@/components/mensa/menu-view";
+import { MensaMore } from "@/components/mensa/mensa-more";
 import { isIsoDate, toDate } from "@/lib/date";
 import { MenuHeader } from "../menu-header";
 
@@ -38,6 +39,7 @@ export default function MensaDatePage({ params }: Props) {
       <Suspense fallback={<MenuViewSkeleton />}>
         <DateMenu params={params} />
       </Suspense>
+      <MensaMore />
     </>
   );
 }

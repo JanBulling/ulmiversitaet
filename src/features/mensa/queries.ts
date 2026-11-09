@@ -1,9 +1,9 @@
 import "server-only";
 
-import { and, asc, desc, eq, isNull, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gte, isNull, sql } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 
-import type { IsoDate } from "@/lib/date";
+import { today, type IsoDate } from "@/lib/date";
 import { db } from "@/lib/db";
 import {
   categoryGroups,
@@ -78,7 +78,7 @@ const categoryColumns = {
   showOnHome: categoryGroups.showOnHome,
 };
 
-function toDisplayCategory(row: {
+export function toDisplayCategory(row: {
   categoryName: string;
   groupNameDe: string | null;
   groupNameEn: string | null;
@@ -188,7 +188,7 @@ export async function getMeal(id: string) {
 
   if (!row) return null;
 
-  const [comments, servedOn] = await Promise.all([
+  const [comments, servedOn, upcoming] = await Promise.all([
     db
       .select({
         id: mealRatings.id,
@@ -212,6 +212,13 @@ export async function getMeal(id: string) {
       .where(eq(mealHistory.mealId, id))
       .orderBy(desc(mealHistory.date))
       .limit(10),
+    // All days from today on, also for meals served every day (`servedOn` is limited). Cached:
+    // "today" is when the cache entry was made, so it still contains the actual today
+    db
+      .select({ date: mealHistory.date })
+      .from(mealHistory)
+      .where(and(eq(mealHistory.mealId, id), gte(mealHistory.date, today())))
+      .orderBy(asc(mealHistory.date)),
   ]);
 
   const { meal } = row;
@@ -243,5 +250,7 @@ export async function getMeal(id: string) {
     rating: row.rating ? toRating(row.rating) : null,
     comments: comments.map((c) => ({ ...c, comment: c.comment! })),
     servedOn: servedOn.map((s) => s.date),
+    /** Today (if served) and later days, for the rating form */
+    upcoming: upcoming.map((s) => s.date),
   };
 }

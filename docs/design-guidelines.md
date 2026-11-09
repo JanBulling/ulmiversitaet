@@ -99,6 +99,7 @@ Use-case-specific parts (e.g. `CategoryLabel`, `MealRow`, `RatingStars` in `src/
 ## 8a. Forms
 
 - Fields: `Input`, `Select` (native, styled like `Input`), and `Label` from `src/components/ui/input.tsx`. Native checkboxes get `size-4 accent-primary`.
+- Dates: `DateInput` (`src/components/ui/date-input.tsx`), never `<input type="date">`. The native field shows the date in the browser's language (`11/04/2026` in an English browser); `DateInput` always shows the day first (`04.11.2026`, `04/11/2026` in English), opens the browser's calendar from its icon, and submits `YYYY-MM-DD`.
 - Forms submit to Server Actions (`<form action={…}>`). Show validation errors with `useActionState`; errors are `text-sm text-destructive` below the field or next to the submit button, success as `text-success` with a check icon.
 - Submit buttons are `SubmitButton` (`src/components/ui/submit-button.tsx`): disabled with a spinner while the action runs.
 - Changes that apply immediately (assigning a category) use `AutoSubmitSelect` or a small form around a single button instead of a separate "save" step.

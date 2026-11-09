@@ -274,10 +274,12 @@
     "commentPlaceholder": "Wie hat es dir geschmeckt?",
     "submitRating": "Bewertung abschicken",
     "ratingSaved": "Danke für deine Bewertung!",
-    "alreadyRated": "Du hast dieses Gericht heute schon bewertet. Morgen kannst du es wieder bewerten.",
+    "alreadyRated": "Du hast dieses Gericht heute schon bewertet.",
     "ratingErrors": {
       "invalid": "Bitte bewerte Geschmack, Aussehen und Preis mit 1 bis 5 Sternen.",
-      "alreadyRated": "Du hast dieses Gericht heute schon bewertet."
+      "alreadyRated": "Du hast dieses Gericht heute schon bewertet.",
+      "tooEarly": "Bewerten kannst du ab {time} Uhr, wenn die Mensa geöffnet hat.",
+      "notToday": "Bewerten kannst du ein Gericht nur an dem Tag, an dem es in der Mensa angeboten wird."
     },
     "prices": "Preise",
     "student": "Studierende",
@@ -300,6 +302,54 @@
     "backToHome": "Zur Startseite",
     "mainDishes": "Hauptgerichte",
     "sidesAndDesserts": "Beilagen, Salate & Desserts"
+  },
+  "MensaMore": {
+    "title": "Mehr zur Mensa",
+    "archive": "Archiv",
+    "archiveDescription": "Speisepläne vergangener Tage",
+    "prices": "Preis-Tracker",
+    "pricesDescription": "Wie sich die Preise entwickeln",
+    "ranking": "Ranking",
+    "rankingDescription": "Die besten und schlechtesten Gerichte"
+  },
+  "MensaArchive": {
+    "title": "Speiseplan-Archiv",
+    "description": "Wähle einen Tag und sieh dir an, was es damals in der Mensa gab.",
+    "date": "Datum",
+    "range": "Speisepläne gibt es vom {first} bis zum {last}.",
+    "show": "Speiseplan anzeigen",
+    "weekend": "Am Wochenende ist die Mensa geschlossen.",
+    "noData": "Noch keine Speisepläne vorhanden."
+  },
+  "MensaPrices": {
+    "title": "Preis-Tracker",
+    "description": "Durchschnittliche Preise pro Tag, berechnet aus allen Gerichten auf dem Speiseplan. Wird einmal am Tag aktualisiert.",
+    "summary": "Aktuell",
+    "summaryHint": "Durchschnitt der letzten {days} Speiseplan-Tage für Studierende, verglichen mit den ersten {days} Tagen ab {since}.",
+    "main": "Hauptgericht",
+    "dessert": "Dessert",
+    "chart": "Hauptgerichte",
+    "chartLabel": "Durchschnittspreis der Hauptgerichte pro Tag",
+    "daily": "Tagesdurchschnitt",
+    "trend": "Durchschnitt der letzten {days} Tage",
+    "months": "Pro Monat",
+    "month": "Monat",
+    "noData": "Noch keine Preise vorhanden.",
+    "short": {
+      "student": "Stud.",
+      "employee": "Bed.",
+      "guest": "Gäste"
+    }
+  },
+  "MensaRanking": {
+    "title": "Ranking",
+    "description": "Die am besten und am schlechtesten bewerteten Hauptgerichte aller Zeiten. Wird einmal am Tag aktualisiert.",
+    "best": "Top 10",
+    "worst": "Flop 10",
+    "rank": "Platz {rank}",
+    "lastServed": "Zuletzt am {date}",
+    "noData": "Noch nicht genug Bewertungen.",
+    "hint": "Gerechnet wird mit allen Hauptgerichten mit mindestens {count} Bewertungen. Gerichte mit wenigen Bewertungen werden etwas Richtung 3 Sterne gezogen, damit eine einzelne Begeisterung (oder Enttäuschung) nicht reicht."
   },
   "Admin": {
     "title": "Admin",
@@ -448,5 +498,11 @@
     "external": "öffnet in neuem Tab",
     "showCategory": "Alle Links in {title}",
     "backToAll": "Alle Links"
+  },
+  "DateInput": {
+    "placeholder": "TT.MM.JJJJ",
+    "openCalendar": "Kalender öffnen",
+    "invalid": "Bitte gib ein Datum im Format TT.MM.JJJJ ein, z. B. {example}.",
+    "outOfRange": "Bitte wähle ein Datum zwischen {min} und {max}."
   }
 }

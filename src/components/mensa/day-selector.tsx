@@ -12,7 +12,10 @@ import {
 import { Link } from "@/lib/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-/** Weekday links for the week of `selected`; navigation is limited to this and next week */
+/**
+ * Weekday links for the week of `selected`. From this week only next week can be reached;
+ * past weeks (opened from the archive) can be browsed in both directions.
+ */
 export async function DaySelector({
   selected,
   today,
@@ -27,7 +30,7 @@ export async function DaySelector({
 
   const week = startOfWeek(selected);
   const currentWeek = startOfWeek(today);
-  const hasPrevious = week > currentWeek;
+  const hasPrevious = week !== currentWeek;
   const hasNext = week < addDays(currentWeek, 7);
 
   return (

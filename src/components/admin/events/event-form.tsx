@@ -4,6 +4,7 @@ import { Check } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useActionState } from "react";
 
+import { DateInput } from "@/components/ui/date-input";
 import { Input, Label } from "@/components/ui/input";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { DEFAULT_EVENT_COLOR } from "@/features/events/format";
@@ -40,10 +41,9 @@ export function EventForm({ event }: { event?: Event }) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label={t("events.startDate")} htmlFor="startDate">
-          <Input
+          <DateInput
             id="startDate"
             name="startDate"
-            type="date"
             defaultValue={event?.startDate}
             required
           />
@@ -65,10 +65,9 @@ export function EventForm({ event }: { event?: Event }) {
           htmlFor="endDate"
           hint={t("events.endDateHint")}
         >
-          <Input
+          <DateInput
             id="endDate"
             name="endDate"
-            type="date"
             defaultValue={
               event && event.endDate !== event.startDate ? event.endDate : ""
             }

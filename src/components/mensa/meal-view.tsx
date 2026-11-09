@@ -202,7 +202,7 @@ async function RateMeal({ meal }: { meal: Meal }) {
   return (
     <Panel>
       <PanelHeader icon={MessageSquarePlus} title={t("rateMeal")} />
-      <RatingForm mealId={meal.id} />
+      <RatingForm mealId={meal.id} servedOn={meal.upcoming} />
     </Panel>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, StarIcon } from "lucide-react";
+import { Check, Clock, StarIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useActionState, useId, useState, useSyncExternalStore } from "react";
 
@@ -8,13 +8,24 @@ import { PanelBody } from "@/components/ui/panel";
 import { SubmitButton } from "@/components/ui/submit-button";
 import { rateMeal, type RatingFormState } from "@/features/mensa/actions";
 import { ratedMealsFromCookieHeader } from "@/features/mensa/rated-meals";
+import { RATING_OPENS_AT, ratingWindow } from "@/features/mensa/rating-window";
+import type { IsoDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 
 const DIMENSIONS = ["taste", "look", "price"] as const;
 const COMMENT_MAX_LENGTH = 1000;
 
-/** Rating with an optional comment, once per meal and day */
-export function RatingForm({ mealId }: { mealId: string }) {
+/**
+ * Rating with an optional comment, once per meal and day; only open on a day the meal is
+ * served, from 11:30 (`servedOn`: the days it is served, at least from today on)
+ */
+export function RatingForm({
+  mealId,
+  servedOn,
+}: {
+  mealId: string;
+  servedOn: IsoDate[];
+}) {
   const t = useTranslations("Mensa");
   const [state, action] = useActionState<RatingFormState, FormData>(
     rateMeal,
@@ -22,6 +33,7 @@ export function RatingForm({ mealId }: { mealId: string }) {
   );
   const [comment, setComment] = useState("");
   const ratedToday = useRatedToday(mealId);
+  const now = useNow();
 
   if (state.saved || ratedToday) {
     return (
@@ -29,6 +41,20 @@ export function RatingForm({ mealId }: { mealId: string }) {
         <p className="flex items-center gap-2 text-sm text-muted-foreground">
           <Check className="size-4 shrink-0 text-success" aria-hidden />
           {state.saved ? t("ratingSaved") : t("alreadyRated")}
+        </p>
+      </PanelBody>
+    );
+  }
+
+  // The time is only known in the browser
+  if (now === null) return null;
+  const status = ratingWindow(servedOn, new Date(now));
+  if (status !== "open") {
+    return (
+      <PanelBody>
+        <p className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Clock className="size-4 shrink-0" aria-hidden />
+          {t(`ratingErrors.${status}`, { time: RATING_OPENS_AT })}
         </p>
       </PanelBody>
     );
@@ -66,7 +92,7 @@ export function RatingForm({ mealId }: { mealId: string }) {
           <SubmitButton>{t("submitRating")}</SubmitButton>
           {state.error && (
             <span className="text-sm text-destructive">
-              {t(`ratingErrors.${state.error}`)}
+              {t(`ratingErrors.${state.error}`, { time: RATING_OPENS_AT })}
             </span>
           )}
         </div>
@@ -133,6 +159,25 @@ function StarInput({ name, label }: { name: string; label: string }) {
 
 // The cookie only changes through the rating action, which re-renders the form anyway
 const subscribe = () => () => {};
+
+const MINUTE_MS = 60 * 1000;
+
+function subscribeToMinutes(onChange: () => void) {
+  const interval = setInterval(onChange, 10 * 1000);
+  return () => clearInterval(interval);
+}
+
+/**
+ * The current time rounded down to the minute, updated while the page is open (so the form
+ * opens at 11:30 without a reload); `null` on the server
+ */
+function useNow() {
+  return useSyncExternalStore(
+    subscribeToMinutes,
+    () => Math.floor(Date.now() / MINUTE_MS) * MINUTE_MS,
+    () => null,
+  );
+}
 
 /** Whether this browser rated the meal in the last 24 hours (always `false` on the server) */
 function useRatedToday(mealId: string) {

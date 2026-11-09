@@ -274,10 +274,12 @@
     "commentPlaceholder": "How did you like it?",
     "submitRating": "Submit rating",
     "ratingSaved": "Thanks for your rating!",
-    "alreadyRated": "You already rated this meal today. You can rate it again tomorrow.",
+    "alreadyRated": "You already rated this meal today.",
     "ratingErrors": {
       "invalid": "Please rate taste, look, and price with 1 to 5 stars.",
-      "alreadyRated": "You already rated this meal today."
+      "alreadyRated": "You already rated this meal today.",
+      "tooEarly": "You can rate this meal from {time}, once the mensa has opened.",
+      "notToday": "You can only rate a meal on the day it's served in the mensa."
     },
     "prices": "Prices",
     "student": "Students",
@@ -300,6 +302,54 @@
     "backToHome": "Back to home",
     "mainDishes": "Main dishes",
     "sidesAndDesserts": "Sides, salads & desserts"
+  },
+  "MensaMore": {
+    "title": "More about the mensa",
+    "archive": "Archive",
+    "archiveDescription": "Menus of past days",
+    "prices": "Price tracker",
+    "pricesDescription": "How prices are changing",
+    "ranking": "Ranking",
+    "rankingDescription": "The best and worst meals"
+  },
+  "MensaArchive": {
+    "title": "Menu archive",
+    "description": "Pick a day and see what the mensa served back then.",
+    "date": "Date",
+    "range": "Menus are available from {first} to {last}.",
+    "show": "Show menu",
+    "weekend": "The mensa is closed on weekends.",
+    "noData": "No menus yet."
+  },
+  "MensaPrices": {
+    "title": "Price tracker",
+    "description": "Average prices per day, calculated from all meals on the menu. Updated once a day.",
+    "summary": "Currently",
+    "summaryHint": "Average of the last {days} menu days for students, compared with the first {days} days from {since}.",
+    "main": "Main dish",
+    "dessert": "Dessert",
+    "chart": "Main dishes",
+    "chartLabel": "Average price of the main dishes per day",
+    "daily": "Daily average",
+    "trend": "Average of the last {days} days",
+    "months": "Per month",
+    "month": "Month",
+    "noData": "No prices yet.",
+    "short": {
+      "student": "Stud.",
+      "employee": "Staff",
+      "guest": "Guests"
+    }
+  },
+  "MensaRanking": {
+    "title": "Ranking",
+    "description": "The best and worst rated main dishes of all time. Updated once a day.",
+    "best": "Top 10",
+    "worst": "Bottom 10",
+    "rank": "Rank {rank}",
+    "lastServed": "Last served {date}",
+    "noData": "Not enough ratings yet.",
+    "hint": "Includes all main dishes with at least {count} ratings. Meals with few ratings are pulled slightly towards 3 stars, so a single burst of enthusiasm (or disappointment) isn't enough."
   },
   "Admin": {
     "title": "Admin",
@@ -448,5 +498,11 @@
     "external": "opens in a new tab",
     "showCategory": "All links in {title}",
     "backToAll": "All links"
+  },
+  "DateInput": {
+    "placeholder": "DD/MM/YYYY",
+    "openCalendar": "Open calendar",
+    "invalid": "Please enter a date as DD/MM/YYYY, e.g. {example}.",
+    "outOfRange": "Please choose a date between {min} and {max}."
   }
 }

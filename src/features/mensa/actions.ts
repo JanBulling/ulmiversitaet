@@ -1,13 +1,13 @@
 "use server";
 
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { hasLocale } from "next-intl";
 import { cookies } from "next/headers";
 import { z } from "zod";
 
 import { today } from "@/lib/date";
 import { db } from "@/lib/db";
-import { mealRatings, meals } from "@/lib/db/schema";
+import { mealHistory, mealRatings } from "@/lib/db/schema";
 import { routing } from "@/lib/i18n/routing";
 import { invalidateMensa } from "./cache";
 import { getGuruAdvice, isGuruEnabled } from "./guru";
@@ -18,9 +18,10 @@ import {
   parseRatedMeals,
   serializeRatedMeals,
 } from "./rated-meals";
+import { ratingWindow, type RatingWindow } from "./rating-window";
 
 export type RatingFormState = {
-  error?: "invalid" | "alreadyRated";
+  error?: "invalid" | "alreadyRated" | Exclude<RatingWindow, "open">;
   saved?: boolean;
 };
 
@@ -38,7 +39,10 @@ const ratingSchema = z.object({
     .transform((value) => value || null),
 });
 
-/** Rates a meal with an optional comment; once per meal and day (see `rated-meals.ts`) */
+/**
+ * Rates a meal with an optional comment: only on the day it is served, after the mensa opened
+ * (see `rating-window.ts`), and once per meal and day (see `rated-meals.ts`)
+ */
 export async function rateMeal(
   _previous: RatingFormState,
   formData: FormData,
@@ -51,11 +55,19 @@ export async function rateMeal(
   const rated = parseRatedMeals(cookieStore.get(RATED_MEALS_COOKIE)?.value);
   if (rated.has(mealId)) return { error: "alreadyRated" };
 
-  const [meal] = await db
-    .select({ id: meals.id })
-    .from(meals)
-    .where(eq(meals.id, mealId));
-  if (!meal) return { error: "invalid" };
+  // Also rejects unknown meals: they are never served
+  const now = new Date();
+  const servedToday = await db
+    .select({ date: mealHistory.date })
+    .from(mealHistory)
+    .where(
+      and(eq(mealHistory.mealId, mealId), eq(mealHistory.date, today(now))),
+    );
+  const status = ratingWindow(
+    servedToday.map((row) => row.date),
+    now,
+  );
+  if (status !== "open") return { error: status };
 
   await db.insert(mealRatings).values({ mealId, ...values });
 
