@@ -55,6 +55,8 @@
       "nearMe": "Haltestellen in meiner Nähe",
       "backToCampus": "Zurück zu den Uni-Haltestellen",
       "disruption": "Aktuelle Störung",
+      "moreDepartures": "Mehr Abfahrten",
+      "platform": "Steig {platform}",
       "errors": {
         "unavailable": "Die Abfahrten konnten gerade nicht geladen werden.",
         "stale": "Aktualisierung fehlgeschlagen – die Zeiten sind eventuell nicht aktuell.",
@@ -268,7 +270,13 @@
     "noComments": "Noch keine Kommentare abgegeben!",
     "rateMeal": "Gericht bewerten",
     "rateMealHint": "Wie war's? Du kannst jedes Gericht einmal am Tag bewerten.",
-    "ratingLabels": ["Schlecht", "Naja", "Okay", "Gut", "Super"],
+    "ratingLabels": [
+      "Schlecht",
+      "Naja",
+      "Okay",
+      "Gut",
+      "Super"
+    ],
     "stars": "{count, plural, one {# Stern} other {# Sterne}}",
     "commentLabel": "Kommentar (optional)",
     "commentPlaceholder": "Wie hat es dir geschmeckt?",
@@ -486,6 +494,19 @@
       "HELMHOLTZ": "Helmholtzstraße",
       "MICHELSBERG": "Michelsberg"
     }
+  },
+  "PublicTransport": {
+    "title": "Abfahrten",
+    "description": "Echtzeit-Abfahrten aller Haltestellen der SWU in Ulm und Neu-Ulm",
+    "searchPlaceholder": "Haltestelle suchen…",
+    "searchLabel": "Haltestelle suchen",
+    "clearSearch": "Suche löschen",
+    "noResults": "Keine Haltestelle gefunden.",
+    "saved": "Gespeichert",
+    "savedHint": "Tippe bei einer Haltestelle auf „Speichern“, damit sie hier erscheint. Gespeicherte Haltestellen bleiben nur in diesem Browser.",
+    "save": "Speichern",
+    "unsave": "Nicht mehr speichern",
+    "closeNearby": "Haltestellen in der Nähe ausblenden"
   },
   "Links": {
     "title": "Links",

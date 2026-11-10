@@ -17,6 +17,7 @@ const INTERNAL_PAGES = [
   "/campus-map",
   "/guides",
   "/parking-lots",
+  "/public-transport",
   "/links",
   "/about",
   "/exmatriculation",

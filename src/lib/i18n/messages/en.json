@@ -55,6 +55,8 @@
       "nearMe": "Stops near me",
       "backToCampus": "Back to the university stops",
       "disruption": "Current disruption",
+      "moreDepartures": "More departures",
+      "platform": "Platform {platform}",
       "errors": {
         "unavailable": "Departures couldn't be loaded right now.",
         "stale": "Refresh failed – the times may be out of date.",
@@ -268,7 +270,13 @@
     "noComments": "No comments yet!",
     "rateMeal": "Rate this meal",
     "rateMealHint": "How was it? You can rate each meal once a day.",
-    "ratingLabels": ["Bad", "Meh", "Okay", "Good", "Great"],
+    "ratingLabels": [
+      "Bad",
+      "Meh",
+      "Okay",
+      "Good",
+      "Great"
+    ],
     "stars": "{count, plural, one {# star} other {# stars}}",
     "commentLabel": "Comment (optional)",
     "commentPlaceholder": "How did you like it?",
@@ -486,6 +494,19 @@
       "HELMHOLTZ": "Helmholtzstraße",
       "MICHELSBERG": "Michelsberg"
     }
+  },
+  "PublicTransport": {
+    "title": "Departures",
+    "description": "Real-time departures of all SWU stops in Ulm and Neu-Ulm",
+    "searchPlaceholder": "Search for a stop…",
+    "searchLabel": "Search for a stop",
+    "clearSearch": "Clear search",
+    "noResults": "No stop found.",
+    "saved": "Saved",
+    "savedHint": "Tap “Save” on a stop to show it here. Saved stops are only kept in this browser.",
+    "save": "Save",
+    "unsave": "Remove from saved",
+    "closeNearby": "Hide nearby stops"
   },
   "Links": {
     "title": "Links",

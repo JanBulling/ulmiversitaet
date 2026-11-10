@@ -30,7 +30,7 @@ Siehe die Angaben im [Impressum](/impressum).
 - Google Gemini API (Anbieter: Google): Der „Mensa-Guru“ lässt seine Essensempfehlung vom KI-Modell Gemini erzeugen. Die Anfrage stellt unser Server; übermittelt werden nur der Speiseplan des Tages und die zusammengefassten Bewertungen (Durchschnitt und Anzahl), keine Kommentare und keine personenbezogenen Daten. Ihre IP-Adresse wird dabei nicht an Google übermittelt.
 - SWU Mobility API `api.swu.de`: Abruf von ÖPNV-Abfahrten/Passagen für angezeigte Haltestellen. Dabei wird Ihre IP-Adresse technisch bedingt an den API-Server übermittelt. Rechtsgrundlage: Art. 6 Abs. 1 lit. b und f DSGVO.
 - OpenFreeMap (`tiles.openfreemap.org`): Kartenkacheln, Schriften und Symbole für den Campusplan, auf Basis von OpenStreetMap-Daten. Beim Aufruf des Campusplans lädt Ihr Browser diese Dateien direkt vom Anbieter; dabei wird Ihre IP-Adresse technisch bedingt übermittelt. Es werden keine Cookies gesetzt. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Darstellung einer Karte). Die Räume, Gebäude und die Suche des Campusplans liegen auf unserem Server; Suchanfragen verlassen Ihren Browser nicht.
-- Standort („Mein Standort“ auf dem Campusplan): Nur wenn Sie die Schaltfläche nutzen und es in Ihrem Browser erlauben, wird Ihr Standort auf der Karte angezeigt. Er wird nur in Ihrem Browser verarbeitet und nicht an uns übermittelt.
+- Standort („Mein Standort“ auf dem Campusplan, „Haltestellen in meiner Nähe“ bei den ÖPNV-Abfahrten): Nur wenn Sie die Schaltfläche nutzen und es in Ihrem Browser erlauben, wird Ihr Standort auf der Karte angezeigt bzw. werden die nächsten Haltestellen gesucht. Er wird nur in Ihrem Browser verarbeitet und nicht an uns übermittelt.
 
 ### 3. Datenbank
 
@@ -38,7 +38,7 @@ Siehe die Angaben im [Impressum](/impressum).
 
 ### 4. Lokale Speicherung (LocalStorage)
 
-- Für Komfortfunktionen (z. B. Darstellung Hell/Dunkel/System) werden Einstellungen im `localStorage` Ihres Browsers abgelegt. Diese Daten werden nicht an den Server übertragen und dienen ausschließlich der Darstellung. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Nutzerfreundlichkeit).
+- Für Komfortfunktionen (z. B. Darstellung Hell/Dunkel/System, gespeicherte ÖPNV-Haltestellen) werden Einstellungen im `localStorage` Ihres Browsers abgelegt. Diese Daten werden nicht an den Server übertragen und dienen ausschließlich der Darstellung bzw. der Bedienung. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Nutzerfreundlichkeit).
 
 ### 5. Cookies
 

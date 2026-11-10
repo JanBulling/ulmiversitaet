@@ -26,6 +26,7 @@ export default function manifest(): MetadataRoute.Manifest {
     shortcuts: [
       { name: "Mensa", url: "/mensa" },
       { name: "Parkplätze", short_name: "Parken", url: "/parking-lots" },
+      { name: "Abfahrten", url: "/public-transport" },
       { name: "Links", url: "/links" },
     ],
   };

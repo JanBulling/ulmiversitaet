@@ -58,6 +58,7 @@ export function parseDepartures(json: any): Departure[] {
     .map((item) => ({
       route: String(item?.RouteName ?? ""),
       direction: String(item?.DepartureDirectionText ?? ""),
+      platform: item?.PlatformName ? String(item.PlatformName) : null,
       scheduledTime: new Date(item?.DepartureTimeScheduled),
       actualTime: new Date(item?.DepartureTimeActual),
       countdown: Number(item?.DepartureCountdown),

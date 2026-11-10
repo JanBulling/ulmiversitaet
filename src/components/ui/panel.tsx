@@ -42,7 +42,7 @@ export function PanelHeader({
       {Icon && (
         <Icon className="size-6 shrink-0 text-primary md:size-8" aria-hidden />
       )}
-      <Heading className="flex-1 text-xl font-bold md:text-2xl">
+      <Heading className="min-w-0 flex-1 text-xl font-bold md:text-2xl">
         {title}
       </Heading>
       {children && (

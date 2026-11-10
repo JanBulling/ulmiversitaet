@@ -1,6 +1,8 @@
 export type Departure = {
   route: string;
   direction: string;
+  /** Platform letter or number at the stop, e.g. "D" */
+  platform: string | null;
   scheduledTime: Date;
   actualTime: Date;
   /** Seconds until departure at the time of the request */

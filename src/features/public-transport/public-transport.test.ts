@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest";
 
 import { countdownLabel, delayStatus, formatDelay } from "./format";
 import { distanceInMeters, findNearestStops } from "./nearest-stops";
+import { getStop, searchStops } from "./stops";
 import { parseDepartures, parsePassengerAlert, SwuApiError } from "./swu-api";
 
 const fixture = (name: string) =>
@@ -23,6 +24,7 @@ describe("SWU API parsing", () => {
     expect(departures[0]).toEqual({
       route: "2",
       direction: "Science Park II",
+      platform: "F",
       scheduledTime: new Date("2026-11-03T14:14:00+01:00"),
       actualTime: new Date("2026-11-03T14:16:20+01:00"),
       countdown: 6,
@@ -131,5 +133,29 @@ describe("nearest stops", () => {
     expect(findNearestStops({ latitude: 52.52, longitude: 13.405 })).toEqual(
       [],
     );
+  });
+});
+
+describe("stop search", () => {
+  it("looks up stops by number with their full name", () => {
+    expect(getStop(1240)).toEqual({ stopId: 1240, name: "Universität Süd" });
+    expect(getStop(-1)).toBeUndefined();
+  });
+
+  it("matches full and short names, ignoring case and umlauts", () => {
+    const ids = (query: string) => searchStops(query).map((s) => s.stopId);
+    expect(ids("universitat sud")).toContain(1240);
+    expect(ids("uni süd")).toContain(1240);
+    expect(ids("HBF")).toContain(1008);
+  });
+
+  it("lists stops starting with the query first", () => {
+    const [first] = searchStops("hauptbahnhof");
+    expect(first.stopId).toBe(1008);
+  });
+
+  it("returns nothing for an empty query and respects the limit", () => {
+    expect(searchStops("  ")).toEqual([]);
+    expect(searchStops("e", 5)).toHaveLength(5);
   });
 });
