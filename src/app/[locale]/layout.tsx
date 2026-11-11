@@ -3,9 +3,10 @@ import "../globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { ThemeProvider } from "@/components/layout/theme-provider";
+import { baseOpenGraph } from "@/lib/metadata";
 import { META_THEME_COLORS, siteConfig } from "@/lib/site";
 import { routing } from "@/lib/i18n/routing";
 import { fontMono, fontSans } from "@/lib/fonts";
@@ -15,57 +16,44 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
-  },
-  metadataBase: new URL(siteConfig.url),
-  description: siteConfig.description,
-  keywords: [
-    "Ulm",
-    "Ulm University",
-    "Universität Ulm",
-    "Ulmiversität",
-    "Ulmiversitaet",
-    "Mensa",
-  ],
-  authors: [
-    { name: "Jan Bulling", url: "https://jan-bulling.com" },
-    { name: "Stefan Rau" },
-  ],
-  creator: "Jan Bulling",
-  openGraph: {
-    type: "website",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
-      },
+/**
+ * Defaults for every page. Open Graph and Twitter title/description are left out on purpose:
+ * Next.js then fills them from each page's own `title` and `description`, so shared links show
+ * the page instead of the site. The images come from the `opengraph-image.tsx` files.
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, locale] = await Promise.all([
+    getTranslations("Metadata"),
+    getLocale(),
+  ]);
+
+  return {
+    title: {
+      default: siteConfig.name,
+      template: `%s | ${siteConfig.name}`,
+    },
+    metadataBase: new URL(siteConfig.url),
+    description: t("description"),
+    keywords: t.raw("keywords") as string[],
+    authors: [
+      { name: "Jan Bulling", url: "https://jan-bulling.com" },
+      { name: "Stefan Rau" },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    images: [siteConfig.ogImage],
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
-  // Home screen app on iOS (the manifest is `src/app/manifest.ts`)
-  appleWebApp: {
-    capable: true,
-    title: siteConfig.name,
-    statusBarStyle: "default",
-  },
-};
+    creator: "Jan Bulling",
+    openGraph: baseOpenGraph(locale),
+    twitter: { card: "summary_large_image" },
+    icons: {
+      icon: "/favicon.ico",
+      apple: "/apple-touch-icon.png",
+    },
+    // Home screen app on iOS (the manifest is `src/app/manifest.ts`)
+    appleWebApp: {
+      capable: true,
+      title: siteConfig.name,
+      statusBarStyle: "default",
+    },
+  };
+}
 
 export default async function RootLayout({
   children,

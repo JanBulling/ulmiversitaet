@@ -5,6 +5,7 @@ import {
   ExternalLink,
   Heart,
   LinkIcon,
+  Map,
   MessageCircle,
   ShieldCheck,
   SquareParking,
@@ -57,11 +58,12 @@ const TEAM: {
 
 /** What the site offers, linked from "Unser Ziel" */
 const FEATURES: {
-  key: "mensa" | "parking" | "links" | "guides";
+  key: "mensa" | "parking" | "links" | "guides" | "map";
   href: string;
   icon: LucideIcon;
 }[] = [
   { key: "mensa", href: "/mensa", icon: CookingPot },
+  { key: "map", href: "/campus-map", icon: Map },
   { key: "parking", href: "/parking-lots", icon: SquareParking },
   { key: "links", href: "/links", icon: LinkIcon },
   { key: "guides", href: "/guides", icon: BookText },

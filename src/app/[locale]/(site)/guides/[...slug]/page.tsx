@@ -16,7 +16,9 @@ import {
   getGuideFolder,
   getGuidePaths,
 } from "@/features/guides/guides";
-import { Link } from "@/lib/i18n/navigation";
+import { getPathname, Link } from "@/lib/i18n/navigation";
+import { baseOpenGraph } from "@/lib/metadata";
+import { OG_ALT, OG_SIZE } from "@/lib/og/constants";
 
 type Props = PageProps<"/[locale]/guides/[...slug]">;
 
@@ -33,17 +35,32 @@ async function resolveSlug(params: Props["params"]) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const [path, locale] = await Promise.all([resolveSlug(params), getLocale()]);
   const guide = await getGuide(path, locale);
+  // Link preview with the guide's title (`src/app/[locale]/og/guides/[...slug]/route.tsx`)
+  const images = [
+    {
+      url: getPathname({
+        href: `/og/guides/${path.split("/").map(encodeURIComponent).join("/")}`,
+        locale,
+      }),
+      ...OG_SIZE,
+      alt: OG_ALT,
+    },
+  ];
 
   if (!guide) {
     const t = await getTranslations("GuidesPage");
-    return { title: `${t("title")}: ${formatFolderName(path)}` };
+    return {
+      title: `${t("title")}: ${formatFolderName(path)}`,
+      openGraph: { ...baseOpenGraph(locale), images },
+    };
   }
 
+  // Open Graph title and description are filled from `title` and `description`
   const { title, summary } = guide.frontmatter;
   return {
     title,
     description: summary,
-    openGraph: { title, description: summary, type: "article" },
+    openGraph: { ...baseOpenGraph(locale), type: "article", images },
   };
 }
 

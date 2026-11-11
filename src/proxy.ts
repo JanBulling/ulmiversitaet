@@ -26,6 +26,7 @@ export default async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Skip API routes, Next.js internals, Vercel internals, and files with an extension
-  matcher: "/((?!api|_next|_vercel|.*\\..*).*)",
+  // Skip API routes, Next.js internals, Vercel internals, files with an extension, and Open Graph
+  // images (Next.js links them with the locale, e.g. `/de/opengraph-image`, which must not redirect)
+  matcher: "/((?!api|_next|_vercel|.*opengraph-image|.*\\..*).*)",
 };

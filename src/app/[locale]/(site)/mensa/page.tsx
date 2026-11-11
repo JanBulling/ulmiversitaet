@@ -12,7 +12,7 @@ import { MenuHeader } from "./menu-header";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Mensa");
-  return { title: t("menuTitle") };
+  return { title: t("menuTitle"), description: t("metaDescription") };
 }
 
 /** Today's menu (next Monday on weekends) */

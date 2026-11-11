@@ -22,6 +22,26 @@
       "eduroam": "eduroam® active"
     }
   },
+  "Metadata": {
+    "homeTitle": "Ulmiversität – Mensa, departures, campus map & more for Ulm University",
+    "description": "Mensa menu, real-time departures, free parking, campus map, links and guides – everything for studying at Ulm University in one place.",
+    "ogTitle": "Everything for studying at Ulm University",
+    "tags": ["Mensa", "Departures", "Parking", "Campus map", "Guides"],
+    "keywords": [
+      "Ulm University",
+      "Universität Ulm",
+      "Ulmiversität",
+      "Mensa Ulm",
+      "menu",
+      "departures",
+      "SWU",
+      "parking",
+      "campus map",
+      "lecture hall finder",
+      "eduroam",
+      "study in Ulm"
+    ]
+  },
   "HomePage": {
     "title": "Ulmiversität",
     "Events": {
@@ -88,7 +108,8 @@
     "description": "A collection of useful guides for students at Ulm University. You have more ideas? <a>Let us know!</a>.",
     "backToAll": "Back to all guides",
     "eduroamDescription": "Guides to get eduroam® onto different devices.",
-    "guideCount": "{count, plural, one {# guide} other {# guides}}"
+    "guideCount": "{count, plural, one {# guide} other {# guides}}",
+    "metaDescription": "Step-by-step guides for everyday university life in Ulm: eduroam, university VPN, email, chip card and more."
   },
   "ParkingLotPage": {
     "title": "Parking Lots",
@@ -114,6 +135,10 @@
         "mensa": {
           "title": "Mensa",
           "description": "Menu, ratings, and nutrition"
+        },
+        "map": {
+          "title": "Campus map",
+          "description": "Navigate around campus"
         },
         "parking": {
           "title": "Parking",
@@ -270,13 +295,7 @@
     "noComments": "No comments yet!",
     "rateMeal": "Rate this meal",
     "rateMealHint": "How was it? You can rate each meal once a day.",
-    "ratingLabels": [
-      "Bad",
-      "Meh",
-      "Okay",
-      "Good",
-      "Great"
-    ],
+    "ratingLabels": ["Bad", "Meh", "Okay", "Good", "Great"],
     "stars": "{count, plural, one {# star} other {# stars}}",
     "commentLabel": "Comment (optional)",
     "commentPlaceholder": "How did you like it?",
@@ -309,7 +328,9 @@
     "backToMenu": "Back to the menu",
     "backToHome": "Back to home",
     "mainDishes": "Main dishes",
-    "sidesAndDesserts": "Sides, salads & desserts"
+    "sidesAndDesserts": "Sides, salads & desserts",
+    "metaDescription": "Menu of the Ulm University mensa with prices, nutrition facts and ratings – for today and the whole week.",
+    "mealMetaDescription": "Prices, nutrition facts and ratings from the Ulm University mensa."
   },
   "MensaMore": {
     "title": "More about the mensa",
@@ -331,7 +352,7 @@
   },
   "MensaPrices": {
     "title": "Price tracker",
-    "description": "Average prices per day, calculated from all meals on the menu. Updated once a day.",
+    "description": "Average prices per day, calculated from all meals on the menu.",
     "summary": "Currently",
     "summaryHint": "Average of the last {days} menu days for students, compared with the first {days} days from {since}.",
     "main": "Main dish",
@@ -351,13 +372,13 @@
   },
   "MensaRanking": {
     "title": "Ranking",
-    "description": "The best and worst rated main dishes of all time. Updated once a day.",
+    "description": "The best and worst rated main dishes of all time.",
     "best": "Top 10",
     "worst": "Bottom 10",
     "rank": "Rank {rank}",
     "lastServed": "Last served {date}",
     "noData": "Not enough ratings yet.",
-    "hint": "Includes all main dishes with at least {count} ratings. Meals with few ratings are pulled slightly towards 3 stars, so a single burst of enthusiasm (or disappointment) isn't enough."
+    "hint": "Includes all main dishes with at least {count} ratings."
   },
   "Admin": {
     "title": "Admin",

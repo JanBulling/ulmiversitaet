@@ -3,8 +3,8 @@ export const BASE_URL = "https://www.ulmiversitaet.de";
 export const siteConfig = {
   name: "Ulmiversität",
   url: BASE_URL,
-  ogImage: `${BASE_URL}/og`,
-  description: "Link management Platform für die Universität Ulm",
+  description:
+    "Mensa-Speiseplan, Echtzeit-Abfahrten, freie Parkplätze, Campusplan, Links und Anleitungen - alles für dein Studium an der Uni Ulm an einem Ort.",
   links: {
     github: "https://github.com/janbulling/ulmiversitaet",
     instagram: "https://www.instagram.com/ulmiversitaet/",

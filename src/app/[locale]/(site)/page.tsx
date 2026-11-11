@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
 import { Page } from "@/components/layout/page";
@@ -6,6 +8,7 @@ import { CampusMapTeaser } from "@/components/home/campus-map-teaser";
 import { FeaturedGuides } from "@/components/home/featured-guides";
 import { FeaturedLinks } from "@/components/home/featured-links";
 import { QuickLinks } from "@/components/home/quick-links";
+import { SiteJsonLd } from "@/components/home/site-json-ld";
 import {
   ParkingSection,
   ParkingSectionSkeleton,
@@ -19,9 +22,16 @@ import {
   PublicTransportSectionSkeleton,
 } from "@/components/public-transport/public-transport-section";
 
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("Metadata");
+  // Without the " | Ulmiversität" suffix, the name is already part of the title
+  return { title: { absolute: t("homeTitle") } };
+}
+
 export default function HomePage() {
   return (
     <Page className="space-y-8">
+      <SiteJsonLd />
       <QuickLinks />
 
       <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-7">

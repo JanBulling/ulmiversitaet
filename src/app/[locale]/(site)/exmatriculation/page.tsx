@@ -20,7 +20,7 @@ export default async function ExmatriculationPage() {
     <Page width="narrow">
       <div className="px-4 md:px-0">
         <Button variant="ghost" size="sm" asChild>
-          <Link href="/guides/exmatrikulieren">
+          <Link href="/">
             <ArrowLeft />
             {t("backToHome")}
           </Link>

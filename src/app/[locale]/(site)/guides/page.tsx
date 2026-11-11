@@ -8,7 +8,7 @@ import { getGuideFolder } from "@/features/guides/guides";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("GuidesPage");
-  return { title: t("title") };
+  return { title: t("title"), description: t("metaDescription") };
 }
 
 export default async function GuidesPage() {

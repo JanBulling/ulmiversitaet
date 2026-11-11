@@ -22,6 +22,26 @@
       "eduroam": "eduroam® aktiv"
     }
   },
+  "Metadata": {
+    "homeTitle": "Ulmiversität – Mensa, Abfahrten, Campusplan & mehr für die Uni Ulm",
+    "description": "Mensa-Speiseplan, Echtzeit-Abfahrten, freie Parkplätze, Campusplan, Links und Anleitungen – alles für dein Studium an der Uni Ulm an einem Ort.",
+    "ogTitle": "Alles für dein Studium an der Uni Ulm",
+    "tags": ["Mensa", "Abfahrten", "Parkplätze", "Campusplan", "Anleitungen"],
+    "keywords": [
+      "Uni Ulm",
+      "Universität Ulm",
+      "Ulmiversität",
+      "Mensa Uni Ulm",
+      "Speiseplan",
+      "Abfahrten",
+      "SWU",
+      "Parkplätze",
+      "Campusplan",
+      "Hörsaalfinder",
+      "eduroam",
+      "Studium Ulm"
+    ]
+  },
   "HomePage": {
     "title": "Ulmiversität",
     "Events": {
@@ -88,7 +108,8 @@
     "description": "Die Ulmiversität hat eine Sammlung von Anleitungen, die den Uni-Alltag erleichtern sollen. Eine Anleitung fehlt oder Du hast weitere Ideen? <a>Schreibe uns!</a>.",
     "backToAll": "Zurück zu allen Anleitungen",
     "eduroamDescription": "Anleitungen zur Einrichtung von eduroam® an verschiedenen Geräten.",
-    "guideCount": "{count, plural, one {# Anleitung} other {# Anleitungen}}"
+    "guideCount": "{count, plural, one {# Anleitung} other {# Anleitungen}}",
+    "metaDescription": "Schritt-für-Schritt-Anleitungen für den Uni-Alltag in Ulm: eduroam, Uni-VPN, E-Mail, Chipkarte und mehr."
   },
   "ParkingLotPage": {
     "title": "Parkplätze",
@@ -114,6 +135,10 @@
         "mensa": {
           "title": "Mensa",
           "description": "Speiseplan, Bewertungen und Nährwerte"
+        },
+        "map": {
+          "title": "Campus Karte",
+          "description": "Finde dich auf dem Kampus zurecht"
         },
         "parking": {
           "title": "Parkplätze",
@@ -270,13 +295,7 @@
     "noComments": "Noch keine Kommentare abgegeben!",
     "rateMeal": "Gericht bewerten",
     "rateMealHint": "Wie war's? Du kannst jedes Gericht einmal am Tag bewerten.",
-    "ratingLabels": [
-      "Schlecht",
-      "Naja",
-      "Okay",
-      "Gut",
-      "Super"
-    ],
+    "ratingLabels": ["Schlecht", "Naja", "Okay", "Gut", "Super"],
     "stars": "{count, plural, one {# Stern} other {# Sterne}}",
     "commentLabel": "Kommentar (optional)",
     "commentPlaceholder": "Wie hat es dir geschmeckt?",
@@ -309,7 +328,9 @@
     "backToMenu": "Zum Speiseplan",
     "backToHome": "Zur Startseite",
     "mainDishes": "Hauptgerichte",
-    "sidesAndDesserts": "Beilagen, Salate & Desserts"
+    "sidesAndDesserts": "Beilagen, Salate & Desserts",
+    "metaDescription": "Speiseplan der Mensa der Uni Ulm mit Preisen, Nährwerten und Bewertungen – für heute und die ganze Woche.",
+    "mealMetaDescription": "Preise, Nährwerte und Bewertungen aus der Mensa der Uni Ulm."
   },
   "MensaMore": {
     "title": "Mehr zur Mensa",
@@ -331,7 +352,7 @@
   },
   "MensaPrices": {
     "title": "Preis-Tracker",
-    "description": "Durchschnittliche Preise pro Tag, berechnet aus allen Gerichten auf dem Speiseplan. Wird einmal am Tag aktualisiert.",
+    "description": "Durchschnittliche Preise pro Tag, berechnet aus allen Gerichten auf dem Speiseplan.",
     "summary": "Aktuell",
     "summaryHint": "Durchschnitt der letzten {days} Speiseplan-Tage für Studierende, verglichen mit den ersten {days} Tagen ab {since}.",
     "main": "Hauptgericht",
@@ -351,13 +372,13 @@
   },
   "MensaRanking": {
     "title": "Ranking",
-    "description": "Die am besten und am schlechtesten bewerteten Hauptgerichte aller Zeiten. Wird einmal am Tag aktualisiert.",
+    "description": "Die am besten und am schlechtesten bewerteten Hauptgerichte aller Zeiten.",
     "best": "Top 10",
     "worst": "Flop 10",
     "rank": "Platz {rank}",
     "lastServed": "Zuletzt am {date}",
     "noData": "Noch nicht genug Bewertungen.",
-    "hint": "Gerechnet wird mit allen Hauptgerichten mit mindestens {count} Bewertungen. Gerichte mit wenigen Bewertungen werden etwas Richtung 3 Sterne gezogen, damit eine einzelne Begeisterung (oder Enttäuschung) nicht reicht."
+    "hint": "Gerechnet wird mit allen Hauptgerichten mit mindestens {count} Bewertungen."
   },
   "Admin": {
     "title": "Admin",

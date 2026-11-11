@@ -20,8 +20,14 @@ async function loadMeal(params: Props["params"]) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const [meal, locale] = await Promise.all([loadMeal(params), getLocale()]);
-  return meal ? { title: mealName(meal, locale) } : {};
+  const [meal, locale, t] = await Promise.all([
+    loadMeal(params),
+    getLocale(),
+    getTranslations("Mensa"),
+  ]);
+  return meal
+    ? { title: mealName(meal, locale), description: t("mealMetaDescription") }
+    : {};
 }
 
 export default async function MealPage({ params }: Props) {
