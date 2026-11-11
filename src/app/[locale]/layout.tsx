@@ -1,6 +1,7 @@
 import "../globals.css";
 
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -88,6 +89,8 @@ export default async function RootLayout({
         </NextIntlClientProvider>
         {/* Page views, without cookies; only active on Vercel deployments */}
         <Analytics />
+        {/* Core Web Vitals of real visits; only active on Vercel deployments */}
+        <SpeedInsights />
       </body>
     </html>
   );
