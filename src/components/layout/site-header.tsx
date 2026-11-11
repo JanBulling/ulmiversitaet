@@ -4,13 +4,13 @@ import { HeaderScrollEffect } from "./header-scroll";
 import { LocaleSwitcher, LocaleSwitcherFallback } from "./locale-switcher";
 import { Logo } from "./logo";
 import { MainNav, MainNavFallback } from "./main-nav";
-import { MobileNav, MobileNavFallback } from "./mobile-nav";
 import { ModeSwitcher } from "./mode-switcher";
 import { NetworkStatus } from "./network-status";
 
 const HEADER_ID = "site-header";
 
-// Parts that read the URL or request headers sit behind Suspense, so every page keeps a static shell
+// Parts that read the URL or request headers sit behind Suspense, so every page keeps a static shell.
+// On mobile the navigation is the tab bar at the bottom (`tab-bar.tsx`).
 export function SiteHeader() {
   return (
     <header
@@ -32,14 +32,9 @@ export function SiteHeader() {
           <Suspense>
             <NetworkStatus className="hidden lg:flex" />
           </Suspense>
-          <ModeSwitcher className="hidden md:inline-flex" />
-          <div className="hidden md:block">
-            <Suspense fallback={<LocaleSwitcherFallback />}>
-              <LocaleSwitcher />
-            </Suspense>
-          </div>
-          <Suspense fallback={<MobileNavFallback />}>
-            <MobileNav />
+          <ModeSwitcher />
+          <Suspense fallback={<LocaleSwitcherFallback />}>
+            <LocaleSwitcher />
           </Suspense>
         </div>
       </div>

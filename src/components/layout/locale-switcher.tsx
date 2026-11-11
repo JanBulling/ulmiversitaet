@@ -41,7 +41,7 @@ export function useSwitchLocale() {
   return { switchLocale, pending };
 }
 
-/** Dropdown with flags (desktop header, footer) */
+/** Dropdown with flags (header) */
 export function LocaleSwitcher({ className }: { className?: string }) {
   const t = useTranslations("Nav");
   const current = useLocale();
@@ -99,30 +99,5 @@ export function LocaleSwitcherFallback({ className }: { className?: string }) {
       <Flag locale={current} />
       <ChevronDown className="size-3.5 opacity-60" />
     </Button>
-  );
-}
-
-/** Flag buttons side by side (mobile menu) */
-export function LocaleButtons() {
-  const t = useTranslations("Nav");
-  const current = useLocale();
-  const { switchLocale, pending } = useSwitchLocale();
-
-  return (
-    <div className="flex gap-2">
-      {routing.locales.map((locale) => (
-        <Button
-          key={locale}
-          variant={locale === current ? "default" : "outline"}
-          size="sm"
-          disabled={pending}
-          aria-current={locale === current ? "true" : undefined}
-          onClick={() => switchLocale(locale)}
-        >
-          <Flag locale={locale} />
-          {t(`languages.${locale}`)}
-        </Button>
-      ))}
-    </div>
   );
 }

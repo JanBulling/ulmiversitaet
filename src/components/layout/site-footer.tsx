@@ -5,7 +5,6 @@ import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/lib/i18n/navigation";
 import { siteConfig } from "@/lib/site";
-import { LocaleSwitcher, LocaleSwitcherFallback } from "./locale-switcher";
 import { Logo } from "./logo";
 import { NetworkStatus } from "./network-status";
 import { GitHubIcon, InstagramIcon } from "./social-icons";
@@ -53,16 +52,10 @@ export async function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-2 md:hidden">
-          <Suspense>
-            <NetworkStatus />
-          </Suspense>
-          <div className="ml-auto">
-            <Suspense fallback={<LocaleSwitcherFallback />}>
-              <LocaleSwitcher />
-            </Suspense>
-          </div>
-        </div>
+        {/* The header shows it from `lg` */}
+        <Suspense>
+          <NetworkStatus className="lg:hidden" />
+        </Suspense>
 
         <div className="ml-auto flex items-center gap-1 text-xs text-muted-foreground">
           <span>

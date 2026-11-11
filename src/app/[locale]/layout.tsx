@@ -2,7 +2,7 @@ import "../globals.css";
 
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 
@@ -16,6 +16,17 @@ import { cn } from "@/lib/utils";
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+// `maximumScale: 1`: iOS Safari doesn't zoom in when a search field is focused (it still allows
+// pinch zoom; Android Chrome doesn't).
+// `cover`: the page reaches under the iPhone home indicator and notch, so `env(safe-area-inset-*)`
+// has values. The mobile tab bar uses them to stay above the home indicator.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
+};
 
 /**
  * Defaults for every page. Open Graph and Twitter title/description are left out on purpose:
@@ -79,7 +90,8 @@ export default async function RootLayout({
       </head>
       <body
         className={cn(
-          "min-h-svh bg-background font-sans text-foreground antialiased",
+          // Side padding keeps content clear of the notch in landscape (`viewportFit: "cover"`)
+          "min-h-svh bg-background pr-[env(safe-area-inset-right)] pl-[env(safe-area-inset-left)] font-sans text-foreground antialiased",
           fontSans.variable,
           fontMono.variable,
         )}
