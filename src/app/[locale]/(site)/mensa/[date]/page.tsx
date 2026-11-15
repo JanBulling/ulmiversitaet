@@ -12,9 +12,9 @@ import {
 } from "@/components/mensa/menu-view";
 import { MensaMore } from "@/components/mensa/mensa-more";
 import { isVerifiedHuman } from "@/features/human-check/human-check";
-import { isOpenMenuDay } from "@/features/mensa/history";
+import { isOpenMenuDayToday } from "@/features/mensa/history";
 import { getMenuRange } from "@/features/mensa/statistics";
-import { isIsoDate, today, toDate, type IsoDate } from "@/lib/date";
+import { isIsoDate, toDate, type IsoDate } from "@/lib/date";
 import { MenuHeader } from "../menu-header";
 
 type Props = PageProps<"/[locale]/mensa/[date]">;
@@ -23,14 +23,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { date } = await params;
   if (!isIsoDate(date)) return {};
 
-  const [t, format] = await Promise.all([
+  const [t, format, open] = await Promise.all([
     getTranslations("Mensa"),
     getFormatter(),
+    isOpenMenuDayToday(date),
   ]);
   return {
     title: `${t("menuTitle")} ${format.dateTime(toDate(date), { dateStyle: "medium" })}`,
     // Only humans may see older and later menus (human check), so they aren't indexed
-    robots: isOpenMenuDay(date, today()) ? undefined : { index: false },
+    robots: open ? undefined : { index: false },
   };
 }
 
@@ -71,7 +72,7 @@ async function DateDays({ params }: { params: Props["params"] }) {
 async function DateMenu({ params }: { params: Props["params"] }) {
   const date = await menuDay(params);
   if (!date) notFound();
-  if (!isOpenMenuDay(date, today()) && !(await isVerifiedHuman())) {
+  if (!(await isOpenMenuDayToday(date)) && !(await isVerifiedHuman())) {
     return <HumanCheckPanel />;
   }
   return <MenuView date={date} />;

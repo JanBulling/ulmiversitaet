@@ -257,15 +257,17 @@ export async function getMeal(id: string) {
 }
 
 /**
- * IDs of the meals served on the days open to everyone around `now` (see `history.ts`); the
- * pages of all other meals need the human check
+ * IDs of the meals served on the days open to everyone around today (see `history.ts`); the
+ * pages of all other meals need the human check. "Today" is read inside the cache (pages are
+ * prerendered per meal, where `today()` is only allowed in a cache scope), so the window
+ * moves with the revalidation, a few hours after midnight at most.
  */
-export async function getOpenMealIds(now: IsoDate): Promise<string[]> {
+export async function getOpenMealIds(): Promise<string[]> {
   "use cache: remote";
   cacheTag(MENSA_CACHE_TAG);
   cacheLife(MENSA_DATA_CACHE_LIFE);
 
-  const { from, to } = openMenuDays(now);
+  const { from, to } = openMenuDays(today());
   const rows = await db
     .selectDistinct({ id: mealHistory.mealId })
     .from(mealHistory)

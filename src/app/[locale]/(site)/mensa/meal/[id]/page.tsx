@@ -10,7 +10,6 @@ import { MealView, MealViewSkeleton } from "@/components/mensa/meal-view";
 import { isVerifiedHuman } from "@/features/human-check/human-check";
 import { mealName } from "@/features/mensa/display";
 import { getMeal, getOpenMealIds } from "@/features/mensa/queries";
-import { today } from "@/lib/date";
 import { Link } from "@/lib/i18n/navigation";
 
 type Props = PageProps<"/[locale]/mensa/meal/[id]">;
@@ -24,7 +23,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
  */
 const mealAccess = cache(
   async (id: string): Promise<"open" | "verified" | "locked"> => {
-    if ((await getOpenMealIds(today())).includes(id)) return "open";
+    if ((await getOpenMealIds()).includes(id)) return "open";
     return (await isVerifiedHuman()) ? "verified" : "locked";
   },
 );
