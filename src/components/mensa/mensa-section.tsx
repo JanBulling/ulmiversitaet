@@ -10,6 +10,7 @@ import {
   PanelHeader,
 } from "@/components/ui/panel";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TODAY_CACHE_LIFE } from "@/lib/cache";
 import { today, toDate } from "@/lib/date";
 import { Link } from "@/lib/i18n/navigation";
 import {
@@ -18,7 +19,7 @@ import {
   formatPrice,
   mealName,
 } from "@/features/mensa/display";
-import { MENSA_CACHE_TAG, TODAY_CACHE_LIFE } from "@/features/mensa/cache";
+import { MENSA_CACHE_TAG } from "@/features/mensa/cache";
 import { isGuruEnabled } from "@/features/mensa/guru";
 import { getMenu, type MenuCategory } from "@/features/mensa/queries";
 import { CategoryLabel } from "./category-label";

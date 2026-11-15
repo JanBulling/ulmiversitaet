@@ -8,11 +8,14 @@ import { db } from "@/lib/db";
 import { events } from "@/lib/db/schema";
 import { EVENTS_CACHE_TAG } from "./cache";
 
+// Shared remote cache: events only change through the admin (events tag), plus a daily
+// revalidation. Keyed by date, so a new day starts new entries anyway.
+
 /** Events that haven't ended before `from`, soonest first */
 export async function getUpcomingEvents(from: IsoDate, limit = 6) {
-  "use cache";
+  "use cache: remote";
   cacheTag(EVENTS_CACHE_TAG);
-  cacheLife("hours");
+  cacheLife("days");
 
   return db
     .select()
@@ -27,9 +30,9 @@ export async function getUpcomingEvents(from: IsoDate, limit = 6) {
 
 /** Events overlapping `from`…`to` (inclusive), for the calendar */
 export async function getEventsBetween(from: IsoDate, to: IsoDate) {
-  "use cache";
+  "use cache: remote";
   cacheTag(EVENTS_CACHE_TAG);
-  cacheLife("hours");
+  cacheLife("days");
 
   return db
     .select({

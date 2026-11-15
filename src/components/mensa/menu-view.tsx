@@ -4,9 +4,11 @@ import { cacheLife, cacheTag } from "next/cache";
 
 import { Panel, PanelEmpty, PanelHeader } from "@/components/ui/panel";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TODAY_CACHE_LIFE } from "@/lib/cache";
 import { nextWeekday, today, toDate, type IsoDate } from "@/lib/date";
-import { MENSA_CACHE_TAG, TODAY_CACHE_LIFE } from "@/features/mensa/cache";
+import { MENSA_CACHE_TAG } from "@/features/mensa/cache";
 import { getMenu, type MenuCategory } from "@/features/mensa/queries";
+import { getMenuRange } from "@/features/mensa/statistics";
 import { CategoryLabel } from "./category-label";
 import { DaySelector } from "./day-selector";
 import { MealRow } from "./meal-row";
@@ -18,19 +20,19 @@ function selectedDate(date: IsoDate | undefined, now: IsoDate) {
 }
 
 /**
- * Weekday selector and the full date above the menu. Needs no data, so it is cached on its
- * own and shown right away instead of waiting for the menu.
+ * Weekday selector and the full date above the menu. Only needs the cached menu range, so it
+ * is cached on its own and shown right away instead of waiting for the menu.
  */
 export async function MenuDays({ date }: { date?: IsoDate }) {
   "use cache";
   cacheLife(TODAY_CACHE_LIFE); // "today" moves with the change of day
   const now = today();
   const selected = selectedDate(date, now);
-  const format = await getFormatter();
+  const [format, range] = await Promise.all([getFormatter(), getMenuRange()]);
 
   return (
     <div className="space-y-2">
-      <DaySelector selected={selected} today={now} />
+      <DaySelector selected={selected} today={now} first={range?.first} />
       <p className="text-center text-sm text-muted-foreground">
         {format.dateTime(toDate(selected), { dateStyle: "full" })}
       </p>

@@ -6,7 +6,7 @@ Below today's menu on the home page, "Frage den Guru" asks Google's Gemini model
 
 1. The button (`src/components/mensa/mensa-guru.tsx`) calls the Server Action `askGuru(locale)` (`src/features/mensa/actions.ts`).
 2. `getGuruAdvice(date, locale)` (`src/features/mensa/guru.ts`) sends all meals of the day with their ratings (averages for overall, taste, look and value for money, plus the number of ratings), category, diet, price, calories and protein to Gemini. Comments are not sent. The model answers with JSON `{ mealId, message }`. The schema only allows ids of today's meals, and `parseGuruAnswer()` checks the answer again.
-3. The answer is cached per day and language (`"use cache"`, mensa tag). The free tier is used about once per day and language. A new rating, an admin change or a menu sync clears the cache, so the guru reconsiders on the next click. Errors are not cached: the button shows "Der Guru meditiert gerade…" with a retry, and the real reason is logged as `[mensa-guru]`.
+3. The answer is cached per day and language (`"use cache: remote"`, mensa tag). The free tier is used about once per day and language. A new rating, an admin change or a menu sync clears the cache, so the guru reconsiders on the next click. Errors are not cached: the button shows "Der Guru meditiert gerade…" with a retry, and the real reason is logged as `[mensa-guru]`.
 
 Prompt and parsing live in `src/features/mensa/guru-prompt.ts` (tested without an API key in `guru-prompt.test.ts`).
 

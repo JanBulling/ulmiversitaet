@@ -6,8 +6,8 @@ import { cacheLife } from "next/cache";
 import { PageHeader } from "@/components/layout/page";
 import { ArchiveForm } from "@/components/mensa/archive-form";
 import { Panel, PanelBody, PanelEmpty } from "@/components/ui/panel";
-import { TODAY_CACHE_LIFE } from "@/features/mensa/cache";
 import { getMenuRange } from "@/features/mensa/statistics";
+import { TODAY_CACHE_LIFE } from "@/lib/cache";
 import { today, toDate, type IsoDate } from "@/lib/date";
 import { BackToMenu } from "../back-to-menu";
 

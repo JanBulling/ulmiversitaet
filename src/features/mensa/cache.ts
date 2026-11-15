@@ -4,13 +4,12 @@ import { refresh, updateTag } from "next/cache";
 export const MENSA_CACHE_TAG = "mensa";
 
 /**
- * Lifetime of cached views that show "today's" menu (home page section, `/mensa`). Data
- * changes invalidate them through the tag; the 30-minute revalidation only has to catch
- * the change of day.
+ * Lifetime of the menu and meal queries in the remote cache. The menu only changes once a
+ * day; menu syncs, admin changes and ratings invalidate it through the tag anyway.
  */
-export const TODAY_CACHE_LIFE = {
+export const MENSA_DATA_CACHE_LIFE = {
   stale: 5 * 60,
-  revalidate: 30 * 60,
+  revalidate: 4 * 60 * 60,
   expire: 24 * 60 * 60,
 };
 

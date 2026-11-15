@@ -14,7 +14,7 @@ import {
   meals,
   type CategoryKind,
 } from "@/lib/db/schema";
-import { MENSA_CACHE_TAG } from "./cache";
+import { MENSA_CACHE_TAG, MENSA_DATA_CACHE_LIFE } from "./cache";
 
 export type Prices = {
   studentCents: number | null;
@@ -105,9 +105,9 @@ function toRating(
 
 /** The menu of one day, grouped by display category in their configured order */
 export async function getMenu(date: IsoDate): Promise<Menu> {
-  "use cache";
+  "use cache: remote";
   cacheTag(MENSA_CACHE_TAG);
-  cacheLife("hours");
+  cacheLife(MENSA_DATA_CACHE_LIFE);
 
   const rows = await db
     .select({
@@ -170,9 +170,9 @@ export type MealDetails = Awaited<ReturnType<typeof getMeal>>;
 
 /** A meal with its current data, rating summary, comments, and the days it was served */
 export async function getMeal(id: string) {
-  "use cache";
+  "use cache: remote";
   cacheTag(MENSA_CACHE_TAG);
-  cacheLife("hours");
+  cacheLife(MENSA_DATA_CACHE_LIFE);
 
   const [row] = await db
     .select({

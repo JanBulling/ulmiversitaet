@@ -1,8 +1,9 @@
 import { CalendarClock } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
-import { connection } from "next/server";
+import { cacheLife, cacheTag } from "next/cache";
 
 import { Panel, PanelHeader } from "@/components/ui/panel";
+import { TODAY_CACHE_LIFE } from "@/lib/cache";
 import { addDays, startOfMonth, today } from "@/lib/date";
 import type { Event } from "@/lib/db/schema";
 import {
@@ -10,6 +11,7 @@ import {
   formatEventDates,
   formatEventTimes,
 } from "@/features/events/format";
+import { EVENTS_CACHE_TAG } from "@/features/events/cache";
 import { getEventsBetween, getUpcomingEvents } from "@/features/events/queries";
 import { EventCalendar } from "./event-calendar";
 
@@ -19,9 +21,14 @@ const CALENDAR_MONTHS = 3;
 /**
  * Month calendar with the event days marked, next to the list of upcoming events
  * (like on the previous site). Renders nothing if there are no upcoming events.
+ *
+ * Cached as a whole (part of the prerendered page): admin changes invalidate it through the
+ * events tag, and it revalidates every 30 minutes for the change of day.
  */
 export async function EventsSection({ className }: { className?: string }) {
-  await connection(); // "upcoming" depends on today
+  "use cache";
+  cacheTag(EVENTS_CACHE_TAG);
+  cacheLife(TODAY_CACHE_LIFE);
   const now = today();
   const [upcoming, calendarEvents] = await Promise.all([
     getUpcomingEvents(now),

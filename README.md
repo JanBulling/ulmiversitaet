@@ -109,7 +109,7 @@ src/
 - The database still contains the legacy tables of the old deployments (`public.mensa_*`, `public.ulmiversitaet_*`). drizzle-kit only looks at the `ulmiversitaet` schema (`schemaFilter`), so it never touches them.
 - Schema changes: edit the schema, run `pnpm db:generate`, review the SQL in `src/lib/db/migrations/`, then `pnpm db:migrate`. Don't use `drizzle-kit push`.
 - Statements that must be atomic go into `db.batch([...])` (one transaction over the HTTP driver).
-- Read data in `"use cache"` functions with `cacheTag`/`cacheLife`; invalidate with `updateTag` (Server Actions) or `revalidateTag` (cron/Route Handlers).
+- Read data in `"use cache: remote"` functions with `cacheTag`/`cacheLife`; invalidate with `updateTag` (Server Actions) or `revalidateTag` (cron/Route Handlers). Plain `"use cache"` only lives in the memory of one serverless instance, so database reads would run on most requests and keep Neon from suspending. Every query is logged as `[db] …`, so the Vercel logs show when the database is woken up.
 - The mensa data model is documented in `docs/plans/mensa-database.md`.
 
 ### Caching / rendering

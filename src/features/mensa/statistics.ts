@@ -25,7 +25,7 @@ export async function getMenuRange(): Promise<{
   first: IsoDate;
   last: IsoDate;
 } | null> {
-  "use cache";
+  "use cache: remote";
   cacheLife("days");
 
   const [range] = await db
@@ -41,7 +41,7 @@ export async function getMenuRange(): Promise<{
  * all days are included, also those before the separate `price_history` table started
  */
 export async function getPriceDays(): Promise<PriceDay[]> {
-  "use cache";
+  "use cache: remote";
   cacheLife("days");
 
   const avg = (column: AnyPgColumn, kind: CategoryKind) =>
@@ -74,7 +74,7 @@ const RANKING_SIZE = 10;
  * `meal_rating_stats` (pulled towards 3 stars for meals with few ratings)
  */
 export async function getMealRanking() {
-  "use cache";
+  "use cache: remote";
   cacheLife("days");
 
   const ranked = (order: typeof asc) =>

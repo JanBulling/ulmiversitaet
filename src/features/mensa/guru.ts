@@ -36,7 +36,7 @@ export async function getGuruAdvice(
   date: IsoDate,
   locale: Locale,
 ): Promise<GuruAdvice | null> {
-  "use cache";
+  "use cache: remote";
   cacheTag(MENSA_CACHE_TAG);
   cacheLife("days");
 

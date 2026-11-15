@@ -14,14 +14,17 @@ import { cn } from "@/lib/utils";
 
 /**
  * Weekday links for the week of `selected`. From this week only next week can be reached;
- * past weeks (opened from the archive) can be browsed in both directions.
+ * past weeks (opened from the archive) can be browsed in both directions, back to the week of
+ * `first` (the first day with a menu), so crawlers don't follow empty weeks forever.
  */
 export async function DaySelector({
   selected,
   today,
+  first,
 }: {
   selected: IsoDate;
   today: IsoDate;
+  first?: IsoDate;
 }) {
   const [t, format] = await Promise.all([
     getTranslations("Mensa"),
@@ -30,7 +33,8 @@ export async function DaySelector({
 
   const week = startOfWeek(selected);
   const currentWeek = startOfWeek(today);
-  const hasPrevious = week !== currentWeek;
+  const hasPrevious =
+    week !== currentWeek && (!first || week > startOfWeek(first));
   const hasNext = week < addDays(currentWeek, 7);
 
   return (
