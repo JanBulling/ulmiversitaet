@@ -130,6 +130,7 @@ src/
   - Price tracker: average prices per menu day, computed from `meal_history` (`getPriceDays`), with a 20-day moving average (`src/features/mensa/price-stats.ts`) and averages per month.
   - Ranking: top and bottom 10 main dishes with at least 3 ratings, ordered by the weighted `score` of `meal_rating_stats`.
   - Their data is cached with `cacheLife("days")` and not tagged, so new ratings or menu syncs show up there within a day (`src/features/mensa/statistics.ts`).
+- Human check against bots (`src/features/human-check/`, `src/features/mensa/history.ts`): menus more than 14 days from today, their meals, and the archive are only loaded after a self-hosted [ALTCHA](https://altcha.org) proof-of-work check, so crawlers can't wake the database for every old day. Solving it sets a signed cookie (`ulm_human`, 30 days); the challenge comes from `/api/human-check`. Its secrets are derived from `SESSION_SECRET`. These pages are `noindex`.
 - Ratings are only open on a day the meal is served, from 11:30 (Berlin) when the mensa opens (`src/features/mensa/rating-window.ts`, checked in the form and in the Server Action), and once per meal and day per browser (cookie, `rated-meals.ts`).
 
 ### Tests

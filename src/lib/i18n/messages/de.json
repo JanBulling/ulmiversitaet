@@ -348,6 +348,12 @@
     "weekend": "Am Wochenende ist die Mensa geschlossen.",
     "noData": "Noch keine Speisepläne vorhanden."
   },
+  "HumanCheck": {
+    "title": "Kurze Prüfung gegen Bots",
+    "description": "Das Archiv mit älteren Speiseplänen und Gerichten zeigen wir erst nach einer kurzen Prüfung, damit Bots es nicht massenhaft abrufen. Die Prüfung läuft in deinem Browser, ohne Tracking, und gilt 30 Tage.",
+    "loading": "Wird geladen…",
+    "failed": "Die Prüfung hat nicht geklappt. Bitte versuche es noch einmal."
+  },
   "MensaPrices": {
     "title": "Preis-Tracker",
     "description": "Durchschnittliche Preise pro Tag, berechnet aus allen Gerichten auf dem Speiseplan.",

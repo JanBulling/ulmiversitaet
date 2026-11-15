@@ -3,6 +3,7 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+import { HumanCheckPanel } from "@/components/human-check/human-check";
 import {
   MenuDays,
   MenuDaysPlaceholder,
@@ -10,8 +11,10 @@ import {
   MenuViewSkeleton,
 } from "@/components/mensa/menu-view";
 import { MensaMore } from "@/components/mensa/mensa-more";
+import { isVerifiedHuman } from "@/features/human-check/human-check";
+import { isOpenMenuDay } from "@/features/mensa/history";
 import { getMenuRange } from "@/features/mensa/statistics";
-import { isIsoDate, toDate, type IsoDate } from "@/lib/date";
+import { isIsoDate, today, toDate, type IsoDate } from "@/lib/date";
 import { MenuHeader } from "../menu-header";
 
 type Props = PageProps<"/[locale]/mensa/[date]">;
@@ -26,6 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   ]);
   return {
     title: `${t("menuTitle")} ${format.dateTime(toDate(date), { dateStyle: "medium" })}`,
+    // Only humans may see older and later menus (human check), so they aren't indexed
+    robots: isOpenMenuDay(date, today()) ? undefined : { index: false },
   };
 }
 
@@ -62,8 +67,12 @@ async function DateDays({ params }: { params: Props["params"] }) {
   return date ? <MenuDays date={date} /> : null;
 }
 
+/** Days outside the two weeks around today need the human check before the menu is loaded */
 async function DateMenu({ params }: { params: Props["params"] }) {
   const date = await menuDay(params);
   if (!date) notFound();
+  if (!isOpenMenuDay(date, today()) && !(await isVerifiedHuman())) {
+    return <HumanCheckPanel />;
+  }
   return <MenuView date={date} />;
 }

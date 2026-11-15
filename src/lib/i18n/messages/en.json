@@ -348,6 +348,12 @@
     "weekend": "The mensa is closed on weekends.",
     "noData": "No menus yet."
   },
+  "HumanCheck": {
+    "title": "Quick check against bots",
+    "description": "The archive of older menus and meals is only shown after a quick check, so bots can't download it in bulk. The check runs in your browser, without any tracking, and lasts for 30 days.",
+    "loading": "Loading…",
+    "failed": "The check didn't work. Please try again."
+  },
   "MensaPrices": {
     "title": "Price tracker",
     "description": "Average prices per day, calculated from all meals on the menu.",

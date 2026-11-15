@@ -2,10 +2,14 @@ import { History } from "lucide-react";
 import type { Metadata } from "next";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { cacheLife } from "next/cache";
+import { Suspense } from "react";
 
+import { HumanCheck } from "@/components/human-check/human-check";
 import { PageHeader } from "@/components/layout/page";
 import { ArchiveForm } from "@/components/mensa/archive-form";
 import { Panel, PanelBody, PanelEmpty } from "@/components/ui/panel";
+import { Skeleton } from "@/components/ui/skeleton";
+import { isVerifiedHuman } from "@/features/human-check/human-check";
 import { getMenuRange } from "@/features/mensa/statistics";
 import { TODAY_CACHE_LIFE } from "@/lib/cache";
 import { today, toDate, type IsoDate } from "@/lib/date";
@@ -29,10 +33,23 @@ export default async function MensaArchivePage() {
         description={t("description")}
       />
       <Panel>
-        <ArchivePicker />
+        <Suspense
+          fallback={
+            <PanelBody>
+              <Skeleton className="h-24 w-full" />
+            </PanelBody>
+          }
+        >
+          <ArchiveGate />
+        </Suspense>
       </Panel>
     </>
   );
+}
+
+/** The archive is for humans: bots would open its old menus by the thousand */
+async function ArchiveGate() {
+  return (await isVerifiedHuman()) ? <ArchivePicker /> : <HumanCheck />;
 }
 
 /** Cached like the day selector: starts at today, which moves with the change of day */

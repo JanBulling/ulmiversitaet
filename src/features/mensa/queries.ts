@@ -1,6 +1,6 @@
 import "server-only";
 
-import { and, asc, desc, eq, gte, isNull, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gte, isNull, lte, sql } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 
 import { today, type IsoDate } from "@/lib/date";
@@ -15,6 +15,7 @@ import {
   type CategoryKind,
 } from "@/lib/db/schema";
 import { MENSA_CACHE_TAG, MENSA_DATA_CACHE_LIFE } from "./cache";
+import { openMenuDays } from "./history";
 
 export type Prices = {
   studentCents: number | null;
@@ -253,4 +254,21 @@ export async function getMeal(id: string) {
     /** Today (if served) and later days, for the rating form */
     upcoming: upcoming.map((s) => s.date),
   };
+}
+
+/**
+ * IDs of the meals served on the days open to everyone around `now` (see `history.ts`); the
+ * pages of all other meals need the human check
+ */
+export async function getOpenMealIds(now: IsoDate): Promise<string[]> {
+  "use cache: remote";
+  cacheTag(MENSA_CACHE_TAG);
+  cacheLife(MENSA_DATA_CACHE_LIFE);
+
+  const { from, to } = openMenuDays(now);
+  const rows = await db
+    .selectDistinct({ id: mealHistory.mealId })
+    .from(mealHistory)
+    .where(and(gte(mealHistory.date, from), lte(mealHistory.date, to)));
+  return rows.map((row) => row.id);
 }

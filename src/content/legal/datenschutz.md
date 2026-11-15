@@ -42,8 +42,9 @@ Siehe die Angaben im [Impressum](/impressum).
 
 ### 5. Cookies
 
-- Wir setzen keine Tracking-Cookies ein. Cookies werden ausschließlich für die korrekte Sprachauswahl und für die Bewertung von Mensa-Gerichten verwendet und dienen nicht der Reichweitenmessung oder Profilbildung.
+- Wir setzen keine Tracking-Cookies ein. Cookies werden ausschließlich für die korrekte Sprachauswahl, für die Bewertung von Mensa-Gerichten und für die Prüfung gegen Bots verwendet und dienen nicht der Reichweitenmessung oder Profilbildung.
 - Wenn Sie ein Gericht bewerten, speichert ein Cookie (`ulm_mensa_rated`) für 24 Stunden, welche Gerichte Sie bewertet haben, damit jedes Gericht nur einmal pro Tag bewertet werden kann. Es enthält nur die IDs der Gerichte und den Zeitpunkt der Bewertung. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Schutz der Bewertungen vor Mehrfachabgaben).
+- Ältere Speisepläne und Gerichte sowie das Speiseplan-Archiv zeigen wir erst nach einer kurzen Prüfung gegen Bots (ALTCHA). Sie läuft auf unserem Server, ohne Drittanbieter: Ihr Browser löst eine Rechenaufgabe, dabei werden keine personenbezogenen Daten erhoben. Nach bestandener Prüfung speichert ein Cookie (`ulm_human`) für 30 Tage nur, dass die Prüfung bestanden wurde. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Schutz vor automatisierten Massenabrufen).
 
 ## Protokolldaten (Server-Logs)
 
