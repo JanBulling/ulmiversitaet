@@ -12,6 +12,7 @@ import {
 import { deriveKey } from "altcha-lib/algorithms/pbkdf2";
 import { jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 import { cache } from "react";
 
 import { env } from "@/lib/env";
@@ -81,6 +82,8 @@ export async function verifyHumanPayload(payload: unknown): Promise<boolean> {
 export const isVerifiedHuman = cache(async (): Promise<boolean> => {
   const token = (await cookies()).get(HUMAN_COOKIE)?.value;
   if (!token) return false;
+  // `jwtVerify` reads the current time (expiry), which Next.js only allows at request time
+  await connection();
   try {
     const { payload } = await jwtVerify(token, secret("cookie"), {
       algorithms: ["HS256"],

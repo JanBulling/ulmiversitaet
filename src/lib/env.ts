@@ -12,7 +12,7 @@ export const env = createEnv({
   server: {
     NEON_DATABASE_URL: z.url(),
 
-    // Vercel cron jobs (mensa scraper)
+    // Vercel Schedules (mensa scraper)
     CRON_SECRET: z.string().min(16),
 
     // Admin dashboard (/admin): the single account and the key for signing its session cookie

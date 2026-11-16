@@ -120,9 +120,10 @@ src/
 ### Mensa
 
 - Menus are scraped from the Studierendenwerk endpoint (`src/features/mensa/scraper/`) and written to the database by `syncMenu` (`src/features/mensa/sync/`). The data model is described in `docs/plans/mensa-database.md`.
-- Two Vercel cron jobs (`vercel.json`, times in UTC, Hobby plan runs them within the given hour):
-  - `/api/cron/mensa/next-week` — Mondays, around 7:00 Berlin: loads Monday–Friday of next week.
-  - `/api/cron/mensa/today` — weekday mornings: refreshes today's menu (the mensa sometimes changes it on short notice).
+- Two [Vercel Schedules](https://vercel.com/docs/schedules) (`vercel.json`, times in Berlin time, Hobby plan starts them within 15 minutes). They call the routes with `GET` and `Authorization: Bearer $CRON_SECRET`, like the former cron jobs:
+  - `mensa-next-week` → `/api/cron/mensa/next-week` — Mondays, 7:00: loads Monday–Friday of next week.
+  - `mensa-today` → `/api/cron/mensa/today` — weekdays, 8:00: refreshes today's menu (the mensa sometimes changes it on short notice).
+- Check runs, or start one by hand, on the project's **Schedules** page in the Vercel dashboard.
 - Manual run (e.g. to fill a fresh database): `curl -H "Authorization: Bearer $CRON_SECRET" "http://localhost:3000/api/cron/mensa/next-week?week=2026-11-02"` or `.../today?date=2026-11-04`.
 - New categories on the menu are added automatically without a group; assign them in the admin dashboard.
 - `/mensa/archive`, `/mensa/prices`, `/mensa/ranking` (linked at the bottom of the menu pages):

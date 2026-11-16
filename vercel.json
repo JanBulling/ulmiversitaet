@@ -1,13 +1,17 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "crons": [
-    {
+  "schedules": {
+    "mensa-next-week": {
+      "schedule": "0 7 * * 1",
+      "timezone": "Europe/Berlin",
       "path": "/api/cron/mensa/next-week",
-      "schedule": "0 6 * * 1"
+      "requestMethod": "GET"
     },
-    {
+    "mensa-today": {
+      "schedule": "0 8 * * 1-5",
+      "timezone": "Europe/Berlin",
       "path": "/api/cron/mensa/today",
-      "schedule": "0 7 * * 1-5"
+      "requestMethod": "GET"
     }
-  ]
+  }
 }

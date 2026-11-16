@@ -332,12 +332,12 @@ Known limit (same as today): bigger name changes like _"Tikka Masala mit veganem
 
 Code: `src/features/mensa/scraper/` (fetch → parse → merge DE/EN) and `src/features/mensa/sync/` (write to DB).
 
-| Job                         | Schedule (UTC, `vercel.json`)                                                | What it does                                                           |
-| --------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `/api/cron/mensa/next-week` | `0 6 * * 1` — Mondays, 07:00–07:59 (winter) / 08:00–08:59 (summer) Berlin    | Loads Monday–Friday of next week, so the menu can be shown in advance  |
-| `/api/cron/mensa/today`     | `0 7 * * 1-5` — weekdays, 08:00–08:59 (winter) / 09:00–09:59 (summer) Berlin | Refreshes today's menu (the mensa sometimes changes it in the morning) |
+| Schedule (`vercel.json`)                        | Runs (Berlin time)              | What it does                                                           |
+| ----------------------------------------------- | ------------------------------- | ---------------------------------------------------------------------- |
+| `mensa-next-week` → `/api/cron/mensa/next-week` | `0 7 * * 1` — Mondays, 07:00    | Loads Monday–Friday of next week, so the menu can be shown in advance  |
+| `mensa-today` → `/api/cron/mensa/today`         | `0 8 * * 1-5` — weekdays, 08:00 | Refreshes today's menu (the mensa sometimes changes it in the morning) |
 
-- Hobby runs each job once a day, somewhere within the given hour. Both are protected by `CRON_SECRET`.
+- [Vercel Schedules](https://vercel.com/docs/schedules) (they replaced the legacy cron jobs) with `timezone: "Europe/Berlin"`. Hobby starts each run within 15 minutes of the given time. Both send `GET` and are protected by `CRON_SECRET`.
 - Manual runs: `?week=YYYY-MM-DD` (next-week job) and `?date=YYYY-MM-DD` (today job).
 - The menu is published several weeks ahead; the endpoint requires the `startThisWeek`/`startNextWeek` parameters.
 - Everything is an upsert, so re-running a job is harmless. A week takes ~3 s.
