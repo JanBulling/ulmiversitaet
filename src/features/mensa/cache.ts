@@ -5,12 +5,14 @@ export const MENSA_CACHE_TAG = "mensa";
 
 /**
  * Lifetime of the menu and meal queries in the remote cache. The menu only changes once a
- * day; menu syncs, admin changes and ratings invalidate it through the tag anyway.
+ * day; menu syncs, admin changes and ratings invalidate it through the tag anyway, so the
+ * revalidation only catches the change of day in queries that read "today" (on weekdays the
+ * morning sync already does that). After a week without requests an entry is dropped.
  */
 export const MENSA_DATA_CACHE_LIFE = {
   stale: 5 * 60,
-  revalidate: 4 * 60 * 60,
-  expire: 24 * 60 * 60,
+  revalidate: 12 * 60 * 60,
+  expire: 7 * 24 * 60 * 60,
 };
 
 /**

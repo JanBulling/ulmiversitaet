@@ -68,7 +68,7 @@ async function DateDays({ params }: { params: Props["params"] }) {
   return date ? <MenuDays date={date} /> : null;
 }
 
-/** Days outside the two weeks around today need the human check before the menu is loaded */
+/** Days more than a week from today need the human check before the menu is loaded */
 async function DateMenu({ params }: { params: Props["params"] }) {
   const date = await menuDay(params);
   if (!date) notFound();

@@ -8,7 +8,7 @@ import { addDays, today, type IsoDate } from "@/lib/date";
  * meals need the human check: bots crawl them by the thousand, and every one of them would
  * wake up the database.
  */
-export const OPEN_MENU_DAYS = 14;
+export const OPEN_MENU_DAYS = 7;
 
 /** First and last day open to everyone */
 export function openMenuDays(now: IsoDate): { from: IsoDate; to: IsoDate } {

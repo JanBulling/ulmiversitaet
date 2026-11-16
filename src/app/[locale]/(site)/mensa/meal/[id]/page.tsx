@@ -17,7 +17,7 @@ type Props = PageProps<"/[locale]/mensa/meal/[id]">;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /**
- * Meals of the two weeks around today are open to everyone; all others need the human check
+ * Meals of the days up to a week from today are open to everyone; all others need the human check
  * before they are loaded (see `features/mensa/history.ts`). Both checks don't query the
  * database: the open meals are cached, the check is a cookie. Once per request.
  */

@@ -260,7 +260,7 @@ export async function getMeal(id: string) {
  * IDs of the meals served on the days open to everyone around today (see `history.ts`); the
  * pages of all other meals need the human check. "Today" is read inside the cache (pages are
  * prerendered per meal, where `today()` is only allowed in a cache scope), so the window
- * moves with the revalidation, a few hours after midnight at most.
+ * moves with the morning menu sync or the revalidation, half a day after midnight at most.
  */
 export async function getOpenMealIds(): Promise<string[]> {
   "use cache: remote";
