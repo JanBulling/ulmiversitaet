@@ -1,11 +1,11 @@
 # Parking
 
-The home page shows the free spaces of the main university parking lots; `/parking-lots` lists all lots with a live counter, grouped by area. The numbers come from the parking guidance system of the university (DUU), which counts the cars per lot.
+The home page shows the free spaces of the main university parking lots with the expected change in the next 30 minutes, and today's [forecast](parking-forecast.md) for the whole campus; `/parking-lots` lists all lots with a live counter, grouped by area. The numbers come from the parking guidance system of the university (DUU), which counts the cars per lot.
 
 ## How it works
 
 1. The DUU API (`http://tsu-app.rrooaarr.biz/front/soap.php?counterid=…`) returns the number of parked cars as plain text. The counters drift and can go negative (e.g. `-4` on a nearly empty lot) or above the capacity, so free spaces are kept between 0 and the total. Unknown counters answer `-1`, which looks like a drifted counter, so check new counter ids by hand (see below). It is **HTTP-only and has no CORS headers**, so browsers can't call it from the HTTPS site; only our server does.
-2. `getParkingSnapshot()` (`src/features/parking/queries.ts`) reads all counters in parallel and computes free spaces = total − parked cars, limited to 0 … total. The result is cached for one minute, so all visitors share one reading.
+2. `getParkingSnapshot()` (`src/features/parking/queries.ts`) reads all counters in parallel (one shared reading for the home page and `/parking-lots`) and computes free spaces = total − parked cars, limited to 0 … total. The result is cached for one minute, so all visitors share one reading.
 3. The page is rendered with that data. In the browser, `/api/parking` (Route Handler) is polled every 60 s to update the numbers (paused while the tab is hidden).
 
 Logic lives in `src/features/parking/`, data in `src/content/parking/parking-lots.ts`, UI in `src/components/parking/`.

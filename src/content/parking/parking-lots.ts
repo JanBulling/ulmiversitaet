@@ -44,13 +44,16 @@ export const PARKING_LOTS: ParkingLot[] = [
 ];
 
 /** Lots on the home page, in this order */
-export const HOME_LOTS = ["P10", "P24", "P41", "P09", "P20"];
+export const HOME_LOTS = ["P10", "P24", "P41", "P09"];
 
 /** Subset of `HOME_LOTS` shown on small screens */
 export const HOME_LOTS_MOBILE = ["P10", "P24", "P41"];
 
-/** Lot whose forecast is shown on the home page and open on the parking page */
+/** Lot whose forecast is open on the parking page */
 export const FEATURED_LOT = "P24";
+
+/** Lots added up to the campus forecast on the home page (the main university lots) */
+export const CAMPUS_LOTS = ["P24", "P10", "P11", "P12", "P41", "P44"];
 
 /** Order of the areas on the parking page */
 export const PARKING_AREAS: ParkingArea[] = ["OST", "HELMHOLTZ", "WEST", "KLINIKEN", "MICHELSBERG"];

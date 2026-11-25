@@ -46,5 +46,5 @@ export default async function ParkingLotsPage() {
 
 async function Overview() {
   await connection(); // per request (the reading itself is cached for a minute)
-  return <ParkingOverview initial={await getParkingSnapshot("all")} />;
+  return <ParkingOverview initial={await getParkingSnapshot()} />;
 }

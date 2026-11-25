@@ -69,6 +69,49 @@ export function forecastDay(
   );
 }
 
+/**
+ * Expected change of free spaces `minutes` after the reading (positive: more free), or `null`
+ * if that is already the next day
+ */
+export function expectedFreeChange(
+  model: ForecastModel,
+  lot: LotModel,
+  total: number,
+  live: LiveReading,
+  minutes: number,
+): number | null {
+  const { weekday, minute } = berlinTime(live.at);
+  const slots = forecastDay(model, lot, weekday, total, live);
+  const later = slots[Math.floor((minute + minutes) / model.slotMinutes)];
+  if (later === undefined) return null;
+  return limit(live.parked, total) - later;
+}
+
+/**
+ * Several lots as one: parked cars added up per weekday and slot. As `weight` is shared by all
+ * lots, `forecastDay` of the sum with the summed live reading equals the sum of the forecasts
+ * (up to the limits). `low` / `high` are sums of each lot's extremes, which were seen on
+ * different days, so they overstate the range.
+ */
+export function combineLots(lots: LotModel[]): LotModel {
+  const add = (series: (lot: LotModel) => number[][]) =>
+    series(lots[0]).map((day, weekday) =>
+      day.map((_, slot) =>
+        lots.reduce((sum, lot) => sum + series(lot)[weekday][slot], 0),
+      ),
+    );
+  return {
+    code: lots.map((lot) => lot.code).join("+"),
+    capacity: lots.reduce((sum, lot) => sum + lot.capacity, 0),
+    days: lots[0].days.map((_, weekday) =>
+      Math.min(...lots.map((lot) => lot.days[weekday])),
+    ),
+    typical: add((lot) => lot.typical),
+    low: add((lot) => lot.low),
+    high: add((lot) => lot.high),
+  };
+}
+
 /** Combine `factor` neighboring slots into one with `combine` (e.g. 15 → 30 minutes) */
 export function coarsen(
   slots: number[],

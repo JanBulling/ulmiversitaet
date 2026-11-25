@@ -553,8 +553,6 @@
       "MICHELSBERG": "Michelsberg"
     },
     "forecast": {
-      "show": "Prognose",
-      "hide": "Prognose ausblenden",
       "today": "Heute",
       "busier": "Gerade mehr los als üblich",
       "quieter": "Gerade weniger los als üblich",
@@ -566,15 +564,20 @@
       "now": "jetzt {free} frei",
       "expected": "voraussichtlich etwa {free} frei",
       "usually": "üblicherweise etwa {free} frei",
-      "range": "(bisher {min}–{max} frei)",
       "noData": "Für diesen Wochentag gibt es noch keine Daten.",
       "fullNow": "Gerade voll, voraussichtlich bis etwa {to} Uhr",
       "notFullToday": "Wird heute voraussichtlich nicht mehr voll",
       "notFullUsually": "Wird an diesem Tag meist nicht voll",
-      "homeTitle": "Prognose {name}",
+      "nowShort": "jetzt",
+      "occupied": "belegt",
       "disclaimer": "Die Prognose kann ungenau sein, vor allem an Feiertagen und in den Semesterferien.",
       "freeUntilTomorrow": "Voraussichtlich Platz bis morgen {from} Uhr",
       "almostFullNow": "{free, plural, one {Nur noch # Platz frei} other {Nur noch # Plätze frei}}, bis etwa {to} Uhr wird es voraussichtlich knapp"
+    },
+    "trend": {
+      "more": "In 30 Minuten voraussichtlich {count} mehr frei",
+      "fewer": "In 30 Minuten voraussichtlich {count} weniger frei",
+      "same": "In 30 Minuten voraussichtlich etwa gleich viel frei"
     },
     "jumpTo": "Springe zu"
   },

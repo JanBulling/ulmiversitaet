@@ -1,6 +1,6 @@
 "use client";
 
-import { ChartColumn, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 
 import { Panel, PanelHeader } from "@/components/ui/panel";
@@ -21,7 +21,7 @@ import { useParkingSnapshot } from "./use-parking-snapshot";
 export function ParkingOverview({ initial }: { initial: ParkingSnapshot }) {
   const t = useTranslations("Parking");
   const format = useFormatter();
-  const { snapshot, stale } = useParkingSnapshot(initial, "all");
+  const { snapshot, stale } = useParkingSnapshot(initial);
   const areas = PARKING_AREAS.filter((area) =>
     snapshot.lots.some((lot) => lot.area === area),
   );
@@ -146,15 +146,6 @@ function LotRow({ lot }: { lot: ParkingLotStatus }) {
         <p className="text-xs text-muted-foreground">
           {t("spaces", { count: lot.total })}
         </p>
-        {hasForecast(lot) && (
-          <p className="mt-1 flex items-center gap-1 text-xs font-semibold text-primary">
-            <ChartColumn className="size-3.5" aria-hidden />
-            <span className="group-open:hidden">{t("forecast.show")}</span>
-            <span className="hidden group-open:inline">
-              {t("forecast.hide")}
-            </span>
-          </p>
-        )}
       </div>
       <FreeSpaces free={lot.free} total={lot.total} />
     </>

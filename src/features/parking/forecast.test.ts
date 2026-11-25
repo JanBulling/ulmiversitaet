@@ -4,7 +4,9 @@ import model from "@/content/parking/forecast.json";
 import {
   berlinTime,
   coarsen,
+  combineLots,
   comparedToUsual,
+  expectedFreeChange,
   type ForecastModel,
   forecastDay,
   formatMinutes,
@@ -72,6 +74,44 @@ describe("parking forecast", () => {
     expect(
       comparedToUsual(MODEL, LOT, 100, { parked: 20, at: WEDNESDAY_7AM }),
     ).toBe("quieter");
+  });
+
+  it("expects the change of free spaces in the next slots", () => {
+    // 07:00, 20 more cars than typical: 70 now, 60 + 20 × 0.5 = 70 in 6 hours
+    const live = { parked: 70, at: WEDNESDAY_7AM };
+    expect(expectedFreeChange(MODEL, LOT, 100, live, 360)).toBe(0);
+    // Typical now: 50 now, 60 in 6 hours, so 10 fewer free
+    expect(
+      expectedFreeChange(MODEL, LOT, 100, { ...live, parked: 50 }, 360),
+    ).toBe(-10);
+    // 13:00 → 19:00: from 60 parked down to 10
+    const afternoon = { parked: 60, at: new Date("2026-11-25T12:00:00Z") };
+    expect(expectedFreeChange(MODEL, LOT, 100, afternoon, 360)).toBe(50);
+    // Past midnight: no forecast
+    expect(expectedFreeChange(MODEL, LOT, 100, afternoon, 720)).toBeNull();
+  });
+
+  it("adds up several lots", () => {
+    const other: LotModel = {
+      ...LOT,
+      code: "P98",
+      capacity: 50,
+      days: [1, 2, 2, 2, 2, 2, 0],
+      typical: Array(7).fill([0, 20, 20, 0]),
+    };
+    const both = combineLots([LOT, other]);
+    expect(both).toMatchObject({ code: "P99+P98", capacity: 150 });
+    expect(both.days).toEqual([1, 2, 2, 2, 2, 2, 0]);
+    expect(both.typical[2]).toEqual([10, 70, 80, 10]);
+    // The forecast of the sum is the sum of the forecasts
+    const live = { parked: 100, at: WEDNESDAY_7AM }; // 70 + 30
+    expect(forecastDay(MODEL, both, 2, 150, live)).toEqual(
+      forecastDay(MODEL, LOT, 2, 100, { ...live, parked: 70 }).map(
+        (cars, slot) =>
+          cars +
+          forecastDay(MODEL, other, 2, 50, { ...live, parked: 30 })[slot],
+      ),
+    );
   });
 
   it("finds the first stretch the lot is full", () => {

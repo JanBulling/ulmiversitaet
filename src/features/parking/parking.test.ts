@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
+import forecast from "@/content/parking/forecast.json";
 import {
+  CAMPUS_LOTS,
   HOME_LOTS,
   HOME_LOTS_MOBILE,
   PARKING_AREAS,
@@ -61,6 +63,17 @@ describe("parking lot config", () => {
     expect(HOME_LOTS_MOBILE.every((code) => HOME_LOTS.includes(code))).toBe(
       true,
     );
+  });
+
+  it("adds up existing lots with a forecast for the campus, each counter once", () => {
+    const lots = CAMPUS_LOTS.map((code) =>
+      PARKING_LOTS.find((lot) => lot.code === code),
+    );
+    for (const lot of lots) {
+      expect(String(lot?.counterId) in forecast.lots, lot?.code).toBe(true);
+    }
+    const counters = lots.map((lot) => lot?.counterId);
+    expect(new Set(counters).size).toBe(counters.length);
   });
 
   it("lists every area", () => {

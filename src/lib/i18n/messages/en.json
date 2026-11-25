@@ -553,8 +553,6 @@
       "MICHELSBERG": "Michelsberg"
     },
     "forecast": {
-      "show": "Forecast",
-      "hide": "Hide forecast",
       "today": "Today",
       "busier": "Busier than usual right now",
       "quieter": "Less busy than usual right now",
@@ -566,15 +564,20 @@
       "now": "{free} free now",
       "expected": "probably about {free} free",
       "usually": "usually about {free} free",
-      "range": "(so far {min}–{max} free)",
       "noData": "There is no data for this weekday yet.",
       "fullNow": "Full right now, probably until about {to}",
       "notFullToday": "Probably won't fill up again today",
       "notFullUsually": "Usually doesn't fill up on this day",
-      "homeTitle": "Forecast {name}",
+      "nowShort": "now",
+      "occupied": "occupied",
       "disclaimer": "The forecast may be inaccurate, especially on public holidays and during semester breaks.",
       "freeUntilTomorrow": "Probably space until {from} tomorrow",
       "almostFullNow": "{free, plural, one {Only # space left} other {Only # spaces left}}, probably tight until about {to}"
+    },
+    "trend": {
+      "more": "Probably {count} more free in 30 minutes",
+      "fewer": "Probably {count} fewer free in 30 minutes",
+      "same": "Probably about the same in 30 minutes"
     },
     "jumpTo": "Jump to"
   },
