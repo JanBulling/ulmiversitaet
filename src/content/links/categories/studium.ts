@@ -79,6 +79,13 @@ export const studium: LinkCategory = {
       keywords: ["karte", "map", "hörsaal", "raum", "room", "gebäude", "building"],
     },
     {
+      id: "free-rooms",
+      label: { de: "Freie Räume", en: "Free Rooms" },
+      href: "/free-rooms",
+      description: { de: "Welche Hörsäle und Seminarräume gerade frei sind.", en: "Which lecture halls and seminar rooms are free right now." },
+      keywords: ["lernraum", "study room", "hörsaal", "seminarraum", "raum", "room", "frei", "free", "belegung"],
+    },
+    {
       id: "hoersaalfinder",
       label: { de: "Hörsaalfinder", en: "Lecture Hall Finder" },
       href: "https://www.uni-ulm.de/einrichtungen/kiz/weiteres/campus-navigation/hoersaalfinder/",

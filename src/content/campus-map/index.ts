@@ -35,6 +35,12 @@ export type Room = {
   lng: number;
   /** Page of the room in the university's Hörsaalfinder */
   url: string;
+  /**
+   * Room ids in campusonline (`raum.rgid=…` in the link of a room) whose bookings block this
+   * room; used by `/free-rooms`. Several if the room is also booked as a whole with its
+   * neighbor. Lecture halls and seminar rooms need it, see docs/free-rooms.md.
+   */
+  qisIds?: number[];
 };
 
 export type BuildingProperties = {

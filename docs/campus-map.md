@@ -44,7 +44,8 @@ Add one line to `rooms.json`:
   "seats": 30,
   "lat": 48.42301,
   "lng": 9.95745,
-  "url": "https://www.uni-ulm.de/…"
+  "url": "https://www.uni-ulm.de/…",
+  "qisIds": [152]
 }
 ```
 
@@ -55,6 +56,7 @@ Add one line to `rooms.json`:
 - `title` (optional): extra name in both languages, e.g. `{"de": "Blauer Hörsaal", "en": "Blue lecture hall"}`.
 - `printer` (optional): `{"paper": ["A4", "A3"], "color": true}`.
 - Coordinates: right-click in OpenStreetMap or Google Maps → copy. `url` is the Hörsaalfinder page; leave it out if there is none.
+- `qisIds` (lecture halls and seminar rooms): the room's id in campusonline, used by `/free-rooms`. See [free-rooms.md](free-rooms.md#finding-the-campusonline-id-of-a-room).
 
 `pnpm test` checks the ids, the building references and that the coordinates lie in the map area.
 

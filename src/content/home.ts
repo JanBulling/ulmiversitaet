@@ -1,4 +1,10 @@
-import { BookOpen, LinkIcon, Users, type LucideIcon } from "lucide-react";
+import {
+  BookOpen,
+  DoorOpen,
+  LinkIcon,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 
 import type { Localized } from "@/content/links";
 
@@ -24,7 +30,7 @@ export const QUICK_LINKS: QuickLink[] = [
   { linkId: "campus4", image: "/icons/quick-links/campus4.png" },
   { linkId: "sogo", image: "/icons/quick-links/mail.png" },
   { linkId: "print-uni", image: "/icons/quick-links/print.png" },
-  { linkId: "cloudstore", image: "/icons/quick-links/nextcloud.png" },
+  { linkId: "free-rooms", label: { de: "Freie Räume", en: "Free rooms" }, lucideIcon: DoorOpen },
   { linkId: "campusplan", label: { de: "Karte", en: "Map" }, image: "/icons/quick-links/map.png" },
 ];
 

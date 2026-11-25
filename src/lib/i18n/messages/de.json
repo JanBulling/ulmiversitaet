@@ -98,7 +98,11 @@
         "highlight": "Gebäude und Räume werden auf der Karte markiert",
         "route": "Nächste Haltestelle und Route zu Fuß"
       },
-      "open": "Karte öffnen"
+      "open": "Karte öffnen",
+      "freeRooms": {
+        "title": "Freie Räume",
+        "description": "Einen freien Hörsaal oder Seminarraum finden."
+      }
     }
   },
   "GuidesPage": {
@@ -258,6 +262,35 @@
     "mapLabel": "Karte des Campus",
     "mapError": "Die Karte konnte nicht geladen werden. Die Suche funktioniert trotzdem.",
     "source": "Räume aus dem <hsf>Hörsaalfinder</hsf> der Universität. Fehlt etwas oder stimmt etwas nicht? <mail>Schreib uns</mail>."
+  },
+  "FreeRooms": {
+    "title": "Freie Räume",
+    "description": "Welche Hörsäle und Seminarräume heute und morgen frei sind",
+    "map": "Karte",
+    "today": "Heute",
+    "tomorrow": "Morgen",
+    "day": "Tag",
+    "time": "Uhrzeit",
+    "now": "Jetzt",
+    "kind": "Raumart",
+    "allKinds": "Alle Räume",
+    "area": "Bereich",
+    "allAreas": "Alle Bereiche",
+    "duration": "Frei für",
+    "durations": {
+      "any": "Egal",
+      "60": "Mind. 1 Stunde",
+      "120": "Mind. 2 Stunden",
+      "180": "Mind. 3 Stunden"
+    },
+    "freeCount": "{free} von {total} frei",
+    "until": "bis {time}",
+    "restOfDay": "bis Tagesende",
+    "next": "Danach: {title}",
+    "noneFree": "Keine passenden Räume frei.",
+    "closed": "Am Wochenende sind die Gebäude der Universität geschlossen.",
+    "unavailable": "Die Raumbelegung konnte gerade nicht aus Campusonline geladen werden.",
+    "source": "Belegung laut <link>Campusonline</link>, Stand {time} Uhr. Nicht jede Buchung steht dort, und freie Räume können trotzdem abgeschlossen sein."
   },
   "NotFound": {
     "title": "Schrödingers Katze ist gestorben",

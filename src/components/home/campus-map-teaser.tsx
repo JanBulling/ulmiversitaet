@@ -1,7 +1,8 @@
-import { ArrowRight, MapPinned, Route, Search } from "lucide-react";
+import { ArrowRight, DoorOpen, MapPinned, Route, Search } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import { KIND_ICONS } from "@/components/campus-map/kind-icon";
+import { Tile } from "@/components/ui/tile";
 import { ROOMS } from "@/content/campus-map";
 import { getBuilding } from "@/features/campus-map/places";
 import { campusPreview } from "@/features/campus-map/preview";
@@ -34,7 +35,8 @@ const LABELS = new Set([
 
 /**
  * Advertises the campus map on the home page: what it does and a static (non-interactive) map of
- * the campus that links to it.
+ * the campus that links to it, plus a tile for the free rooms (below the text on larger screens,
+ * below the map on phones).
  */
 export async function CampusMapTeaser() {
   const [t, tMap] = await Promise.all([
@@ -51,8 +53,8 @@ export async function CampusMapTeaser() {
   ];
 
   return (
-    <section className="grid grid-cols-1 items-center gap-4 md:grid-cols-7">
-      <div className="px-4 md:col-span-3 md:px-0">
+    <section className="grid grid-cols-1 gap-4 md:grid-cols-7">
+      <div className="px-4 md:col-span-3 md:row-start-1 md:self-end md:px-0">
         <h2 className="text-2xl font-bold">{t("title")}</h2>
         <p className="text-sm text-muted-foreground">{t("description")}</p>
         {/* Only next to the map on larger screens; on phones title and map are enough */}
@@ -71,7 +73,7 @@ export async function CampusMapTeaser() {
 
       <Link
         href="/campus-map"
-        className="group relative block overflow-hidden border-y bg-muted md:col-span-4 md:rounded-lg md:border"
+        className="group relative block self-center overflow-hidden border-y bg-muted md:col-span-4 md:col-start-4 md:row-span-2 md:row-start-1 md:rounded-lg md:border"
         aria-label={t("open")}
       >
         <svg
@@ -156,6 +158,15 @@ export async function CampusMapTeaser() {
           />
         </span>
       </Link>
+
+      <Tile
+        href="/free-rooms"
+        icon={DoorOpen}
+        size="lg"
+        title={t("freeRooms.title")}
+        description={t("freeRooms.description")}
+        className="px-4 md:col-span-3 md:row-start-2 md:self-start md:px-0"
+      />
     </section>
   );
 }

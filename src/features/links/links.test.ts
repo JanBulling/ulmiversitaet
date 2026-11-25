@@ -15,6 +15,7 @@ const INTERNAL_PAGES = [
   "/",
   "/mensa",
   "/campus-map",
+  "/free-rooms",
   "/guides",
   "/parking-lots",
   "/public-transport",

@@ -98,7 +98,11 @@
         "highlight": "Buildings and rooms are highlighted on the map",
         "route": "Nearest stop and walking directions"
       },
-      "open": "Open map"
+      "open": "Open map",
+      "freeRooms": {
+        "title": "Free rooms",
+        "description": "Find a free lecture hall or seminar room."
+      }
     }
   },
   "GuidesPage": {
@@ -258,6 +262,35 @@
     "mapLabel": "Map of the campus",
     "mapError": "The map could not be loaded. Search still works.",
     "source": "Rooms from the university's <hsf>Hörsaalfinder</hsf>. Something missing or wrong? <mail>Let us know</mail>."
+  },
+  "FreeRooms": {
+    "title": "Free rooms",
+    "description": "Which lecture halls and seminar rooms are free today and tomorrow",
+    "map": "Map",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "day": "Day",
+    "time": "Time",
+    "now": "Now",
+    "kind": "Room type",
+    "allKinds": "All rooms",
+    "area": "Area",
+    "allAreas": "All areas",
+    "duration": "Free for",
+    "durations": {
+      "any": "Any time",
+      "60": "At least 1 hour",
+      "120": "At least 2 hours",
+      "180": "At least 3 hours"
+    },
+    "freeCount": "{free} of {total} free",
+    "until": "until {time}",
+    "restOfDay": "rest of the day",
+    "next": "Then: {title}",
+    "noneFree": "No matching rooms are free.",
+    "closed": "The university buildings are closed on weekends.",
+    "unavailable": "The room bookings couldn't be loaded from Campusonline right now.",
+    "source": "Bookings from <link>Campusonline</link>, as of {time}. Not every booking is listed there, and free rooms may still be locked."
   },
   "NotFound": {
     "title": "Schrödinger's cat has died",

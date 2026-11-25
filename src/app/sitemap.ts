@@ -21,6 +21,7 @@ const PAGES: {
   { path: "/public-transport" },
   { path: "/parking-lots" },
   { path: "/campus-map" },
+  { path: "/free-rooms" },
   { path: "/links" },
   { path: "/guides" },
   { path: "/exmatriculation" },
