@@ -1,4 +1,10 @@
-import { CalendarClock, CookingPot, LayoutDashboard, Tags } from "lucide-react";
+import {
+  CalendarClock,
+  CookingPot,
+  LayoutDashboard,
+  Megaphone,
+  Tags,
+} from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
@@ -47,6 +53,15 @@ async function Overview() {
           icon={CalendarClock}
           title={t("nav.events")}
           description={t("overview.eventsDescription")}
+          className="h-full"
+        />
+      </li>
+      <li>
+        <Tile
+          href="/admin/banner"
+          icon={Megaphone}
+          title={t("nav.banner")}
+          description={t("overview.bannerDescription")}
           className="h-full"
         />
       </li>

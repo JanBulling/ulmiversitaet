@@ -426,7 +426,8 @@
       "categories": "Kategorien",
       "logout": "Abmelden",
       "site": "Zur Website",
-      "events": "Events"
+      "events": "Events",
+      "banner": "Banner"
     },
     "login": {
       "title": "Admin-Anmeldung",
@@ -439,7 +440,8 @@
       "description": "Verwaltung der Ulmiversität.",
       "mensaDescription": "Speiseplan neu laden und kontrollieren",
       "categoriesDescription": "{count, plural, =0 {Alle Kategorien sind zugeordnet} one {# Kategorie ohne Zuordnung} other {# Kategorien ohne Zuordnung}}",
-      "eventsDescription": "Events für die Startseite verwalten"
+      "eventsDescription": "Events für die Startseite verwalten",
+      "bannerDescription": "Hinweis ganz oben auf der Website"
     },
     "mensa": {
       "refreshTitle": "Speiseplan aktualisieren",
@@ -533,6 +535,37 @@
         "endTimeWithoutStart": "Ein Ende braucht auch einen Beginn."
       },
       "intro": "Events erscheinen auf der Startseite, bis sie vorbei sind."
+    },
+    "banner": {
+      "intro": "Der Banner steht ganz oben auf jeder Seite der Website, bis er ausgeblendet oder ein neuer erstellt wird.",
+      "visible": "Angezeigt",
+      "none": "Gerade wird kein Banner angezeigt.",
+      "hide": "Ausblenden",
+      "show": "Einblenden",
+      "others": "Frühere Banner",
+      "new": "Neuer Banner",
+      "create": "Erstellen und anzeigen",
+      "createHint": "Ersetzt den angezeigten Banner.",
+      "edit": "Bearbeiten",
+      "back": "Zurück zu den Bannern",
+      "titleField": "Titel",
+      "description": "Beschreibung (optional)",
+      "link": "Link (optional)",
+      "linkHint": "Eine Adresse (https://…) oder eine Seite der Website (/mensa).",
+      "color": "Farbe",
+      "defaultColor": "Standard",
+      "english": "Englisch (optional)",
+      "englishHint": "Ohne englischen Titel zeigt die englische Seite den deutschen Text.",
+      "titleEn": "Titel (Englisch)",
+      "descriptionEn": "Beschreibung (Englisch)",
+      "preview": "Vorschau",
+      "statusVisible": "Wird gerade angezeigt.",
+      "statusHidden": "Wird gerade nicht angezeigt.",
+      "delete": "Löschen",
+      "deleteHint": "Der Banner wird endgültig gelöscht.",
+      "errors": {
+        "link": "Der Link muss mit https:// oder / beginnen."
+      }
     }
   },
   "Parking": {
@@ -611,5 +644,8 @@
     "openCalendar": "Kalender öffnen",
     "invalid": "Bitte gib ein Datum im Format TT.MM.JJJJ ein, z. B. {example}.",
     "outOfRange": "Bitte wähle ein Datum zwischen {min} und {max}."
+  },
+  "Banner": {
+    "label": "Hinweis"
   }
 }

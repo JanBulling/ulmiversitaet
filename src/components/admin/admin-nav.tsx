@@ -16,6 +16,7 @@ export async function AdminNav() {
     { href: "/admin/mensa", label: t("nav.mensa") },
     { href: "/admin/mensa/categories", label: t("nav.categories") },
     { href: "/admin/events", label: t("nav.events") },
+    { href: "/admin/banner", label: t("nav.banner") },
   ];
 
   return (
