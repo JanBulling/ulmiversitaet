@@ -537,7 +537,7 @@
       "intro": "Events erscheinen auf der Startseite, bis sie vorbei sind."
     },
     "banner": {
-      "intro": "Der Banner steht ganz oben auf jeder Seite der Website, bis er ausgeblendet oder ein neuer erstellt wird.",
+      "intro": "Der Banner steht ganz oben auf der Startseite, bis er ausgeblendet oder ein neuer erstellt wird.",
       "visible": "Angezeigt",
       "none": "Gerade wird kein Banner angezeigt.",
       "hide": "Ausblenden",

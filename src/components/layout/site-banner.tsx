@@ -7,7 +7,7 @@ import { BannerBar } from "./banner-bar";
 /**
  * The banner set in the admin, above the site header; nothing without one. The banner comes
  * from the shared cache (invalidated by the admin), so pages don't query the database for it.
- * It is on every page, so a database error only leaves it out (errors aren't cached).
+ * A database error only leaves it out instead of breaking the page (errors aren't cached).
  */
 export async function SiteBanner() {
   const [banner, locale] = await Promise.all([

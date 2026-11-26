@@ -537,7 +537,7 @@
       "intro": "Events are shown on the home page until they are over."
     },
     "banner": {
-      "intro": "The banner is shown at the very top of every page of the website until it is hidden or a new one is created.",
+      "intro": "The banner is shown at the very top of the home page until it is hidden or a new one is created.",
       "visible": "Shown",
       "none": "No banner is shown right now.",
       "hide": "Hide",

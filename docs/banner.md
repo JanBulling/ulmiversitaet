@@ -1,6 +1,6 @@
 # Banner
 
-A thin notice at the very top of every page of the website, above the header (e.g. "Mensa heute geschlossen"). Admins manage it at `/admin/banner`. It is not shown in the admin dashboard.
+A thin notice at the very top of the home page, above the header (e.g. "Mensa heute geschlossen"). Admins manage it at `/admin/banner`. It is not shown in the admin dashboard.
 
 ## What visitors see
 
@@ -21,7 +21,7 @@ A thin notice at the very top of every page of the website, above the header (e.
 
 - Table `ulmiversitaet.banners` (`src/lib/db/schema/banners.ts`, migrations `0004_banners.sql` and `0005_banner-colors.sql`, which replaced the Info/Warnung style with the color). A partial unique index allows only one row with `visible = true`. Creating or showing a banner hides the visible one in the same transaction (`db.batch`).
 - `getVisibleBanner()` (`src/features/banner/queries.ts`) is `"use cache: remote"` with the `banner` tag and no expiry (`cacheLife("max")`), so pages never query the database for it. Every admin action (`src/features/admin/banner/actions.ts`) calls `updateTag("banner")`, so the next page load shows the change.
-- `SiteBanner` (`src/components/layout/site-banner.tsx`) renders it in the site layout (`src/app/[locale]/(site)/layout.tsx`) inside `<Suspense>`. A database error leaves the banner out instead of breaking every page; errors aren't cached.
+- `SiteBanner` (`src/components/layout/site-banner.tsx`) renders it inside `<Suspense>` in the `@banner` slot of the site layout (`src/app/[locale]/(site)/layout.tsx`), so it sits above the header. Only the home page fills the slot (`@banner/page.tsx`); every other page gets nothing from `@banner/[...catchAll]/page.tsx` (client-side navigation, where a slot would otherwise keep showing the banner) and `@banner/default.tsx` (full page loads). A database error leaves the banner out instead of breaking the home page; errors aren't cached.
 - The bar is `BannerBar` (`src/components/layout/banner-bar.tsx`), also used for the previews in the admin.
 
 ## Where to change what
